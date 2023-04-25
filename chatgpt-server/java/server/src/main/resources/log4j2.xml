@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="info">
+
+  <Properties>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5level %t %logger{36} %l %msg%xEx%n" />
+  </Properties>
+
+  <appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+    </Console>
+
+    <RollingFile name="chatgpt-debug" fileName="logs/chatgpt-debug.log"
+      filePattern="logs/chatgpt-debug.log.%d{MM-dd-yyyy}">
+      <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy modulate="false" interval="1"/>
+      </Policies>
+    </RollingFile>
+
+    <RollingFile name="chatgpt-info" fileName="logs/chatgpt-info.log"
+      filePattern="logs/chatgpt-info.log.%d{MM-dd-yyyy}">
+      <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy modulate="false" interval="1"/>
+      </Policies>
+    </RollingFile>
+
+    <RollingFile name="chatgpt-warn" fileName="logs/chatgpt-warn.log"
+      filePattern="logs/chatgpt-warn.log.%d{MM-dd-yyyy}">
+      <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy modulate="false" interval="1"/>
+      </Policies>
+    </RollingFile>
+
+    <RollingFile name="chatgpt-error" fileName="logs/chatgpt-error.log"
+      filePattern="logs/chatgpt-error.log.%d{MM-dd-yyyy}">
+      <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${LOG_PATTERN}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy modulate="false" interval="1"/>
+      </Policies>
+    </RollingFile>
+  </appenders>
+
+  <loggers>
+    <!--建立一个默认的root的logger-->
+    <root level="debug">
+      <appender-ref ref="Console"/>
+    </root>
+
+    <logger name="cike.chatgpt" additivity="false">
+      <appender-ref ref="Console"/>
+      <appender-ref ref="chatgpt-debug"/>
+      <appender-ref ref="chatgpt-info"/>
+      <appender-ref ref="chatgpt-warn"/>
+      <appender-ref ref="chatgpt-error"/>
+    </logger>
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="INFO"/>
+
+  </loggers>
+</configuration>

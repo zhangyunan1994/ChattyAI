@@ -1,0 +1,16 @@
+server:
+  servlet:
+    context-path: /chatapi
+  tomcat:
+    connection-timeout: 10m
+spring:
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  mvc:
+    async:
+      request-timeout: 10m
+logging:
+  config: classpath:log4j2.xml

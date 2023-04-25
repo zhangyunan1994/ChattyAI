@@ -1,0 +1,52 @@
+server:
+  port: 18080
+
+datasource:
+  url: jdbc:mysql://127.0.0.1:13306/chatgpt?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8
+  username: root
+  password: 123456
+  minimum-idle: 2
+  maximum-pool-size: 5
+
+openai:
+  # OpenAI API Key - https://platform.openai.com/overview
+  apiKey: sk-
+
+  # change this to an `accessToken` extracted from the ChatGPT site's `https://chat.openai.com/api/auth/session` response
+  accessToken:
+
+  # OpenAI API Base URL - https://api.openai.com
+  baseUrl: https://api.openai.com
+
+  # OpenAI API Model - https://platform.openai.com/docs/models
+#  model: gpt-4-0314
+  model: gpt-3.5-turbo
+
+  # set `true` to disable OpenAI API debug log
+  disableLog: false
+
+  # Reverse Proxy - Available on accessToken
+  # Default: https://bypass.churchless.tech/api/conversation
+  # More: https://github.com/transitive-bullshit/chatgpt-api#reverse-proxy
+  apiReverseProxy: https://bypass.churchless.tech/api/conversation
+
+  # timeout
+  timeoutSeconds: 600
+
+  # Secret key
+  AUTH_SECRET_KEY:
+
+  # Socks Proxy Host
+  SOCKS_PROXY_HOST:
+
+  # Socks Proxy Port
+  SOCKS_PROXY_PORT:
+
+  # Socks Proxy Username
+  SOCKS_PROXY_USERNAME:
+
+  # Socks Proxy Password
+  SOCKS_PROXY_PASSWORD:
+
+  # HTTPS PROXY
+  HTTPS_PROXY:
