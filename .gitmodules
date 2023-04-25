@@ -1,0 +1,3 @@
+[submodule "chatgpt-web"]
+	path = chatgpt-web
+	url = https://github.com/cike-projects/chatgpt-web.git
