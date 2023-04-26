@@ -1,0 +1,25 @@
+server:
+  port: 18080
+
+spring:
+  datasource:
+    url:
+    username:
+    password:
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+
+openai:
+  # OpenAI API Key - https://platform.openai.com/overview
+  apiKey: sk-
+
+  # OpenAI API Base URL - https://api.openai.com
+  baseUrl: https://api.openai.com
+
+  # OpenAI API Model - https://platform.openai.com/docs/models
+  model: gpt-3.5-turbo
+
+  # timeout
+  timeoutSeconds: 600
+

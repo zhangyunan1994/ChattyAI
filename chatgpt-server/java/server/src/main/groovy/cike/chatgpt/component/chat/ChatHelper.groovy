@@ -4,7 +4,8 @@ package cike.chatgpt.component.chat
 import cike.chatgpt.config.OpenAIConfig
 import cike.chatgpt.controller.RequestProps
 import cike.chatgpt.repository.ChatGPTMessageRecordRepository
-import cike.chatgpt.repository.SensitiveWordsRepository
+import cike.chatgpt.repository.sensitive.SensitiveWordsHitRecordRepository
+import cike.chatgpt.repository.sensitive.SensitiveWordsRepository
 import cike.chatgpt.utils.NanoIdUtils
 import com.alibaba.fastjson.JSON
 import com.theokanning.openai.completion.chat.*
@@ -98,6 +99,7 @@ class SensitiveWordsStrategy extends GPTStrategy {
 
     @Override
     def dodo(OutputStream outputStream, String userId, RequestProps requestParam) {
+        SensitiveWordsHitRecordRepository.addHitRecord(userId, requestParam.roomId, null, requestParam.systemMessage, "user", requestParam.prompt, null, System.currentTimeSeconds(), null)
         outputStream.write(SensitiveWordsPrompt.getBytes(StandardCharsets.UTF_8))
         outputStream.flush()
     }

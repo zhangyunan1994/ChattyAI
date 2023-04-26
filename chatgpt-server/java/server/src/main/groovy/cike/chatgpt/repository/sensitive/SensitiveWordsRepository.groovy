@@ -1,4 +1,4 @@
-package cike.chatgpt.repository
+package cike.chatgpt.repository.sensitive
 
 import cike.chatgpt.config.SQLInstance
 

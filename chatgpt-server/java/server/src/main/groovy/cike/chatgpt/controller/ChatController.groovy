@@ -2,6 +2,7 @@ package cike.chatgpt.controller
 
 
 import cike.chatgpt.component.chat.ChatHelper
+import cike.chatgpt.interceptor.Permission
 import cike.chatgpt.interceptor.RequiredLogin
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.slf4j.Logger
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody
 
-@RequiredLogin
+@RequiredLogin(permission = Permission.CHAT)
 @Controller
 @RequestMapping("chat")
 class ChatController {
@@ -28,7 +29,7 @@ class ChatController {
     @Autowired
     private ChatHelper chatHelper;
 
-    @PostMapping(path = "octet-stream")
+    @PostMapping(path = "stream")
     ResponseEntity<StreamingResponseBody> chatStream(@RequestBody RequestProps requestParam,
                                                      @RequestHeader("Authorization") String authorization) throws IOException {
         // 从文件系统中读取二进制文件内容

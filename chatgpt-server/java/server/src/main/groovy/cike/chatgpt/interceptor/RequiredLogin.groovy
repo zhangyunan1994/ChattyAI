@@ -1,6 +1,7 @@
 package cike.chatgpt.interceptor
 
 import cike.chatgpt.SessionManager
+import cike.chatgpt.repository.rbac.RABCRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
@@ -16,7 +17,9 @@ import java.lang.annotation.Target
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target([ElementType.METHOD, ElementType.TYPE])
-@interface RequiredLogin {}
+@interface RequiredLogin {
+    Permission permission() default Permission.IGNORE
+}
 
 @Component
 class RequiredLoginInterceptor implements HandlerInterceptor {
@@ -25,29 +28,38 @@ class RequiredLoginInterceptor implements HandlerInterceptor {
 
     @Override
     boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (handler instanceof HandlerMethod) {
-            HandlerMethod handlerMethod = (HandlerMethod) handler
-
-            // 判断是否需要登录
-            RequiredLogin requiredLogin = handlerMethod.getMethod().getDeclaredAnnotation(RequiredLogin.class)
-
-            if (null == requiredLogin) {
-                requiredLogin = handlerMethod.getBeanType().getAnnotation(RequiredLogin.class)
-            }
-
-            if (null == requiredLogin) {
-                return true
-            }
-
-            if (null != requiredLogin) {
-                String authorization = request.getHeader("Authorization");
-                if (authorization && SessionManager.get(authorization.substring(7))) {
-                    return true
-                }
-                response.sendError(401);
-                return false;
-            }
+        if (!(handler instanceof HandlerMethod)) {
+            return true
         }
-        return true;
+
+        HandlerMethod handlerMethod = (HandlerMethod) handler
+
+        // 判断是否需要登录
+        RequiredLogin requiredLogin = handlerMethod.getMethod().getDeclaredAnnotation(RequiredLogin.class)
+
+        if (null == requiredLogin) {
+            requiredLogin = handlerMethod.getBeanType().getAnnotation(RequiredLogin.class)
+        }
+
+        if (null == requiredLogin) {
+            return true
+        }
+
+        String authorization = request.getHeader("Authorization")
+        if (!authorization) {
+            response.sendError(401)
+            return false
+        }
+
+        def u = SessionManager.get(authorization.substring(7))
+        if (!u) {
+            response.sendError(401)
+            return false
+        }
+
+        if (requiredLogin.permission() && requiredLogin.permission() != Permission.IGNORE) {
+            return RABCRepository.getUserPermission(u.uid).contains(requiredLogin.permission().getCode())
+        }
+        return true
     }
 }

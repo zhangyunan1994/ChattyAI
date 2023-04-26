@@ -3,13 +3,17 @@ package cike.chatgpt.service
 
 import cike.chatgpt.SessionManager
 import cike.chatgpt.controller.CommonResponse
+import cike.chatgpt.repository.AuthSessionTokenRepository
 import cike.chatgpt.repository.User
 import cike.chatgpt.repository.UserRepository
+import cike.chatgpt.utils.NanoIdUtils
 import com.google.common.base.Preconditions
 import com.google.common.base.Strings
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+
+import java.time.LocalDateTime
 
 @Service
 class AuthService {
@@ -29,11 +33,13 @@ class AuthService {
             return new CommonResponse(status: CommonResponse.Fail, message: "Password mismatch")
         }
 
-//        def token = NanoIdUtils.randomNanoId()
-//        SessionManager.put(token.toString(), user)
+        def token = NanoIdUtils.randomNanoId(50)
+
+        AuthSessionTokenRepository.addRecord(token, user.uid, LocalDateTime.now().plusDays(3))
+        SessionManager.put(token.toString(), user)
+
         log.info("用户登录 token {}", user.uid)
-        SessionManager.put(user.uid, user)
-        return new CommonResponse(status: CommonResponse.Success, data: user.uid)
+        return new CommonResponse(status: CommonResponse.Success, data: token)
     }
 
     CommonResponse<User> checkToken(String token) {

@@ -5,7 +5,7 @@ class CommonResponse<T> {
     public static String Success = "Success"
     public static String Fail = "Fail"
 
-    String status;
-    String message;
+    String status
+    String message
     T data
 }

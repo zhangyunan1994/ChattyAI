@@ -1,0 +1,3 @@
+application-*.yaml
+!application-template.yaml
+logs

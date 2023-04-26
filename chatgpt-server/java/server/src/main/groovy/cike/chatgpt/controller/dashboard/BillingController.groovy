@@ -3,6 +3,8 @@ package cike.chatgpt.controller.dashboard
 
 import cike.chatgpt.config.OpenAIConfig
 import cike.chatgpt.controller.CommonResponse
+import cike.chatgpt.interceptor.Permission
+import cike.chatgpt.interceptor.RequiredLogin
 import cike.openai.OpenAiService
 import cike.openai.dashboard.billing.Usage
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +18,7 @@ import java.time.LocalDate
 
 @RestController
 @RequestMapping("/dashboard/billing")
+@RequiredLogin(permission = Permission.DASH)
 class BillingController {
 
     @Autowired

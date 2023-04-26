@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+  "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+  <classPathEntry
+    location="${user.home}/.m2/repository/mysql/mysql-connector-java/8.0.25/mysql-connector-java-8.0.25.jar"/>
+
+  <context id="context1" targetRuntime="MyBatis3">
+    <!--    当表名或者字段名为SQL关键字的时候，可以设置该属性为true，MBG会自动给表名或字段名添加分隔符-->
+    <property name="autoDelimitKeywords" value="true"/>
+    <property name="beginningDelimiter" value="`"/>
+    <property name="endingDelimiter" value="`"/>
+    <property name="javaFileEncoding" value="UTF-8"/>
+
+    <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+    <commentGenerator>
+      <property name="suppressDate" value="true"/>
+      <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+
+    <jdbcConnection
+      connectionURL="jdbc:mysql://127.0.0.1:13306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"
+      driverClass="com.mysql.cj.jdbc.Driver"
+      password="123456"
+      userId="root">
+      <property name="nullCatalogMeansCurrent" value="true"/>
+    </jdbcConnection>
+
+    <javaModelGenerator targetPackage="cike.chatgpt.repository.entity" targetProject="./src/main/groovy"/>
+    <sqlMapGenerator targetPackage="cike.chatgpt.repository.mapper" targetProject="./src/main/resources"/>
+    <javaClientGenerator targetPackage="cike.chatgpt.repository.mapper" targetProject="./src/main/groovy"
+      type="XMLMAPPER"/>
+
+    <table tableName="user"/>
+  </context>
+</generatorConfiguration>
