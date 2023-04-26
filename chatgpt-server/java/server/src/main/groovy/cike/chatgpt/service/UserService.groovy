@@ -3,6 +3,7 @@ package cike.chatgpt.service
 import cike.chatgpt.controller.PageList
 import cike.chatgpt.repository.UserRepository
 import cike.chatgpt.repository.entity.User
+import cike.chatgpt.utils.NanoIdUtils
 import com.github.pagehelper.Page
 import com.github.pagehelper.PageHelper
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,6 +23,7 @@ class UserService {
   }
 
   void addUser(User user) {
+    user.setUid(NanoIdUtils.randomNanoId())
     userRepository.addUser(user)
 
   }
