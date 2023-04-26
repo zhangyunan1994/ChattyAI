@@ -1,3 +1,6 @@
 [submodule "chatgpt-web"]
 	path = chatgpt-web
 	url = https://github.com/cike-projects/chatgpt-web.git
+[submodule "chattyai-web-ui"]
+	path = chattyai-web-ui
+	url = https://github.com/zhangyunan1994/chattyai-web-ui
