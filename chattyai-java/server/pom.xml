@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>cick</groupId>
-    <artifactId>java</artifactId>
+    <artifactId>chattyai</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 

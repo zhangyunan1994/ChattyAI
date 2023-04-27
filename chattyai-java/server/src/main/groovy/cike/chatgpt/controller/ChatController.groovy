@@ -4,6 +4,7 @@ package cike.chatgpt.controller
 import cike.chatgpt.component.chat.ChatHelper
 import cike.chatgpt.interceptor.Permission
 import cike.chatgpt.interceptor.RequiredLogin
+import cike.chatgpt.interceptor.SessionHolder
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -29,14 +30,14 @@ class ChatController {
     @Autowired
     private ChatHelper chatHelper;
 
+    @Autowired
+    private SessionHolder sessionHolder
+
     @PostMapping(path = "stream")
-    ResponseEntity<StreamingResponseBody> chatStream(@RequestBody RequestProps requestParam,
-                                                     @RequestHeader("Authorization") String authorization) throws IOException {
-        // 从文件系统中读取二进制文件内容
+    ResponseEntity<StreamingResponseBody> chatStream(@RequestBody RequestProps requestParam) throws IOException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        String userId = authorization.substring(7)
-        StreamingResponseBody streamingResponse = chatHelper.sendChat(userId, requestParam)
+        StreamingResponseBody streamingResponse = chatHelper.sendChat(sessionHolder.getCurrentUserUID(), requestParam)
         return new ResponseEntity<>(streamingResponse, headers, HttpStatus.OK);
     }
 }

@@ -1,6 +1,5 @@
 package cike.chatgpt.component.chat
 
-
 import cike.chatgpt.config.OpenAIConfig
 import cike.chatgpt.controller.RequestProps
 import cike.chatgpt.repository.ChatGPTMessageRecordRepository
@@ -11,7 +10,6 @@ import com.alibaba.fastjson.JSON
 import com.theokanning.openai.completion.chat.*
 import com.theokanning.openai.image.CreateImageRequest
 import com.theokanning.openai.image.ImageResult
-import com.theokanning.openai.service.OpenAiService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,13 +18,15 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 
 import javax.annotation.PostConstruct
 import java.nio.charset.StandardCharsets
-import java.time.Duration
 
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Component
 class ChatHelper {
 
     static Logger log = LoggerFactory.getLogger(ChatHelper.class)
+
+    @Autowired
+    private OpenAiServicePool openAiServicePool
 
     @Autowired
     private OpenAIConfig openAIConfig
@@ -37,11 +37,9 @@ class ChatHelper {
 
     @PostConstruct
     void init() {
-        def service = new OpenAiService(openAIConfig.apiKey, Duration.ofSeconds(openAIConfig.timeoutSeconds ?: 10))
-
-        chatStrategy = new ChatStrategy(openAIConfig, service)
-        imageStrategy = new ImageStrategy(openAIConfig, service)
-        sensitiveWordsStrategy = new SensitiveWordsStrategy(openAIConfig, service)
+        chatStrategy = new ChatStrategy(openAIConfig, openAiServicePool)
+        imageStrategy = new ImageStrategy(openAIConfig, openAiServicePool)
+        sensitiveWordsStrategy = new SensitiveWordsStrategy(openAIConfig, openAiServicePool)
     }
 
     boolean isSensitiveWords(String systemMessage, String prompt) {
@@ -77,12 +75,12 @@ class ChatHelper {
 
 abstract class GPTStrategy {
 
+    OpenAiServicePool pool
     OpenAIConfig openAIConfig
-    OpenAiService service
 
-    GPTStrategy(OpenAIConfig openAIConfig, OpenAiService service) {
+    GPTStrategy(OpenAIConfig openAIConfig, OpenAiServicePool pool) {
+        this.pool = pool
         this.openAIConfig = openAIConfig
-        this.service = service
     }
 
     abstract dodo(OutputStream outputStream, String userId, RequestProps requestParam)
@@ -93,8 +91,8 @@ class SensitiveWordsStrategy extends GPTStrategy {
 
     private static String SensitiveWordsPrompt = "{\"delta\":\"私。\",\"detail\":{\"choices\":[{\"index\":0,\"message\":{\"content\":\"私。\"}}],\"created\":1681904187,\"id\":\"chatcmpl-770OpRIV67apVWSljl5csWcNb3vKU\",\"model\":\"gpt-3.5-turbo-0301\",\"object\":\"chat.completion.chunk\"},\"id\":\"chatcmpl-770OpRIV67apVWSljl5csWcNb3vKU\",\"text\":\"## 该问题敏感不要问\\n\\n![](https://th.bing.com/th/id/OIP.HiR_mWL7XXgvsG5xA0RByAHaHa?pid=ImgDet&rs=1) \\n\\n注意数据安全和隐私安全 。我想提醒你，尊重他人的隐私是一种美德。在使用计算机和网络时，请遵守相关法律法规，不要非法侵入他人的隐私。\"}"
 
-    SensitiveWordsStrategy(OpenAIConfig openAIConfig, OpenAiService service) {
-        super(openAIConfig, service)
+    SensitiveWordsStrategy(OpenAIConfig openAIConfig, OpenAiServicePool pool) {
+        super(openAIConfig, pool)
     }
 
     @Override
@@ -108,8 +106,8 @@ class SensitiveWordsStrategy extends GPTStrategy {
 class ImageStrategy extends GPTStrategy {
     static Logger log = LoggerFactory.getLogger(ImageStrategy.class)
 
-    ImageStrategy(OpenAIConfig openAIConfig, OpenAiService service) {
-        super(openAIConfig, service)
+    ImageStrategy(OpenAIConfig openAIConfig, OpenAiServicePool pool) {
+        super(openAIConfig, pool)
     }
 
     @Override
@@ -138,9 +136,8 @@ class ImageStrategy extends GPTStrategy {
         outputStream.write(JSON.toJSONBytes(result))
         outputStream.flush()
 
-
         def request = new CreateImageRequest(prompt: messageDescription, n: 1)
-        ImageResult image = service.createImage(request)
+        ImageResult image = pool.getOne().createImage(request)
 
         messageId = NanoIdUtils.randomNanoId()
 
@@ -170,8 +167,8 @@ class ChatStrategy extends GPTStrategy {
 
     static Logger log = LoggerFactory.getLogger(ChatStrategy.class)
 
-    ChatStrategy(OpenAIConfig openAIConfig, OpenAiService service) {
-        super(openAIConfig, service)
+    ChatStrategy(OpenAIConfig openAIConfig, OpenAiServicePool pool) {
+        super(openAIConfig, pool)
     }
 
     @Override
@@ -212,7 +209,7 @@ class ChatStrategy extends GPTStrategy {
         String messageId = ""
         String model = ""
         long created = 0l
-        service.streamChatCompletion(chatCompletionRequest)
+        pool.getOne().streamChatCompletion(chatCompletionRequest)
                 .doOnError {
                     log.info("emitter.completeWithError()", it)
                     outputStream.flush()

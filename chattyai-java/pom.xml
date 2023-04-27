@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cick</groupId>
-  <artifactId>java</artifactId>
+  <artifactId>chattyai</artifactId>
   <packaging>pom</packaging>
   <modules>
     <module>server</module>

@@ -41,7 +41,7 @@ class UserController {
   @PostMapping("modify")
   CommonResponse<String> modify(@RequestBody User user) {
     try {
-      userService.modifyUser(user)
+      userService.modifyUserWithoutPassword(user)
     } catch (IllegalArgumentException e) {
       return new CommonResponse<String>(status: CommonResponse.Fail, message: e.getMessage())
     }

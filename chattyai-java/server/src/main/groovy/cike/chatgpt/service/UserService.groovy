@@ -36,11 +36,10 @@ class UserService {
     userRepository.addUser(user)
   }
 
-  void modifyUser(User user) {
+  void modifyUserWithoutPassword(User user) {
     Preconditions.checkArgument(user.id != null && user.id >= 0, "呦呦呦")
     Preconditions.checkArgument(user.username != null && user.username.length() >= 8, "登录用户名错误，至少 8 位")
     Preconditions.checkArgument(user.nickname != null && user.nickname.length() >= 2, "昵称错误，至少 2 位")
-    Preconditions.checkArgument(user.passwordHash != null && user.passwordHash.length() > 8, "密码错误，至少 8 位")
     Preconditions.checkArgument(user.avatar != null && user.avatar.length() > 8 && user.avatar.startsWith("http"), "头像错误，至少 8 位且以 http 开头")
     Preconditions.checkArgument(user.status != null && (user.status == 1 || user.status == 2), "状态错误")
 

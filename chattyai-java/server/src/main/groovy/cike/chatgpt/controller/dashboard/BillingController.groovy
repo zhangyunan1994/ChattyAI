@@ -40,9 +40,7 @@ class BillingController {
         } catch (Exception e) {
             return new CommonResponse<BillingUsage>(status: CommonResponse.Fail, message: e.message)
         }
-
     }
-
 }
 
 

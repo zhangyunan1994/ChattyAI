@@ -34,6 +34,10 @@
     <javaClientGenerator targetPackage="cike.chatgpt.repository.mapper" targetProject="./src/main/groovy"
       type="XMLMAPPER"/>
 
-    <table tableName="user"/>
+<!--    <table tableName="user"/>-->
+<!--    <table tableName="sensitive_words"/>-->
+<!--    <table tableName="sensitive_words_hit_record"/>-->
+<!--    <table tableName="chatgpt_message_record"/>-->
+    <table tableName="openai_key_config"/>
   </context>
 </generatorConfiguration>
