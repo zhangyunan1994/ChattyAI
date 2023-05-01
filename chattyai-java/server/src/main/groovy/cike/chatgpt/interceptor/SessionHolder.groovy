@@ -16,6 +16,9 @@ class SessionHolder {
   @Autowired
   HttpServletRequest request;
 
+  @Autowired
+  private SessionManager sessionManager
+
   String getCurrentUserUID() {
 
     String authorization = request.getHeader("Authorization")
@@ -24,7 +27,7 @@ class SessionHolder {
       return null
     }
 
-    def u = SessionManager.get(authorization.substring(7))
+    def u = sessionManager.get(authorization.substring(7))
     return u.uid
   }
 }

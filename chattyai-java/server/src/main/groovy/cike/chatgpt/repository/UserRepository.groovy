@@ -1,10 +1,12 @@
 package cike.chatgpt.repository
 
 import cike.chatgpt.config.SQLInstance
+import cike.chatgpt.repository.entity.User
 import cike.chatgpt.repository.entity.UserExample
 import cike.chatgpt.repository.mapper.UserMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
+import cike.chatgpt.utils.CollectionUtil
 
 @Repository
 class UserRepository {
@@ -12,23 +14,19 @@ class UserRepository {
   @Autowired
   private UserMapper userMapper
 
-  static User findByUsername(String username) {
-    def row = SQLInstance.sql.firstRow("select id, uid, username, password_hash, avatar, description from user where username = ?", username)
-    if (row) {
-      return new User(id: row.id as int, uid: row.uid, username: row.username, password: row.password_hash, avatar: row.avatar, description: row.description)
-    }
-    return null
+  User findByUsername(String username) {
+    UserExample example = new UserExample()
+    example.createCriteria().andUsernameEqualTo(username)
+    CollectionUtil.getFirstElseNull(userMapper.selectByExample(example))
   }
 
-  static User findByUid(String uid) {
-    def row = SQLInstance.sql.firstRow("select id, uid, username, password_hash, avatar, description from user where uid = ?", uid)
-    if (row) {
-      return new User(id: row.id as int, uid: row.uid, username: row.username, password: row.password_hash, avatar: row.avatar, description: row.description)
-    }
-    return null
+  User findByUid(String uid) {
+    UserExample example = new UserExample()
+    example.createCriteria().andUidEqualTo(uid)
+    CollectionUtil.getFirstElseNull(userMapper.selectByExample(example))
   }
 
-  List<cike.chatgpt.repository.entity.User> findByCondition(String username) {
+  List<User> findByCondition(String username) {
     UserExample example = new UserExample()
     UserExample.Criteria criteria = example.createCriteria()
     if (username) {
@@ -38,20 +36,11 @@ class UserRepository {
     userMapper.selectByExample(example)
   }
 
-  void addUser(cike.chatgpt.repository.entity.User user) {
+  void addUser(User user) {
     userMapper.insertSelective(user)
   }
 
-  void modifyUser(cike.chatgpt.repository.entity.User user) {
+  void modifyUser(User user) {
     userMapper.updateByPrimaryKeySelective(user)
   }
-}
-
-class User {
-  Integer id
-  String uid
-  String username
-  String password
-  String avatar
-  String description
 }
