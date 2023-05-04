@@ -1,12 +1,12 @@
 package cike.chatgpt.repository
 
-import cike.chatgpt.config.SQLInstance
+
 import cike.chatgpt.repository.entity.User
 import cike.chatgpt.repository.entity.UserExample
 import cike.chatgpt.repository.mapper.UserMapper
+import cike.chatgpt.utils.CollectionUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
-import cike.chatgpt.utils.CollectionUtil
 
 @Repository
 class UserRepository {

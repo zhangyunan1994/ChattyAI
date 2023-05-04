@@ -91,8 +91,6 @@ abstract class GPTStrategy {
 class SensitiveWordsStrategy extends GPTStrategy {
   static Logger log = LoggerFactory.getLogger(SensitiveWordsStrategy.class)
 
-  private static String SensitiveWordsPrompt = "{\"delta\":\"私。\",\"detail\":{\"choices\":[{\"index\":0,\"message\":{\"content\":\"私。\"}}],\"created\":1681904187,\"id\":\"chatcmpl-770OpRIV67apVWSljl5csWcNb3vKU\",\"model\":\"gpt-3.5-turbo-0301\",\"object\":\"chat.completion.chunk\"},\"id\":\"chatcmpl-770OpRIV67apVWSljl5csWcNb3vKU\",\"text\":\"## 该问题敏感不要问\\n\\n![](https://th.bing.com/th/id/OIP.HiR_mWL7XXgvsG5xA0RByAHaHa?pid=ImgDet&rs=1) \\n\\n注意数据安全和隐私安全 。我想提醒你，尊重他人的隐私是一种美德。在使用计算机和网络时，请遵守相关法律法规，不要非法侵入他人的隐私。\"}"
-
   SensitiveWordsStrategy(OpenAIConfig openAIConfig, OpenAiServicePool pool) {
     super(openAIConfig, pool)
   }
@@ -100,7 +98,11 @@ class SensitiveWordsStrategy extends GPTStrategy {
   @Override
   def dodo(OutputStream outputStream, String userId, RequestProps requestParam) {
     SensitiveWordsHitRecordRepository.addHitRecord(userId, requestParam.roomId, null, requestParam.systemMessage, "user", requestParam.prompt, null, System.currentTimeSeconds(), null)
-    outputStream.write(SensitiveWordsPrompt.getBytes(StandardCharsets.UTF_8))
+    def id = NanoIdUtils.randomNanoId()
+    def message = new ChatWebMessage(id: id, text: "很抱歉，我无法回答相关问题，", finishReason: "")
+    outputStream.write(JSON.toJSONBytes(message))
+    message = new ChatWebMessage(id: id, text: "很抱歉，我无法回答相关问题，请您尊重个人隐私，不要随意公开他人的个人信息。如果您有其他问题，我会尽力回答。", finishReason: "stop")
+    outputStream.write(("\n" + JSON.toJSONString(message)).getBytes(StandardCharsets.UTF_8))
     outputStream.flush()
   }
 }
@@ -122,7 +124,6 @@ class ImageStrategy extends GPTStrategy {
 
     def result = new ChatWebMessage(id: messageId,
         text: firstText,
-        role: "assistant",
         finishReason: "",
     )
 
@@ -162,9 +163,9 @@ class ChatStrategy extends GPTStrategy {
 
     messages.add(systemMessage)
 
-    if (requestParam.getUseContext() && requestParam.options.parentMessageId) {
+    if (requestParam.options.parentMessageId) {
       // 增加上下文
-      def historyMessage = ChatGPTMessageRecordRepository.getLastRecords(userId, requestParam.roomId, requestParam.options.parentMessageId, 10)
+      def historyMessage = ChatGPTMessageRecordRepository.getLastRecords(userId, requestParam.roomId, requestParam.options.parentMessageId, 20)
       historyMessage.each {
         messages.add(new ChatMessage(it.role, it.content))
       }
@@ -211,7 +212,6 @@ class ChatStrategy extends GPTStrategy {
             sb.append(content)
             def result = new ChatWebMessage(id: it.id,
                 text: sb,
-                role: it.choices[0].message.role,
                 finishReason: it.choices[0].finishReason
             )
             if (firstChunk) {
@@ -233,8 +233,5 @@ class ChatStrategy extends GPTStrategy {
 class ChatWebMessage {
   String id
   String text
-  String role
   String finishReason
-  String parentMessageId
-  String conversationId
 }
