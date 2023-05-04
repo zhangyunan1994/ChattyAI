@@ -1,9 +1,8 @@
 package setting
 
 import (
-	"log"
-
 	"gopkg.in/ini.v1"
+	"log"
 )
 
 type Server struct {
@@ -26,7 +25,6 @@ var cfg *ini.File
 
 func Setup(profile string) {
 	cfg2, err := ini.Load("conf/app.ini")
-	//cfg, err = ini.Load(bytes)
 	if err != nil {
 		log.Fatalf("setting.Setup, fail to parse 'conf/app.ini': %v", err)
 	}

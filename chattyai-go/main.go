@@ -1,9 +1,10 @@
 package main
 
 import (
+	"chattyai-go/job"
 	"chattyai-go/models"
+	"chattyai-go/routers"
 	"chattyai-go/setting"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
 	"time"
@@ -12,7 +13,7 @@ import (
 func main() {
 	args := os.Args
 
-	profile := "test"
+	profile := "dev"
 
 	if args != nil && len(args) > 1 {
 		profile = args[1]
@@ -21,17 +22,13 @@ func main() {
 	// 初始化数据库链接
 	setting.Setup(profile)
 	models.Setup()
+	job.Init()
 
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+	routerInit := routers.InitRouter()
 
 	s := &http.Server{
 		Addr:           ":38083",
-		Handler:        r,
+		Handler:        routerInit,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
