@@ -7,6 +7,7 @@ import (
 	"chattyai-go/setting"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -27,10 +28,10 @@ func main() {
 	routerInit := routers.InitRouter()
 
 	s := &http.Server{
-		Addr:           ":38083",
+		Addr:           ":" + strconv.Itoa(setting.ServerSetting.HttpPort),
 		Handler:        routerInit,
-		ReadTimeout:    10 * time.Second,
-		WriteTimeout:   10 * time.Second,
+		ReadTimeout:    60 * time.Second,
+		WriteTimeout:   60 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
 	err := s.ListenAndServe()
