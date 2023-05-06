@@ -26,7 +26,7 @@
 
 
     <mybatis.spring.boot.version>2.2.2</mybatis.spring.boot.version>
-    <mysql-connector-java.version>8.0.25</mysql-connector-java.version>
+    <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
 
     <spring-boot.version>2.6.6</spring-boot.version>
 
