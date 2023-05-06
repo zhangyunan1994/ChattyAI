@@ -26,3 +26,39 @@ git submodule update
 - go
 - python
 
+# 相关项目
+
+<table>
+  <thead align="center">
+    <tr border: none;>
+      <td><b>🎁 Projects</b></td>
+      <td><b>⭐ Stars</b></td>
+      <td><b>📚 Forks</b></td>
+      <td><b>🛎 Issues</b></td>
+      <td><b>📬 Pull requests</b></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/zhangyunan1994/ChattyAI"><b>ChattyAI</b></a></td>
+      <td><a href="https://github.com/zhangyunan1994/ChattyAI/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/zhangyunan1994/ChattyAI/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/zhangyunan1994/ChattyAI/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/zhangyunan1994/ChattyAI/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/cike-projects/chatgpt-web"><b>chatgpt-web</b></a></td>
+      <td><a href="https://github.com/cike-projects/chatgpt-web/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/cike-projects/chatgpt-web/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/cike-projects/chatgpt-web/issues"><img alt="Issues" src="https://img.shields.io/github/issues/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/cike-projects/chatgpt-web/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
+    </tr>
+    <tr>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui"><b>chattyai-web-ui</b></a></td>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/czhangyunan1994/chattyai-web-ui/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
+    </tr>
+  </tbody>
+</table>

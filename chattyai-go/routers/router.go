@@ -7,6 +7,7 @@ import (
 
 func InitRouter() *gin.Engine {
 	r := gin.Default()
+	r.BasePath()
 
 	r.Use(middlewares.Cors())
 
@@ -16,6 +17,14 @@ func InitRouter() *gin.Engine {
 		c.Writer.Header().Add("Accept", "text/html")
 		c.Writer.Flush()
 	})
+
+	chattyaiGroup := r.Group("/chattyai")
+	{
+		chatGroup := chattyaiGroup.Group("chat")
+		{
+			chatGroup.POST("chat")
+		}
+	}
 
 	//quoteGroup := r.Group("/quote")
 	//{
