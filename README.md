@@ -20,11 +20,11 @@ git submodule update
 
 **任选一个后端项目部署**
 
-在 chatgpt-server 下有不同语言实现的后端 server，可以选择自己喜欢的语言部署
+有不同语言实现的后端 server，可以选择任意一个自己喜欢的语言部署
 
-- java(groovy)
-- go
-- python
+- chattyai-java
+- chattyai-go
+- chattyai-py
 
 # 相关项目
 
