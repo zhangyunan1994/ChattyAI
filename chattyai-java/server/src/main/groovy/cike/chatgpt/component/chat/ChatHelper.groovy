@@ -158,8 +158,7 @@ class ChatStrategy extends GPTStrategy {
   @Override
   def dodo(OutputStream outputStream, String userId, RequestProps requestParam) {
     final List<ChatMessage> messages = new ArrayList<>()
-    final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
-        requestParam.systemMessage ?: openAIConfig.defaultSystemPrompt)
+    final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), openAIConfig.defaultSystemPrompt)
 
     messages.add(systemMessage)
 
@@ -195,6 +194,18 @@ class ChatStrategy extends GPTStrategy {
     long created = 0l
     pool.getOne().streamChatCompletion(chatCompletionRequest)
         .doOnError {
+          if (it instanceof SocketException) {
+            def result = new ChatWebMessage(id: NanoIdUtils.randomNanoId(),
+                    text: "Network Error",
+                    finishReason: "Network Error"
+            )
+            if (firstChunk) {
+              outputStream.write(JSON.toJSONBytes(result))
+              firstChunk = false
+            } else {
+              outputStream.write(("\n" + JSON.toJSONString(result)).getBytes(StandardCharsets.UTF_8))
+            }
+          }
           log.info("emitter.completeWithError()", it)
           outputStream.flush()
         }

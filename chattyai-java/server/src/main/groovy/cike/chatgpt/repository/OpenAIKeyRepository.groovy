@@ -36,4 +36,8 @@ class OpenAIKeyRepository {
     example.createCriteria().andStatusEqualTo(1 as byte).andExpiredTimeGreaterThan(new Date())
     return mapper.selectByExample(example)
   }
+
+  List<OpenaiKeyConfig> findAll() {
+    return mapper.selectByExample(null)
+  }
 }
