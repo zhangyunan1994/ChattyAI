@@ -19,47 +19,20 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-public class OpenAiService {
+public class OpenAIExtendService {
 
-  private static final String BASE_URL = "https://api.openai.com/";
-  private static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(10);
   private static final ObjectMapper mapper = defaultObjectMapper();
 
   private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-  private final OpenAiApi api;
+  private final OpenAIExtendAPI api;
 
-  /**
-   * Creates a new OpenAiService that wraps OpenAiApi
-   *
-   * @param token OpenAi token string "sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-   */
-  public OpenAiService(final String token) {
-    this(token, DEFAULT_TIMEOUT);
-  }
-
-  /**
-   * Creates a new OpenAiService that wraps OpenAiApi
-   *
-   * @param token   OpenAi token string "sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-   * @param timeout http read timeout, Duration.ZERO means no timeout
-   */
-  public OpenAiService(final String token, final Duration timeout) {
+  public OpenAIExtendService(final String token, final Duration timeout, String baseUrl) {
     ObjectMapper mapper = defaultObjectMapper();
     OkHttpClient client = defaultClient(token, timeout);
-    Retrofit retrofit = defaultRetrofit(client, mapper);
+    Retrofit retrofit = defaultRetrofit(client, mapper, baseUrl);
 
-    this.api = retrofit.create(OpenAiApi.class);
-  }
-
-  /**
-   * Creates a new OpenAiService that wraps OpenAiApi. Use this if you need more customization, but use
-   * OpenAiService(api, executorService) if you use streaming and want to shut down instantly
-   *
-   * @param api OpenAiApi instance to use for all methods
-   */
-  public OpenAiService(final OpenAiApi api) {
-    this.api = api;
+    this.api = retrofit.create(OpenAIExtendAPI.class);
   }
 
   public Usage dashboardBillingUsage(LocalDate startDate, LocalDate endDate) {
@@ -91,14 +64,6 @@ public class OpenAiService {
     }
   }
 
-  public static OpenAiApi buildApi(String token, Duration timeout) {
-    ObjectMapper mapper = defaultObjectMapper();
-    OkHttpClient client = defaultClient(token, timeout);
-    Retrofit retrofit = defaultRetrofit(client, mapper);
-
-    return retrofit.create(OpenAiApi.class);
-  }
-
   public static ObjectMapper defaultObjectMapper() {
     ObjectMapper mapper = new ObjectMapper();
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -115,9 +80,9 @@ public class OpenAiService {
         .build();
   }
 
-  public static Retrofit defaultRetrofit(OkHttpClient client, ObjectMapper mapper) {
+  public static Retrofit defaultRetrofit(OkHttpClient client, ObjectMapper mapper, String baseUrl) {
     return new Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(baseUrl)
         .client(client)
         .addConverterFactory(JacksonConverterFactory.create(mapper))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

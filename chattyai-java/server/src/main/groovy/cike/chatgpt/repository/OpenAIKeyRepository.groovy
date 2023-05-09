@@ -40,4 +40,12 @@ class OpenAIKeyRepository {
   List<OpenaiKeyConfig> findAll() {
     return mapper.selectByExample(null)
   }
+
+  void updateUsageInfo(long id, double totalUseToken) {
+    def config = new OpenaiKeyConfig()
+    config.id = id
+    config.totalUseToken = totalUseToken.intValue()
+    config.totalUseMoney = totalUseToken.intValue()
+    mapper.updateByPrimaryKeySelective(config)
+  }
 }
