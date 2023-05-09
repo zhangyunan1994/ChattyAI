@@ -25,6 +25,8 @@ git submodule update
 - chattyai-go
 - chattyai-py
 
+[详细部署文档](deploy.md)
+
 # 相关项目
 
 <table>
