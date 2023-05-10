@@ -2,6 +2,7 @@ package cike.openai;
 
 import cike.openai.dashboard.billing.Usage;
 import java.text.DecimalFormat;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,10 @@ class OpenAiServiceTest {
     DecimalFormat df = new DecimalFormat("#.000");
 
     for (OpenAIAccount openAIAccount : openAIAccountList) {
-      OpenAiService openAiService = new OpenAiService(openAIAccount.key);
-
+      ChattyAIService chattyAIService = new ChattyAIService(openAIAccount.key, Duration.ofSeconds(10),
+          "https://api.openai-proxy.com/");
       LocalDate endDate = LocalDate.now().plusDays(1);
-      Usage usage = openAiService.dashboardBillingUsage(endDate.plusDays(-99), endDate);
+      Usage usage = chattyAIService.dashboardBillingUsage(endDate.plusDays(-99), endDate);
       System.out.println(openAIAccount.account + "\t\t: " + df.format(usage.getTotalUsage() / 100) + "$");
     }
   }
