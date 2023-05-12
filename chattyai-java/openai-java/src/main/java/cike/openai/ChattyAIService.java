@@ -86,7 +86,7 @@ public class ChattyAIService {
 
   public static Retrofit defaultRetrofit(OkHttpClient client, ObjectMapper mapper, String baseUrl) {
     return new Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(baseUrl)
         .client(client)
         .addConverterFactory(JacksonConverterFactory.create(mapper))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

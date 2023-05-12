@@ -54,7 +54,9 @@ class ChatHelper {
   }
 
   boolean isCreateImage(String systemMessage, String prompt) {
-    return prompt && prompt.startsWith('#image') && prompt.length() >= 9 && prompt.charAt(6) == (" " as char)
+    return prompt
+            && (prompt.startsWith('@image256x256 ') || prompt.startsWith('@image512x512 ') || prompt.startsWith('@image1024x1024 '))
+            && prompt.trim().length() >= 18
   }
 
   StreamingResponseBody sendChat(String userId, RequestProps requestParam) {
@@ -116,30 +118,41 @@ class ImageStrategy extends GPTStrategy {
 
   @Override
   def dodo(OutputStream outputStream, String userId, RequestProps requestParam) {
-    def messageDescription = requestParam.prompt.substring(7)
+    String size = ""
+    String imageDescription = ""
+    def prompt = requestParam.prompt.trim()
+    if (prompt.startsWith('@image256x256 ')) {
+      size = "256x256"
+      imageDescription = prompt.substring(14)
+    } else if (prompt.startsWith('@image512x512 ')) {
+      size = "512x512"
+      imageDescription = prompt.substring(14)
+    } else if (prompt.startsWith('@image1024x1024 ')) {
+      size = "1024x1024"
+      imageDescription = prompt.substring(16)
+    }
 
     def messageId = NanoIdUtils.randomNanoId()
 
-    String firstText = "正常创建 ${messageDescription} 的图片, 请稍等..."
+    String firstText = "正常创建 ${imageDescription} 的图片, 请稍等..."
 
     def result = new ChatWebMessage(id: messageId,
-        text: firstText,
-        finishReason: "",
+            text: firstText,
+            finishReason: "",
     )
 
     outputStream.write(JSON.toJSONBytes(result))
     outputStream.flush()
 
-    def request = new CreateImageRequest(prompt: messageDescription, n: 1)
+    def request = new CreateImageRequest(prompt: imageDescription, n: 1, size: size)
     ImageResult image = pool.getOne().createImage(request)
 
     messageId = NanoIdUtils.randomNanoId()
 
-    def text = "${firstText}\n\n![${messageDescription}](${image.data.get(0).url})"
+    def text = "${firstText}\n\n![${imageDescription}](${image.data.get(0).url})"
 
     result = new ChatWebMessage(id: messageId,
         text: text,
-        role: "assistant",
         finishReason: "stop"
     )
     outputStream.write(("\n" + JSON.toJSONString(result)).getBytes(StandardCharsets.UTF_8))
