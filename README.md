@@ -63,3 +63,28 @@ git submodule update
     </tr>
   </tbody>
 </table>
+
+
+## 参与贡献
+
+
+感谢所有做过贡献的人!
+
+<a href="https://github.com/zhangyunan1994/ChattyAI/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zhangyunan1994/ChattyAI" />
+</a>
+
+## 赞助
+
+如果你觉得这个项目对你有帮助，并且情况允许的话，可以给我一点点支持，总之非常感谢支持～
+
+<div style="display: flex; gap: 20px;">
+	<div style="text-align: center">
+		<img style="max-width: 100%" src="./docs/wechat.jpeg" alt="微信" />
+		<p>WeChat Pay</p>
+	</div>
+	<div style="text-align: center">
+		<img style="max-width: 100%" src="./docs/wechat2.jpeg" alt="支付宝" />
+		<p>Alipay</p>
+	</div>
+</div>

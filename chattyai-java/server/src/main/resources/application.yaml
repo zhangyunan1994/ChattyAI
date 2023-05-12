@@ -5,7 +5,7 @@ server:
     connection-timeout: 10m
 spring:
   profiles:
-    active: shenzhao
+    active: local
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
