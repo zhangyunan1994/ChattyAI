@@ -1,5 +1,16 @@
 # 项目部署
 
+项目源码可以在 github 或者 gitee 获取
+
+| 项目 | GitHub | Gitee |
+|:--- |:--- |:--- |
+| ChattyAI | [zhangyunan1994/ChattyAI](https://github.com/zhangyunan1994/ChattyAI) | [zhangyunan1994/ChattyAI](https://gitee.com/zhangyunan1994/ChattyAI) |
+| chattyai-web-ui | [zhangyunan1994/chattyai-web-ui](https://github.com/zhangyunan1994/chattyai-web-ui) | [zhangyunan1994/chattyai-web-ui](https://gitee.com/zhangyunan1994/chattyai-web-ui) |
+| ChattyAI | [cike-projects/chatgpt-web](https://github.com/cike-projects/chatgpt-web.git) | [zhangyunan1994/chatgpt-web](https://gitee.com/zhangyunan1994/chatgpt-web) |
+
+可以根据网络情况选择不同的仓库
+
+
 ## 后端项目部署
 
 > 后端项目分为 3 种语言编写，其中部署任意一种即可.

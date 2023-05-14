@@ -11,7 +11,7 @@ git submodule update
 ## 计划
 
 - [ ] 语言计划
-- [ ] 
+- [ ] accessToken 方式调用
 
 ## 如何部署
 
@@ -42,6 +42,7 @@ git submodule update
       <td><b>📚 Forks</b></td>
       <td><b>🛎 Issues</b></td>
       <td><b>📬 Pull requests</b></td>
+      <td><b>📬 Gitee</b></td>
     </tr>
   </thead>
   <tbody>
@@ -51,6 +52,7 @@ git submodule update
       <td><a href="https://github.com/zhangyunan1994/ChattyAI/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/zhangyunan1994/ChattyAI/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/zhangyunan1994/ChattyAI/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href='https://gitee.com/zhangyunan1994/ChattyAI'><img src='https://gitee.com/zhangyunan1994/ChattyAI/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
     </tr>
     <tr>
       <td><a href="https://github.com/cike-projects/chatgpt-web"><b>chatgpt-web</b></a></td>
@@ -58,6 +60,7 @@ git submodule update
       <td><a href="https://github.com/cike-projects/chatgpt-web/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/cike-projects/chatgpt-web/issues"><img alt="Issues" src="https://img.shields.io/github/issues/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/cike-projects/chatgpt-web/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href='https://gitee.com/zhangyunan1994/chatgpt-web'><img src='https://gitee.com/zhangyunan1994/chatgpt-web/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
     </tr>
     <tr>
       <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui"><b>chattyai-web-ui</b></a></td>
@@ -65,6 +68,7 @@ git submodule update
       <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/czhangyunan1994/chattyai-web-ui/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href='https://gitee.com/zhangyunan1994/chattyai-web-ui'><img src='https://gitee.com/zhangyunan1994/chattyai-web-ui/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
     </tr>
   </tbody>
 </table>
