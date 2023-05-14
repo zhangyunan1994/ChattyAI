@@ -8,6 +8,11 @@ git submodule init
 git submodule update
 ```
 
+## 计划
+
+- [ ] 语言计划
+- [ ] 
+
 ## 如何部署
 
 本项目分为 2 个前端和 1 个后端项目。
@@ -80,11 +85,11 @@ git submodule update
 
 <div style="display: flex; gap: 20px;">
 	<div style="text-align: center">
-		<img style="max-width: 100%" src="./docs/wechat.jpeg" alt="微信" />
+		<img style="max-width: 100%; width:300px;" src="./docs/wechat.jpeg" alt="微信" />
 		<p>WeChat Pay</p>
 	</div>
 	<div style="text-align: center">
-		<img style="max-width: 100%" src="./docs/wechat2.jpeg" alt="支付宝" />
-		<p>Alipay</p>
+		<img style="max-width: 100%; width:300px;" src="./docs/wechat2.jpeg" alt="微信" />
+		<p>WeChat Pay</p>
 	</div>
 </div>

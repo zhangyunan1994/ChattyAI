@@ -11,9 +11,6 @@ spring:
       maximum-pool-size: 10
 
 openai:
-  # OpenAI API Key - https://platform.openai.com/overview
-  apiKey: sk-
-
   # OpenAI API Base URL - https://api.openai.com
   baseUrl: https://api.openai.com
 
