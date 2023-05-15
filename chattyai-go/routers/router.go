@@ -6,6 +6,34 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type CommonResponse struct {
+	Status  string      `json:"status"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
+}
+
+func NewSuccessCommonResponse() *CommonResponse {
+	return &CommonResponse{
+		Status:  "Success",
+		Message: "Success",
+	}
+}
+
+func NewFailCommonResponse(message string) *CommonResponse {
+	return &CommonResponse{
+		Status:  "Fail",
+		Message: message,
+	}
+}
+
+func NewSuccessCommonResponseWithData(data interface{}) *CommonResponse {
+	return &CommonResponse{
+		Status:  "Success",
+		Message: "Success",
+		Data:    data,
+	}
+}
+
 func InitRouter() *gin.Engine {
 	r := gin.Default()
 	r.BasePath()
@@ -21,34 +49,16 @@ func InitRouter() *gin.Engine {
 
 	chattyaiGroup := r.Group("/chattyai")
 	{
-		chatGroup := chattyaiGroup.Group("chat")
 		{
-			chatGroup.POST("chat")
+			authGroup := chattyaiGroup.Group("auth")
+			authGroup.POST("login/withPassword", LoginByPassword)
+			authGroup.GET("checkToken", AuthCheckToken)
+		}
+		{
+			chatGroup := chattyaiGroup.Group("chat")
+			chatGroup.POST("chat", ChatStream)
 		}
 	}
 
-	//quoteGroup := r.Group("/quote")
-	//{
-	//	quoteGroup.GET("/random", GetRandomQuote)
-	//}
-	//
-	//sysDictGroup := r.Group("/sysdict")
-	//{
-	//	sysDictGroup.GET("/getByType", GetDictByTypeCode)
-	//}
-	//
-	//guideLinkGroup := r.Group("/guide_link")
-	//{
-	//	guideLinkGroup.GET("list", GetAllLink)
-	//}
-	//
-	//r.GET("/network_link/list", func(c *gin.Context) {
-	//	links, err := models.GetAllNetworkCheckLinks()
-	//	if err != nil {
-	//		c.AbortWithError(500, err)
-	//		return
-	//	}
-	//	c.JSON(200, links)
-	//})
 	return r
 }

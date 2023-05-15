@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"gorm.io/gorm"
 	"time"
 )
@@ -12,7 +13,6 @@ type User struct {
 	Nickname     string    `gorm:"default:null"`
 	PasswordHash string    `gorm:"not null"`
 	Email        string    `gorm:"default:null"`
-	Password     string    `gorm:"not null"`
 	Avatar       string    `gorm:"default:null"`
 	Status       int8      `gorm:"default:1;not null"`
 	Description  string    `gorm:"default:null"`
@@ -26,9 +26,22 @@ func (User) TableName() string {
 
 func GetUserByUsername(username string) (*User, error) {
 	var u User
-	err := db.Where(&User{Username: username}).Find(&u).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err := db.Where(&User{Username: username}).First(&u).Error; err == nil {
+		return &u, nil
+	} else if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, nil
+	} else {
 		return nil, err
 	}
-	return &u, nil
+}
+
+func GetUserByUid(uid string) (*User, error) {
+	var u User
+	if err := db.Where(&User{UID: uid}).First(&u).Error; err == nil {
+		return &u, nil
+	} else if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, nil
+	} else {
+		return nil, err
+	}
 }

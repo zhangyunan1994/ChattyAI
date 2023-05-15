@@ -4,7 +4,6 @@ go 1.19
 
 require (
 	github.com/gin-gonic/gin v1.9.0
-	github.com/jinzhu/gorm v1.9.16
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/sashabaranov/go-openai v1.9.3
 	github.com/urfave/cli/v2 v2.25.3
