@@ -21,18 +21,27 @@ type Database struct {
 
 var DatabaseSetting = &Database{}
 
+type OpenAIConfig struct {
+	BaseUrl        string
+	Model          string
+	TimeoutSeconds int
+}
+
+var OpenAIConfigSetting = &OpenAIConfig{}
+
 var cfg *ini.File
 
-func Setup(profile string) {
-	cfg2, err := ini.Load("conf/app.ini")
+func Setup(configFile string) {
+	cfg2, err := ini.Load(configFile)
 	if err != nil {
-		log.Fatalf("setting.Setup, fail to parse 'conf/app.ini': %v", err)
+		log.Fatalf("setting.Setup, fail to parse '%s': %v", configFile, err)
 	}
 
 	cfg = cfg2
 
 	mapTo("server", ServerSetting)
-	mapTo("database_"+profile, DatabaseSetting)
+	mapTo("database", DatabaseSetting)
+	mapTo("openai", OpenAIConfigSetting)
 }
 
 func mapTo(section string, v interface{}) {

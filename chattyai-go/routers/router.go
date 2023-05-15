@@ -2,13 +2,14 @@ package routers
 
 import (
 	"chattyai-go/middlewares"
+	"chattyai-go/setting"
 	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() *gin.Engine {
 	r := gin.Default()
 	r.BasePath()
-
+	gin.SetMode(setting.ServerSetting.RunMode)
 	r.Use(middlewares.Cors())
 
 	r.GET("/", func(c *gin.Context) {

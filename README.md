@@ -42,6 +42,7 @@ git submodule update
       <td><b>📚 Forks</b></td>
       <td><b>🛎 Issues</b></td>
       <td><b>📬 Pull requests</b></td>
+      <td><b>📬 Contributors</b></td>
       <td><b>📬 Gitee</b></td>
     </tr>
   </thead>
@@ -52,6 +53,7 @@ git submodule update
       <td><a href="https://github.com/zhangyunan1994/ChattyAI/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/zhangyunan1994/ChattyAI/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/zhangyunan1994/ChattyAI/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/zhangyunan1994/ChattyAI?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a target="_blank" rel="noopener" href="https://github.com/zhangyunan1994/ChattyAI/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/zhangyunan1994/ChattyAI?color=1e94de&amp;style=for-the-badge&amp;logo=github"></a></td>
       <td><a href='https://gitee.com/zhangyunan1994/ChattyAI'><img src='https://gitee.com/zhangyunan1994/ChattyAI/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
     </tr>
     <tr>
@@ -60,6 +62,7 @@ git submodule update
       <td><a href="https://github.com/cike-projects/chatgpt-web/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/cike-projects/chatgpt-web/issues"><img alt="Issues" src="https://img.shields.io/github/issues/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/cike-projects/chatgpt-web/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a target="_blank" rel="noopener" href="https://github.com/cike-projects/chatgpt-web/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/cike-projects/chatgpt-web?color=1e94de&amp;style=for-the-badge&amp;logo=github"></a></td>
       <td><a href='https://gitee.com/zhangyunan1994/chatgpt-web'><img src='https://gitee.com/zhangyunan1994/chatgpt-web/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
     </tr>
     <tr>
@@ -68,6 +71,7 @@ git submodule update
       <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/czhangyunan1994/chattyai-web-ui/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a target="_blank" rel="noopener" href="https://github.com/zhangyunan1994/chattyai-web-ui/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/zhangyunan1994/chattyai-web-ui?color=1e94de&amp;style=for-the-badge&amp;logo=github"></a></td>
       <td><a href='https://gitee.com/zhangyunan1994/chattyai-web-ui'><img src='https://gitee.com/zhangyunan1994/chattyai-web-ui/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
     </tr>
   </tbody>

@@ -5,6 +5,9 @@ import (
 	"chattyai-go/models"
 	"chattyai-go/routers"
 	"chattyai-go/setting"
+	"fmt"
+	"github.com/urfave/cli/v2"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -12,30 +15,41 @@ import (
 )
 
 func main() {
-	args := os.Args
+	app := &cli.App{
+		Name:  "greet",
+		Usage: "fight the loneliness!",
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:    "config",
+				Aliases: []string{"c"},
+				Value:   "conf/chattyai.ini",
+				Usage:   "Load configuration from `FILE`",
+			},
+		},
+		Action: func(cCtx *cli.Context) error {
+			fmt.Println(cCtx.String("config"))
+			//
+			// 初始化数据库链接
+			setting.Setup(cCtx.String("config"))
+			models.Setup()
+			job.Init()
 
-	profile := "dev"
+			routerInit := routers.InitRouter()
 
-	if args != nil && len(args) > 1 {
-		profile = args[1]
+			s := &http.Server{
+				Addr:           ":" + strconv.Itoa(setting.ServerSetting.HttpPort),
+				Handler:        routerInit,
+				ReadTimeout:    60 * time.Second,
+				WriteTimeout:   60 * time.Second,
+				MaxHeaderBytes: 1 << 20,
+			}
+			err := s.ListenAndServe()
+			return err
+		},
 	}
 
-	// 初始化数据库链接
-	setting.Setup(profile)
-	models.Setup()
-	job.Init()
-
-	routerInit := routers.InitRouter()
-
-	s := &http.Server{
-		Addr:           ":" + strconv.Itoa(setting.ServerSetting.HttpPort),
-		Handler:        routerInit,
-		ReadTimeout:    60 * time.Second,
-		WriteTimeout:   60 * time.Second,
-		MaxHeaderBytes: 1 << 20,
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
 	}
-	err := s.ListenAndServe()
-	if err != nil {
-		return
-	}
+
 }
