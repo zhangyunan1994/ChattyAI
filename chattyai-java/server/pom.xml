@@ -152,7 +152,7 @@
   </dependencies>
 
   <build>
-    <finalName>chatgpt-server</finalName>
+    <finalName>chattyai-server</finalName>
 
     <plugins>
       <plugin>
