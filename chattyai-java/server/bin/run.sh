@@ -29,7 +29,6 @@ function init()
 function start()
 {
     echo "Start service [${PROJECT}]."
-    getFFSign
     nohup java \
       -Dcom.sun.management.jmxremote \
       -Dcom.sun.management.jmxremote.local.only=true \
