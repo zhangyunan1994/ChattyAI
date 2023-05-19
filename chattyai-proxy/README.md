@@ -41,6 +41,7 @@ go env -w GO111MODULE=on
 **linux**
 
 ```shell
+rm chattyai-proxy
 GOOS=linux GOARCH=amd64 go build -o chattyai-proxy main.go
 ```
 

@@ -46,6 +46,8 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	proxyReq.URL.RawQuery = r.URL.RawQuery
+
 	// 默认超时时间设置为60s
 	client := &http.Client{
 		Timeout: 60 * time.Second,
