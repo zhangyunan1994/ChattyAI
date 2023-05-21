@@ -9,24 +9,26 @@ create table if not exists user (
     id int unsigned auto_increment primary key,
     uid varchar(30) not null unique,
     username varchar(20) unique not null,
+    role varchar(10) not null default 'user' comment '用户角色 user 普通用户；admin 管理员',
     nickname varchar(20) null comment '昵称',
     password_hash varchar(255) not null,
     email VARCHAR(50) NULL,
     avatar varchar(300) null comment '头像',
     status tinyint not null default 1 comment '用户状态 1 正常 2 禁止登录',
     description varchar(300) null comment '用户简介',
+    expired_time datetime null comment '失效时间',
     create_time datetime default current_timestamp,
     update_time datetime default current_timestamp on update current_timestamp
 )ENGINE=INNODB comment='用户表';
 
-INSERT INTO user (uid, username, nickname, password_hash, avatar) VALUES ('20230508175100', 'admin', 'admin', '123456', 'https://th.bing.com/th/id/OIP.HiR_mWL7XXgvsG5xA0RByAHaHa?pid=ImgDet&rs=1');
+INSERT INTO user (uid, username, role, nickname, password_hash, avatar) VALUES ('20230508175100', 'admin123', 'admin', '张瑀楠', 'admin123', 'https://th.bing.com/th/id/OIP.HiR_mWL7XXgvsG5xA0RByAHaHa?pid=ImgDet&rs=1');
 
 create table `role` (
   id int unsigned auto_increment primary key,
   name VARCHAR(20) NOT NULL
 )ENGINE=InnoDB comment='角色表';
 
-insert into role(id, name) values (1, 'superman'), (2, 'chat');
+insert into role(id, name) values (1, 'admin'), (2, 'user');
 
 create table `user_role` (
   id int unsigned auto_increment primary key,
@@ -35,7 +37,7 @@ create table `user_role` (
   unique KEY (`user_id`, `role_id`)
 ) ENGINE = InnoDB comment='用户角色表';
 
-insert into user_role(user_id, role_id) VALUES ('20230508175100', 1), ('20230508175100', 2);
+insert into user_role(user_id, role_id) VALUES ('20230508175100', 1);
 
 create table `permission` (
   id int unsigned auto_increment primary key,
@@ -78,17 +80,13 @@ create table `sensitive_words` (
   UNIQUE KEY `word` (`word`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+drop table sensitive_words_hit_record;
 create table sensitive_words_hit_record (
     id bigint auto_increment primary key,
     uid varchar(30) null,
-    once_conversation_id varchar(100) null,
-    room_id varchar(100) null,
-    system_message varchar(1000) null,
-    role varchar(20) not null comment 'role or assistant',
-    content varchar(10000) null comment '当 role 为 user 时为用户消息，assistant 为 chatgpt 返回消息',
-    message_id varchar(100) null,
-    created bigint null,
-    model varchar(60) null,
+    conversation_id varchar(100) null,
+    system_message varchar(1000) not null,
+    user_message varchar(10000) not null comment '用户问题',
     create_time datetime default CURRENT_TIMESTAMP null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -240,19 +238,23 @@ insert into prompts(sub_prompt, prompt) values
 ('充当 Linux 终端', '我想让你充当 Linux 终端。我将输入命令，您将回复终端应显示的内容。我希望您只在一个唯一的代码块内回复终端输出，而不是其他任何内容。不要写解释。除非我指示您这样做，否则不要键入命令。当我需要用英语告诉你一些事情时，我会把文字放在中括号内[就像这样]。我的第一个命令是 pwd'),
 ('担任雅思写作考官', '我希望你假定自己是雅思写作考官，根据雅思评判标准，按我给你的雅思考题和对应答案给我评分，并且按照雅思写作评分细则给出打分依据。此外，请给我详细的修改意见并写出满分范文。第一个问题是： {{ 这里补充一个问题 }} 对于这个问题，我的答案是：{{ 这里补充一个答案 }} ,请依次给到我以下内容：具体分数及其评分依据、文章修改意见、满分范文。');
 
+drop table chatgpt_message_record;
 create table chatgpt_message_record (
     id bigint auto_increment primary key,
     uid varchar(30) null,
-    once_conversation_id varchar(100) null,
-    room_id varchar(100) null,
-    system_message varchar(1000) null,
-    role varchar(20) not null comment 'role or assistant',
-    content varchar(10000) null comment '当 role 为 user 时为用户消息，assistant 为 chatgpt 返回消息',
+    conversation_id varchar(100) null,
+    system_message varchar(500) not null,
+    role varchar(10) not null comment 'role or assistant',
+    role_message varchar(10000) not null,
     message_id varchar(100) null,
-    created bigint null,
-    model varchar(60) null,
-    create_time datetime default CURRENT_TIMESTAMP null
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    created bigint null comment 'gpt 返回的时间戳',
+    model varchar(60) null comment '采用的模型',
+    context_count int default 0 comment '携带上下问数量',
+    prompt_tokens int default 0,
+    status tinyint default 1 not null comment '对话状态 1 处理中 2 成功 3 部分成功 4 失败 5 超时失败 6 token 限制失败',
+    create_time datetime default CURRENT_TIMESTAMP null,
+    key cdx_ucm(uid, conversation_id, message_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 comment='chatgpt 消息';
 
 #----------------------------------------------------------------------
 # openai 池
@@ -260,14 +262,11 @@ create table openai_key_config (
     id bigint auto_increment primary key,
     account_id varchar(30) null comment 'openai 上的账户名称',
     openai_key varchar(60) null comment 'openai key',
+    support_model varchar(10) not null default 'GPT-3',
     total_use_token int not null default 0 comment '已经消耗token',
     total_use_money int not null default 0 comment '累计消耗金额 单位 美分',
-    status tinyint not null comment '1 可用 2 关闭 3 过期关闭',
+    max_use_money int not null default -1 comment '限制最大可消耗金额，负数则不控制，单位美分',
+    status tinyint not null comment '1 可用 2 关闭 3 过期关闭 4 金额超限关闭 5 key 不可能用',
     create_time datetime default current_timestamp comment '创建时间',
     expired_time datetime not null comment '失效时间'
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-select id, account_id, openai_key, total_use_token, total_use_money, status, create_time, expired_time from openai_key_config where status=1;
-
-#----------------------------------------------------------------------
-# 资费情况
