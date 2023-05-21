@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="password_hash" jdbcType="VARCHAR" property="passwordHash" />
     <result column="email" jdbcType="VARCHAR" property="email" />
@@ -74,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `uid`, username, nickname, password_hash, email, avatar, `status`, description, 
+    id, `uid`, username, `role`, nickname, password_hash, email, avatar, `status`, description, 
     expired_time, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.UserExample" resultMap="BaseResultMap">
@@ -109,15 +110,15 @@
   </delete>
   <insert id="insert" parameterType="cike.chatgpt.repository.entity.User">
     insert into user (id, `uid`, username, 
-      nickname, password_hash, email, 
-      avatar, `status`, description, 
-      expired_time, create_time, update_time
-      )
+      `role`, nickname, password_hash, 
+      email, avatar, `status`, 
+      description, expired_time, create_time, 
+      update_time)
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{passwordHash,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}, 
-      #{expiredTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      #{role,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{passwordHash,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{description,jdbcType=VARCHAR}, #{expiredTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cike.chatgpt.repository.entity.User">
     insert into user
@@ -130,6 +131,9 @@
       </if>
       <if test="username != null">
         username,
+      </if>
+      <if test="role != null">
+        `role`,
       </if>
       <if test="nickname != null">
         nickname,
@@ -168,6 +172,9 @@
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
       </if>
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
@@ -216,6 +223,9 @@
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
+      <if test="record.role != null">
+        `role` = #{record.role,jdbcType=VARCHAR},
+      </if>
       <if test="record.nickname != null">
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
@@ -253,6 +263,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       `uid` = #{record.uid,jdbcType=VARCHAR},
       username = #{record.username,jdbcType=VARCHAR},
+      `role` = #{record.role,jdbcType=VARCHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       password_hash = #{record.passwordHash,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
@@ -274,6 +285,9 @@
       </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        `role` = #{role,jdbcType=VARCHAR},
       </if>
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=VARCHAR},
@@ -309,6 +323,7 @@
     update user
     set `uid` = #{uid,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
+      `role` = #{role,jdbcType=VARCHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
       password_hash = #{passwordHash,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

@@ -1,4 +1,4 @@
-package cike.chatgpt.repository
+package cike.chatgpt.repository.enums
 
 enum UserStatusEnum {
   NORMAL(1 as byte, "正常"),

@@ -9,6 +9,8 @@ public class OpenaiKeyConfig {
 
     private String openaiKey;
 
+    private String supportModel;
+
     private Integer totalUseToken;
 
     private Integer totalUseMoney;
@@ -43,6 +45,14 @@ public class OpenaiKeyConfig {
 
     public void setOpenaiKey(String openaiKey) {
         this.openaiKey = openaiKey;
+    }
+
+    public String getSupportModel() {
+        return supportModel;
+    }
+
+    public void setSupportModel(String supportModel) {
+        this.supportModel = supportModel;
     }
 
     public Integer getTotalUseToken() {

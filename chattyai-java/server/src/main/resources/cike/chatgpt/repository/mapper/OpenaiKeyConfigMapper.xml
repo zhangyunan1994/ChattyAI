@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="account_id" jdbcType="VARCHAR" property="accountId" />
     <result column="openai_key" jdbcType="VARCHAR" property="openaiKey" />
+    <result column="support_model" jdbcType="VARCHAR" property="supportModel" />
     <result column="total_use_token" jdbcType="INTEGER" property="totalUseToken" />
     <result column="total_use_money" jdbcType="INTEGER" property="totalUseMoney" />
     <result column="max_use_money" jdbcType="INTEGER" property="maxUseMoney" />
@@ -71,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, account_id, openai_key, total_use_token, total_use_money, max_use_money, `status`, 
-    create_time, expired_time
+    id, account_id, openai_key, support_model, total_use_token, total_use_money, max_use_money, 
+    `status`, create_time, expired_time
   </sql>
   <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfigExample" resultMap="BaseResultMap">
     select
@@ -106,13 +107,13 @@
   </delete>
   <insert id="insert" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfig">
     insert into openai_key_config (id, account_id, openai_key, 
-      total_use_token, total_use_money, max_use_money, 
-      `status`, create_time, expired_time
-      )
+      support_model, total_use_token, total_use_money, 
+      max_use_money, `status`, create_time, 
+      expired_time)
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=VARCHAR}, #{openaiKey,jdbcType=VARCHAR}, 
-      #{totalUseToken,jdbcType=INTEGER}, #{totalUseMoney,jdbcType=INTEGER}, #{maxUseMoney,jdbcType=INTEGER}, 
-      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{expiredTime,jdbcType=TIMESTAMP}
-      )
+      #{supportModel,jdbcType=VARCHAR}, #{totalUseToken,jdbcType=INTEGER}, #{totalUseMoney,jdbcType=INTEGER}, 
+      #{maxUseMoney,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{expiredTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfig">
     insert into openai_key_config
@@ -125,6 +126,9 @@
       </if>
       <if test="openaiKey != null">
         openai_key,
+      </if>
+      <if test="supportModel != null">
+        support_model,
       </if>
       <if test="totalUseToken != null">
         total_use_token,
@@ -154,6 +158,9 @@
       </if>
       <if test="openaiKey != null">
         #{openaiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="supportModel != null">
+        #{supportModel,jdbcType=VARCHAR},
       </if>
       <if test="totalUseToken != null">
         #{totalUseToken,jdbcType=INTEGER},
@@ -193,6 +200,9 @@
       <if test="record.openaiKey != null">
         openai_key = #{record.openaiKey,jdbcType=VARCHAR},
       </if>
+      <if test="record.supportModel != null">
+        support_model = #{record.supportModel,jdbcType=VARCHAR},
+      </if>
       <if test="record.totalUseToken != null">
         total_use_token = #{record.totalUseToken,jdbcType=INTEGER},
       </if>
@@ -221,6 +231,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       account_id = #{record.accountId,jdbcType=VARCHAR},
       openai_key = #{record.openaiKey,jdbcType=VARCHAR},
+      support_model = #{record.supportModel,jdbcType=VARCHAR},
       total_use_token = #{record.totalUseToken,jdbcType=INTEGER},
       total_use_money = #{record.totalUseMoney,jdbcType=INTEGER},
       max_use_money = #{record.maxUseMoney,jdbcType=INTEGER},
@@ -239,6 +250,9 @@
       </if>
       <if test="openaiKey != null">
         openai_key = #{openaiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="supportModel != null">
+        support_model = #{supportModel,jdbcType=VARCHAR},
       </if>
       <if test="totalUseToken != null">
         total_use_token = #{totalUseToken,jdbcType=INTEGER},
@@ -265,6 +279,7 @@
     update openai_key_config
     set account_id = #{accountId,jdbcType=VARCHAR},
       openai_key = #{openaiKey,jdbcType=VARCHAR},
+      support_model = #{supportModel,jdbcType=VARCHAR},
       total_use_token = #{totalUseToken,jdbcType=INTEGER},
       total_use_money = #{totalUseMoney,jdbcType=INTEGER},
       max_use_money = #{maxUseMoney,jdbcType=INTEGER},

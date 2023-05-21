@@ -1,4 +1,4 @@
-package cike.chatgpt.repository
+package cike.chatgpt.repository.enums
 
 enum ChatMessageRecordStatusEnum {
   IN_GENERATION(1 as byte, "处理中"),

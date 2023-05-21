@@ -1,8 +1,7 @@
 package cike.chatgpt.interceptor
 
 import cike.chatgpt.SessionManager
-import cike.chatgpt.controller.CommonResponse
-import cike.chatgpt.repository.UserStatusEnum
+import cike.chatgpt.repository.enums.UserStatusEnum
 import cike.chatgpt.repository.rbac.RABCRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

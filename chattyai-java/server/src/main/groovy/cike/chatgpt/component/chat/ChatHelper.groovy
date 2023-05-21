@@ -3,7 +3,7 @@ package cike.chatgpt.component.chat
 import cike.chatgpt.config.OpenAIConfig
 import cike.chatgpt.controller.RequestProps
 import cike.chatgpt.repository.ChatGPTMessageRecordRepository
-import cike.chatgpt.repository.ChatMessageRecordStatusEnum
+import cike.chatgpt.repository.enums.ChatMessageRecordStatusEnum
 import cike.chatgpt.repository.sensitive.SensitiveWordsHitRecordRepository
 import cike.chatgpt.repository.sensitive.SensitiveWordsRepository
 import cike.chatgpt.utils.NanoIdUtils

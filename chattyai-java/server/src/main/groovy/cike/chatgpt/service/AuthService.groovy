@@ -5,7 +5,7 @@ import cike.chatgpt.SessionManager
 import cike.chatgpt.controller.CommonResponse
 import cike.chatgpt.repository.AuthSessionTokenRepository
 import cike.chatgpt.repository.UserRepository
-import cike.chatgpt.repository.UserStatusEnum
+import cike.chatgpt.repository.enums.UserStatusEnum
 import cike.chatgpt.repository.entity.User
 import cike.chatgpt.utils.NanoIdUtils
 import com.google.common.base.Preconditions

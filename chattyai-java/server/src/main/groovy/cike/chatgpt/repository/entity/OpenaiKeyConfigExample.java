@@ -305,6 +305,76 @@ public class OpenaiKeyConfigExample {
             return (Criteria) this;
         }
 
+        public Criteria andSupportModelIsNull() {
+            addCriterion("support_model is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelIsNotNull() {
+            addCriterion("support_model is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelEqualTo(String value) {
+            addCriterion("support_model =", value, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelNotEqualTo(String value) {
+            addCriterion("support_model <>", value, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelGreaterThan(String value) {
+            addCriterion("support_model >", value, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelGreaterThanOrEqualTo(String value) {
+            addCriterion("support_model >=", value, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelLessThan(String value) {
+            addCriterion("support_model <", value, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelLessThanOrEqualTo(String value) {
+            addCriterion("support_model <=", value, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelLike(String value) {
+            addCriterion("support_model like", value, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelNotLike(String value) {
+            addCriterion("support_model not like", value, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelIn(List<String> values) {
+            addCriterion("support_model in", values, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelNotIn(List<String> values) {
+            addCriterion("support_model not in", values, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelBetween(String value1, String value2) {
+            addCriterion("support_model between", value1, value2, "supportModel");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportModelNotBetween(String value1, String value2) {
+            addCriterion("support_model not between", value1, value2, "supportModel");
+            return (Criteria) this;
+        }
+
         public Criteria andTotalUseTokenIsNull() {
             addCriterion("total_use_token is null");
             return (Criteria) this;

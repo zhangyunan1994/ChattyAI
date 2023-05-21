@@ -41,5 +41,7 @@
     <table tableName="sensitive_words"/>
     <table tableName="sensitive_words_hit_record"/>
     <table tableName="user"/>
+    <table tableName="role"/>
+    <table tableName="user_role"/>
   </context>
 </generatorConfiguration>
