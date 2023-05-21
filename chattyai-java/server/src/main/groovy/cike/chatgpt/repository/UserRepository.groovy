@@ -8,11 +8,17 @@ import cike.chatgpt.utils.CollectionUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
+import java.text.SimpleDateFormat
+
 @Repository
 class UserRepository {
 
   @Autowired
   private UserMapper userMapper
+
+  User findById(int id) {
+    return userMapper.selectByPrimaryKey(id)
+  }
 
   User findByUsername(String username) {
     UserExample example = new UserExample()
@@ -26,12 +32,29 @@ class UserRepository {
     CollectionUtil.getFirstElseNull(userMapper.selectByExample(example))
   }
 
-  List<User> findByCondition(String username) {
+  List<User> findByCondition(String searchText,
+                             String startTime,
+                             String endTime) {
     UserExample example = new UserExample()
     UserExample.Criteria criteria = example.createCriteria()
-    if (username) {
-      criteria.andUsernameLike("%" + username + "%")
+    if (searchText) {
+      criteria.andUsernameLike("%" + searchText + "%")
     }
+
+    if (endTime || startTime) {
+      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+      if (startTime) {
+        criteria.andCreateTimeGreaterThanOrEqualTo(format.parse(startTime))
+      }
+
+      if (endTime) {
+        criteria.andCreateTimeLessThanOrEqualTo(format.parse(endTime))
+      }
+    }
+
+
+
     example.setOrderByClause("id desc")
     userMapper.selectByExample(example)
   }

@@ -235,143 +235,73 @@ public class ChatgptMessageRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdIsNull() {
-            addCriterion("once_conversation_id is null");
+        public Criteria andConversationIdIsNull() {
+            addCriterion("conversation_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdIsNotNull() {
-            addCriterion("once_conversation_id is not null");
+        public Criteria andConversationIdIsNotNull() {
+            addCriterion("conversation_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdEqualTo(String value) {
-            addCriterion("once_conversation_id =", value, "onceConversationId");
+        public Criteria andConversationIdEqualTo(String value) {
+            addCriterion("conversation_id =", value, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdNotEqualTo(String value) {
-            addCriterion("once_conversation_id <>", value, "onceConversationId");
+        public Criteria andConversationIdNotEqualTo(String value) {
+            addCriterion("conversation_id <>", value, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdGreaterThan(String value) {
-            addCriterion("once_conversation_id >", value, "onceConversationId");
+        public Criteria andConversationIdGreaterThan(String value) {
+            addCriterion("conversation_id >", value, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdGreaterThanOrEqualTo(String value) {
-            addCriterion("once_conversation_id >=", value, "onceConversationId");
+        public Criteria andConversationIdGreaterThanOrEqualTo(String value) {
+            addCriterion("conversation_id >=", value, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdLessThan(String value) {
-            addCriterion("once_conversation_id <", value, "onceConversationId");
+        public Criteria andConversationIdLessThan(String value) {
+            addCriterion("conversation_id <", value, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdLessThanOrEqualTo(String value) {
-            addCriterion("once_conversation_id <=", value, "onceConversationId");
+        public Criteria andConversationIdLessThanOrEqualTo(String value) {
+            addCriterion("conversation_id <=", value, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdLike(String value) {
-            addCriterion("once_conversation_id like", value, "onceConversationId");
+        public Criteria andConversationIdLike(String value) {
+            addCriterion("conversation_id like", value, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdNotLike(String value) {
-            addCriterion("once_conversation_id not like", value, "onceConversationId");
+        public Criteria andConversationIdNotLike(String value) {
+            addCriterion("conversation_id not like", value, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdIn(List<String> values) {
-            addCriterion("once_conversation_id in", values, "onceConversationId");
+        public Criteria andConversationIdIn(List<String> values) {
+            addCriterion("conversation_id in", values, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdNotIn(List<String> values) {
-            addCriterion("once_conversation_id not in", values, "onceConversationId");
+        public Criteria andConversationIdNotIn(List<String> values) {
+            addCriterion("conversation_id not in", values, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdBetween(String value1, String value2) {
-            addCriterion("once_conversation_id between", value1, value2, "onceConversationId");
+        public Criteria andConversationIdBetween(String value1, String value2) {
+            addCriterion("conversation_id between", value1, value2, "conversationId");
             return (Criteria) this;
         }
 
-        public Criteria andOnceConversationIdNotBetween(String value1, String value2) {
-            addCriterion("once_conversation_id not between", value1, value2, "onceConversationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdIsNull() {
-            addCriterion("room_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdIsNotNull() {
-            addCriterion("room_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdEqualTo(String value) {
-            addCriterion("room_id =", value, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdNotEqualTo(String value) {
-            addCriterion("room_id <>", value, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdGreaterThan(String value) {
-            addCriterion("room_id >", value, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdGreaterThanOrEqualTo(String value) {
-            addCriterion("room_id >=", value, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdLessThan(String value) {
-            addCriterion("room_id <", value, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdLessThanOrEqualTo(String value) {
-            addCriterion("room_id <=", value, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdLike(String value) {
-            addCriterion("room_id like", value, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdNotLike(String value) {
-            addCriterion("room_id not like", value, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdIn(List<String> values) {
-            addCriterion("room_id in", values, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdNotIn(List<String> values) {
-            addCriterion("room_id not in", values, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdBetween(String value1, String value2) {
-            addCriterion("room_id between", value1, value2, "roomId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRoomIdNotBetween(String value1, String value2) {
-            addCriterion("room_id not between", value1, value2, "roomId");
+        public Criteria andConversationIdNotBetween(String value1, String value2) {
+            addCriterion("conversation_id not between", value1, value2, "conversationId");
             return (Criteria) this;
         }
 
@@ -515,73 +445,73 @@ public class ChatgptMessageRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNull() {
-            addCriterion("content is null");
+        public Criteria andRoleMessageIsNull() {
+            addCriterion("role_message is null");
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNotNull() {
-            addCriterion("content is not null");
+        public Criteria andRoleMessageIsNotNull() {
+            addCriterion("role_message is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContentEqualTo(String value) {
-            addCriterion("content =", value, "content");
+        public Criteria andRoleMessageEqualTo(String value) {
+            addCriterion("role_message =", value, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotEqualTo(String value) {
-            addCriterion("content <>", value, "content");
+        public Criteria andRoleMessageNotEqualTo(String value) {
+            addCriterion("role_message <>", value, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThan(String value) {
-            addCriterion("content >", value, "content");
+        public Criteria andRoleMessageGreaterThan(String value) {
+            addCriterion("role_message >", value, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThanOrEqualTo(String value) {
-            addCriterion("content >=", value, "content");
+        public Criteria andRoleMessageGreaterThanOrEqualTo(String value) {
+            addCriterion("role_message >=", value, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThan(String value) {
-            addCriterion("content <", value, "content");
+        public Criteria andRoleMessageLessThan(String value) {
+            addCriterion("role_message <", value, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThanOrEqualTo(String value) {
-            addCriterion("content <=", value, "content");
+        public Criteria andRoleMessageLessThanOrEqualTo(String value) {
+            addCriterion("role_message <=", value, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentLike(String value) {
-            addCriterion("content like", value, "content");
+        public Criteria andRoleMessageLike(String value) {
+            addCriterion("role_message like", value, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotLike(String value) {
-            addCriterion("content not like", value, "content");
+        public Criteria andRoleMessageNotLike(String value) {
+            addCriterion("role_message not like", value, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentIn(List<String> values) {
-            addCriterion("content in", values, "content");
+        public Criteria andRoleMessageIn(List<String> values) {
+            addCriterion("role_message in", values, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotIn(List<String> values) {
-            addCriterion("content not in", values, "content");
+        public Criteria andRoleMessageNotIn(List<String> values) {
+            addCriterion("role_message not in", values, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentBetween(String value1, String value2) {
-            addCriterion("content between", value1, value2, "content");
+        public Criteria andRoleMessageBetween(String value1, String value2) {
+            addCriterion("role_message between", value1, value2, "roleMessage");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotBetween(String value1, String value2) {
-            addCriterion("content not between", value1, value2, "content");
+        public Criteria andRoleMessageNotBetween(String value1, String value2) {
+            addCriterion("role_message not between", value1, value2, "roleMessage");
             return (Criteria) this;
         }
 
@@ -782,6 +712,186 @@ public class ChatgptMessageRecordExample {
 
         public Criteria andModelNotBetween(String value1, String value2) {
             addCriterion("model not between", value1, value2, "model");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountIsNull() {
+            addCriterion("context_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountIsNotNull() {
+            addCriterion("context_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountEqualTo(Integer value) {
+            addCriterion("context_count =", value, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountNotEqualTo(Integer value) {
+            addCriterion("context_count <>", value, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountGreaterThan(Integer value) {
+            addCriterion("context_count >", value, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("context_count >=", value, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountLessThan(Integer value) {
+            addCriterion("context_count <", value, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountLessThanOrEqualTo(Integer value) {
+            addCriterion("context_count <=", value, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountIn(List<Integer> values) {
+            addCriterion("context_count in", values, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountNotIn(List<Integer> values) {
+            addCriterion("context_count not in", values, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountBetween(Integer value1, Integer value2) {
+            addCriterion("context_count between", value1, value2, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andContextCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("context_count not between", value1, value2, "contextCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensIsNull() {
+            addCriterion("prompt_tokens is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensIsNotNull() {
+            addCriterion("prompt_tokens is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensEqualTo(Integer value) {
+            addCriterion("prompt_tokens =", value, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensNotEqualTo(Integer value) {
+            addCriterion("prompt_tokens <>", value, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensGreaterThan(Integer value) {
+            addCriterion("prompt_tokens >", value, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensGreaterThanOrEqualTo(Integer value) {
+            addCriterion("prompt_tokens >=", value, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensLessThan(Integer value) {
+            addCriterion("prompt_tokens <", value, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensLessThanOrEqualTo(Integer value) {
+            addCriterion("prompt_tokens <=", value, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensIn(List<Integer> values) {
+            addCriterion("prompt_tokens in", values, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensNotIn(List<Integer> values) {
+            addCriterion("prompt_tokens not in", values, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensBetween(Integer value1, Integer value2) {
+            addCriterion("prompt_tokens between", value1, value2, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andPromptTokensNotBetween(Integer value1, Integer value2) {
+            addCriterion("prompt_tokens not between", value1, value2, "promptTokens");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("`status` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("`status` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Byte value) {
+            addCriterion("`status` =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Byte value) {
+            addCriterion("`status` <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Byte value) {
+            addCriterion("`status` >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("`status` >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Byte value) {
+            addCriterion("`status` <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("`status` <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Byte> values) {
+            addCriterion("`status` in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Byte> values) {
+            addCriterion("`status` not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Byte value1, Byte value2) {
+            addCriterion("`status` between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("`status` not between", value1, value2, "status");
             return (Criteria) this;
         }
 

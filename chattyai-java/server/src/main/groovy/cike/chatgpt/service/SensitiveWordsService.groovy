@@ -54,9 +54,9 @@ class SensitiveWordsService {
   }
 
 
-  PageList<SensitiveWords> pageList(int currentPage, int pageSize, @RequestParam(required = false) String searchText) {
+  PageList<SensitiveWords> pageList(int currentPage, int pageSize, String searchText, String startTime, String endTime) {
     Page<SensitiveWords> page = PageHelper.startPage(currentPage, pageSize)
-    sensitiveWordsRepository.query(searchText)
+    sensitiveWordsRepository.query(searchText, startTime, endTime)
     PageList<SensitiveWords>.of(currentPage, pageSize, page.getTotal(), page.getResult())
   }
 

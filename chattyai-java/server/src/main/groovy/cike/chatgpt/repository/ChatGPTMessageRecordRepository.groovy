@@ -4,6 +4,8 @@ import cike.chatgpt.config.SQLInstance
 import cike.chatgpt.repository.entity.ChatgptMessageRecord
 import cike.chatgpt.repository.entity.ChatgptMessageRecordExample
 import cike.chatgpt.repository.mapper.ChatgptMessageRecordMapper
+import cike.chatgpt.repository.mapper.specific.ChatgptMessageRecordSpecificMapper
+import cike.chatgpt.repository.mapper.specific.ChatgptMessageSpecificRecord
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 
@@ -15,56 +17,63 @@ class ChatGPTMessageRecordRepository {
   @Autowired
   private ChatgptMessageRecordMapper mapper
 
-  static void addRecord(String uid, String roomId, String onceConversationId, String systemMessage, String role, String content, String messageId, long created, String model) {
-    SQLInstance.sql.executeInsert("""insert into chatgpt_message_record(uid, room_id, once_conversation_id, system_message, role, content, message_id, created, model) 
-                 VALUES (?,?,?,?,?,?,?,?,?)""",
-        uid, roomId, onceConversationId, systemMessage, role, content, messageId, created, model,
-    )
+  @Autowired
+  private ChatgptMessageRecordSpecificMapper specificMapper
+
+  void addRecord(String uid,
+                 String conversationId,
+                 String systemMessage,
+                 String role,
+                 String content,
+                 String messageId,
+                 long created,
+                 String model,
+                 int contextCount,
+                 int promptTokens) {
+    def messageRecord = new ChatgptMessageRecord()
+
+    messageRecord.uid = uid
+    messageRecord.conversationId = conversationId
+    messageRecord.systemMessage = systemMessage
+    messageRecord.role = role
+    messageRecord.roleMessage = content
+    messageRecord.messageId = messageId
+    messageRecord.created = created
+    messageRecord.model = model
+    messageRecord.contextCount = contextCount
+    messageRecord.promptTokens = promptTokens
+
+    mapper.insertSelective(messageRecord)
+
   }
 
-  static List<ChatGPTMessage> getLastRecords(String uid, String roomId, String messageId, int count) {
+  static List<ChatGPTMessage> getLastRecords(String uid, String conversationId, String messageId, int count) {
     def sql = """
-            select id, role, content from (
-            select id, role, content from chatgpt_message_record where id <=
-            (select id from chatgpt_message_record where uid = ? and room_id = ? and message_id= ?)
-            and uid = ? and room_id = ? order by id desc limit ${count}) as temp
+            select id, role, role_message, status from (
+            select id, role, role_message, status from chatgpt_message_record where id <=
+            (select id from chatgpt_message_record where uid = ? and conversation_id = ? and message_id= ?)
+            and uid = ? and conversation_id = ? order by id desc limit ${count}) as temp
             order by temp.id
             """
     List<ChatGPTMessage> result = []
-    SQLInstance.sql.rows(sql, uid, roomId, messageId, uid, roomId).each { row ->
+    SQLInstance.sql.rows(sql, uid, conversationId, messageId, uid, conversationId).each { row ->
       result.add(new ChatGPTMessage(id: row.id as long,
           role: row.role,
-          content: row.content
+          roleMessage: row.role_message,
+          status: row.status as byte
       ))
     }
     return result
   }
 
-  List<ChatgptMessageRecord> queryChatRecord(String searchText, String startTime, String endTime) {
-
-    ChatgptMessageRecordExample example = new ChatgptMessageRecordExample()
-
-    ChatgptMessageRecordExample.Criteria criteria = example.createCriteria()
-
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    if (searchText) {
-      criteria.andContentLike('%' + searchText + '%')
-    }
-
-    if (startTime) {
-      criteria.andCreateTimeGreaterThanOrEqualTo(format.parse(startTime))
-    }
-
-    if (endTime) {
-      criteria.andCreateTimeLessThanOrEqualTo(format.parse(endTime))
-    }
-    mapper.selectByExample(example)
+  List<ChatgptMessageSpecificRecord> queryChatRecord(String username, String searchText, String startTime, String endTime) {
+    specificMapper.find(username, searchText, startTime, endTime)
   }
 }
 
 class ChatGPTMessage {
   long id
   String role
-  String content
+  String roleMessage
+  byte status
 }

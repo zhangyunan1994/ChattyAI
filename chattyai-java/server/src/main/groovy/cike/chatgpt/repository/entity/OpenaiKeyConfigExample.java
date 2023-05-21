@@ -425,6 +425,66 @@ public class OpenaiKeyConfigExample {
             return (Criteria) this;
         }
 
+        public Criteria andMaxUseMoneyIsNull() {
+            addCriterion("max_use_money is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyIsNotNull() {
+            addCriterion("max_use_money is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyEqualTo(Integer value) {
+            addCriterion("max_use_money =", value, "maxUseMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyNotEqualTo(Integer value) {
+            addCriterion("max_use_money <>", value, "maxUseMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyGreaterThan(Integer value) {
+            addCriterion("max_use_money >", value, "maxUseMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyGreaterThanOrEqualTo(Integer value) {
+            addCriterion("max_use_money >=", value, "maxUseMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyLessThan(Integer value) {
+            addCriterion("max_use_money <", value, "maxUseMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyLessThanOrEqualTo(Integer value) {
+            addCriterion("max_use_money <=", value, "maxUseMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyIn(List<Integer> values) {
+            addCriterion("max_use_money in", values, "maxUseMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyNotIn(List<Integer> values) {
+            addCriterion("max_use_money not in", values, "maxUseMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyBetween(Integer value1, Integer value2) {
+            addCriterion("max_use_money between", value1, value2, "maxUseMoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxUseMoneyNotBetween(Integer value1, Integer value2) {
+            addCriterion("max_use_money not between", value1, value2, "maxUseMoney");
+            return (Criteria) this;
+        }
+
         public Criteria andStatusIsNull() {
             addCriterion("`status` is null");
             return (Criteria) this;

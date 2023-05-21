@@ -14,13 +14,9 @@ public class TokenizerUtil {
     EncodingRegistry registry = Encodings.newDefaultEncodingRegistry();
     Encoding enc = registry.getEncoding(EncodingType.CL100K_BASE);
     return enc.countTokens(token);
-//    List<Integer> encoded = enc.encode(token);
-//    System.out.println(encoded.size());
-//    System.out.println(encoded);
-//    return encoded.size();
   }
 
-  public static int num_tokens_from_messages(List<ChatMessage> messages, ModelType modelType) {
+  public static int numTokensFromMessages(List<ChatMessage> messages, ModelType modelType) {
 
     int tokens_per_message = 0;
     int tokens_per_name = 0;

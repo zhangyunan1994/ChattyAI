@@ -32,7 +32,7 @@ class SensitiveWordsRepository {
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     if (searchText) {
-      criteria.andContentLike('%' + searchText + '%')
+      criteria.andUserMessageLike('%' + searchText + '%')
     }
 
     if (startTime) {
@@ -46,13 +46,40 @@ class SensitiveWordsRepository {
     hitRecordMapper.selectByExample(example)
   }
 
-  List<SensitiveWords> query(String searchText) {
+  List<SensitiveWords> query(String searchText, String startTime, String endTime) {
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     def example = new SensitiveWordsExample()
 
     if (searchText) {
-      example.createCriteria().andCategoryLike('%' + searchText + '%')
-      example.or().andWordLike('%' + searchText + '%')
+      def criteria = example.createCriteria()
+      criteria.andCategoryLike('%' + searchText + '%')
+
+      def or = example.or()
+      or.andWordLike('%' + searchText + '%')
+
+      if (startTime) {
+        def startDate = format.parse(startTime)
+        criteria.andCreatedAtGreaterThanOrEqualTo(startDate)
+        or.andCreatedAtGreaterThanOrEqualTo(startDate)
+      }
+
+      if (endTime) {
+        def endDate = format.parse(endTime)
+        criteria.andCreatedAtLessThanOrEqualTo(endDate)
+        or.andCreatedAtLessThanOrEqualTo(endDate)
+      }
+    }
+    else if (endTime || startTime) {
+      def criteria = example.createCriteria()
+
+      if (startTime) {
+        criteria.andCreatedAtGreaterThanOrEqualTo(format.parse(startTime))
+      }
+
+      if (endTime) {
+        criteria.andCreatedAtLessThanOrEqualTo(format.parse(endTime))
+      }
     }
 
     sensitiveWordsMapper.selectByExample(example)

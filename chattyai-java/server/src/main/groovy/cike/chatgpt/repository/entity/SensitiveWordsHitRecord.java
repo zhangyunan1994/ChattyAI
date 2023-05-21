@@ -7,21 +7,11 @@ public class SensitiveWordsHitRecord {
 
     private String uid;
 
-    private String onceConversationId;
-
-    private String roomId;
+    private String conversationId;
 
     private String systemMessage;
 
-    private String role;
-
-    private String content;
-
-    private String messageId;
-
-    private Long created;
-
-    private String model;
+    private String userMessage;
 
     private Date createTime;
 
@@ -41,20 +31,12 @@ public class SensitiveWordsHitRecord {
         this.uid = uid;
     }
 
-    public String getOnceConversationId() {
-        return onceConversationId;
+    public String getConversationId() {
+        return conversationId;
     }
 
-    public void setOnceConversationId(String onceConversationId) {
-        this.onceConversationId = onceConversationId;
-    }
-
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
     }
 
     public String getSystemMessage() {
@@ -65,44 +47,12 @@ public class SensitiveWordsHitRecord {
         this.systemMessage = systemMessage;
     }
 
-    public String getRole() {
-        return role;
+    public String getUserMessage() {
+        return userMessage;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
-
-    public Long getCreated() {
-        return created;
-    }
-
-    public void setCreated(Long created) {
-        this.created = created;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
+    public void setUserMessage(String userMessage) {
+        this.userMessage = userMessage;
     }
 
     public Date getCreateTime() {

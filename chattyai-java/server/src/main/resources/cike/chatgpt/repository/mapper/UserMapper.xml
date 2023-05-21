@@ -2,17 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cike.chatgpt.repository.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="cike.chatgpt.repository.entity.User">
-    <id column="id" jdbcType="INTEGER" property="id"/>
-    <result column="uid" jdbcType="VARCHAR" property="uid"/>
-    <result column="username" jdbcType="VARCHAR" property="username"/>
-    <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
-    <result column="password_hash" jdbcType="VARCHAR" property="passwordHash"/>
-    <result column="email" jdbcType="VARCHAR" property="email"/>
-    <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
-    <result column="status" jdbcType="TINYINT" property="status"/>
-    <result column="description" jdbcType="VARCHAR" property="description"/>
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="password_hash" jdbcType="VARCHAR" property="passwordHash" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="expired_time" jdbcType="TIMESTAMP" property="expiredTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,48 +75,49 @@
   </sql>
   <sql id="Base_Column_List">
     id, `uid`, username, nickname, password_hash, email, avatar, `status`, description, 
-    create_time, update_time
+    expired_time, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
-    <include refid="Base_Column_List"/>
+    <include refid="Base_Column_List" />
     from user
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
+      <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
+    select 
+    <include refid="Base_Column_List" />
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete
-    from user
+    delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="cike.chatgpt.repository.entity.UserExample">
     delete from user
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
+      <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="cike.chatgpt.repository.entity.User">
-    insert into user (id, `uid`, username,
-                      nickname, password_hash, email,
-                      avatar, `status`, description,
-                      create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
-            #{nickname,jdbcType=VARCHAR}, #{passwordHash,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
-            #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR},
-            #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    insert into user (id, `uid`, username, 
+      nickname, password_hash, email, 
+      avatar, `status`, description, 
+      expired_time, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{passwordHash,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}, 
+      #{expiredTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cike.chatgpt.repository.entity.User">
     insert into user
@@ -146,6 +148,9 @@
       </if>
       <if test="description != null">
         description,
+      </if>
+      <if test="expiredTime != null">
+        expired_time,
       </if>
       <if test="createTime != null">
         create_time,
@@ -182,6 +187,9 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
+      <if test="expiredTime != null">
+        #{expiredTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -193,7 +201,7 @@
   <select id="countByExample" parameterType="cike.chatgpt.repository.entity.UserExample" resultType="java.lang.Long">
     select count(*) from user
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
+      <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
@@ -226,6 +234,9 @@
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
       </if>
+      <if test="record.expiredTime != null">
+        expired_time = #{record.expiredTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -234,24 +245,25 @@
       </if>
     </set>
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause"/>
+      <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
     update user
     set id = #{record.id,jdbcType=INTEGER},
-    `uid` = #{record.uid,jdbcType=VARCHAR},
-    username = #{record.username,jdbcType=VARCHAR},
-    nickname = #{record.nickname,jdbcType=VARCHAR},
-    password_hash = #{record.passwordHash,jdbcType=VARCHAR},
-    email = #{record.email,jdbcType=VARCHAR},
-    avatar = #{record.avatar,jdbcType=VARCHAR},
-    `status` = #{record.status,jdbcType=TINYINT},
-    description = #{record.description,jdbcType=VARCHAR},
-    create_time = #{record.createTime,jdbcType=TIMESTAMP},
-    update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+      `uid` = #{record.uid,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      password_hash = #{record.passwordHash,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=TINYINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      expired_time = #{record.expiredTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause"/>
+      <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="cike.chatgpt.repository.entity.User">
@@ -281,6 +293,9 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
+      <if test="expiredTime != null">
+        expired_time = #{expiredTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -292,16 +307,17 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cike.chatgpt.repository.entity.User">
     update user
-    set `uid`         = #{uid,jdbcType=VARCHAR},
-        username      = #{username,jdbcType=VARCHAR},
-        nickname      = #{nickname,jdbcType=VARCHAR},
-        password_hash = #{passwordHash,jdbcType=VARCHAR},
-        email         = #{email,jdbcType=VARCHAR},
-        avatar        = #{avatar,jdbcType=VARCHAR},
-        `status`      = #{status,jdbcType=TINYINT},
-        description   = #{description,jdbcType=VARCHAR},
-        create_time   = #{createTime,jdbcType=TIMESTAMP},
-        update_time   = #{updateTime,jdbcType=TIMESTAMP}
+    set `uid` = #{uid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      password_hash = #{passwordHash,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=TINYINT},
+      description = #{description,jdbcType=VARCHAR},
+      expired_time = #{expiredTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

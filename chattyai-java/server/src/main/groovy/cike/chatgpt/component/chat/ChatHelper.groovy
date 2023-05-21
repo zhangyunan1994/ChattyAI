@@ -3,10 +3,13 @@ package cike.chatgpt.component.chat
 import cike.chatgpt.config.OpenAIConfig
 import cike.chatgpt.controller.RequestProps
 import cike.chatgpt.repository.ChatGPTMessageRecordRepository
+import cike.chatgpt.repository.ChatMessageRecordStatusEnum
 import cike.chatgpt.repository.sensitive.SensitiveWordsHitRecordRepository
 import cike.chatgpt.repository.sensitive.SensitiveWordsRepository
 import cike.chatgpt.utils.NanoIdUtils
+import cike.openai.TokenizerUtil
 import com.alibaba.fastjson.JSON
+import com.knuddels.jtokkit.api.ModelType
 import com.theokanning.openai.completion.chat.ChatCompletionRequest
 import com.theokanning.openai.completion.chat.ChatMessage
 import com.theokanning.openai.completion.chat.ChatMessageRole
@@ -18,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody
 
-import javax.annotation.PostConstruct
 import java.nio.charset.StandardCharsets
 
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
@@ -33,16 +35,12 @@ class ChatHelper {
   @Autowired
   private OpenAIConfig openAIConfig
 
+  @Autowired
   private ChatStrategy chatStrategy
+  @Autowired
   private ImageStrategy imageStrategy
+  @Autowired
   private SensitiveWordsStrategy sensitiveWordsStrategy
-
-  @PostConstruct
-  void init() {
-    chatStrategy = new ChatStrategy(openAIConfig, openAiServicePool)
-    imageStrategy = new ImageStrategy(openAIConfig, openAiServicePool)
-    sensitiveWordsStrategy = new SensitiveWordsStrategy(openAIConfig, openAiServicePool)
-  }
 
   boolean isSensitiveWords(String systemMessage, String prompt) {
     for (final def word in SensitiveWordsRepository.findAll()) {
@@ -55,16 +53,16 @@ class ChatHelper {
 
   boolean isCreateImage(String systemMessage, String prompt) {
     return prompt
-            && (prompt.startsWith('@image256x256 ') || prompt.startsWith('@image512x512 ') || prompt.startsWith('@image1024x1024 '))
-            && prompt.trim().length() >= 18
+        && (prompt.startsWith('@image256x256 ') || prompt.startsWith('@image512x512 ') || prompt.startsWith('@image1024x1024 '))
+        && prompt.trim().length() >= 18
   }
 
   StreamingResponseBody sendChat(String userId, RequestProps requestParam) {
     StreamingResponseBody responseBody = (OutputStream outputStream) -> {
       try {
-        if (isSensitiveWords(requestParam.systemMessage, requestParam.prompt)) {
+        if (isSensitiveWords(openAIConfig.defaultSystemPrompt, requestParam.prompt)) {
           sensitiveWordsStrategy.dodo(outputStream, userId, requestParam)
-        } else if (isCreateImage(requestParam.systemMessage, requestParam.prompt)) {
+        } else if (isCreateImage(openAIConfig.defaultSystemPrompt, requestParam.prompt)) {
           imageStrategy.dodo(outputStream, userId, requestParam)
         } else {
           chatStrategy.dodo(outputStream, userId, requestParam)
@@ -90,16 +88,20 @@ abstract class GPTStrategy {
   abstract dodo(OutputStream outputStream, String userId, RequestProps requestParam)
 }
 
+@Component
 class SensitiveWordsStrategy extends GPTStrategy {
   static Logger log = LoggerFactory.getLogger(SensitiveWordsStrategy.class)
 
-  SensitiveWordsStrategy(OpenAIConfig openAIConfig, OpenAiServicePool pool) {
+  @Autowired
+  private SensitiveWordsHitRecordRepository sensitiveWordsHitRecordRepository
+
+  SensitiveWordsStrategy(@Autowired OpenAIConfig openAIConfig, @Autowired OpenAiServicePool pool) {
     super(openAIConfig, pool)
   }
 
   @Override
   def dodo(OutputStream outputStream, String userId, RequestProps requestParam) {
-    SensitiveWordsHitRecordRepository.addHitRecord(userId, requestParam.roomId, null, requestParam.systemMessage, "user", requestParam.prompt, null, System.currentTimeSeconds(), null)
+    sensitiveWordsHitRecordRepository.addHitRecord(userId, requestParam.conversationId, openAIConfig.defaultSystemPrompt, requestParam.prompt)
     def id = NanoIdUtils.randomNanoId()
     def message = new ChatWebMessage(id: id, text: "很抱歉，我无法回答相关问题，", finishReason: "")
     outputStream.write(JSON.toJSONBytes(message))
@@ -109,10 +111,11 @@ class SensitiveWordsStrategy extends GPTStrategy {
   }
 }
 
+@Component
 class ImageStrategy extends GPTStrategy {
   static Logger log = LoggerFactory.getLogger(ImageStrategy.class)
 
-  ImageStrategy(OpenAIConfig openAIConfig, OpenAiServicePool pool) {
+  ImageStrategy(@Autowired OpenAIConfig openAIConfig, @Autowired OpenAiServicePool pool) {
     super(openAIConfig, pool)
   }
 
@@ -137,8 +140,8 @@ class ImageStrategy extends GPTStrategy {
     String firstText = "正常创建 ${imageDescription} 的图片, 请稍等..."
 
     def result = new ChatWebMessage(id: messageId,
-            text: firstText,
-            finishReason: "",
+        text: firstText,
+        finishReason: "",
     )
 
     outputStream.write(JSON.toJSONBytes(result))
@@ -160,11 +163,15 @@ class ImageStrategy extends GPTStrategy {
   }
 }
 
+@Component
 class ChatStrategy extends GPTStrategy {
 
   static Logger log = LoggerFactory.getLogger(ChatStrategy.class)
 
-  ChatStrategy(OpenAIConfig openAIConfig, OpenAiServicePool pool) {
+  @Autowired
+  private ChatGPTMessageRecordRepository chatGPTMessageRecordRepository
+
+  ChatStrategy(@Autowired OpenAIConfig openAIConfig, @Autowired OpenAiServicePool pool) {
     super(openAIConfig, pool)
   }
 
@@ -175,11 +182,19 @@ class ChatStrategy extends GPTStrategy {
 
     messages.add(systemMessage)
 
+    int contextCount = 0
+
     if (requestParam.options.parentMessageId) {
       // 增加上下文
-      def historyMessage = ChatGPTMessageRecordRepository.getLastRecords(userId, requestParam.roomId, requestParam.options.parentMessageId, 20)
+      def historyMessage = ChatGPTMessageRecordRepository.getLastRecords(userId, requestParam.conversationId, requestParam.options.parentMessageId, 20)
       historyMessage.each {
-        messages.add(new ChatMessage(it.role, it.content))
+        if (it.role == ChatMessageRole.USER.value()) {
+          contextCount++
+          messages.add(new ChatMessage(ChatMessageRole.USER.value(), it.roleMessage))
+        }else if (it.status == ChatMessageRecordStatusEnum.SUCCESS.code || it.status == ChatMessageRecordStatusEnum.SUCCESS_PART.code) {
+          contextCount++
+          messages.add(new ChatMessage(it.role, it.roleMessage))
+        }
       }
     }
 
@@ -196,9 +211,19 @@ class ChatStrategy extends GPTStrategy {
         .logitBias(new HashMap<>())
         .build()
 
-    def onceConversationId = NanoIdUtils.randomNanoId()
+    def userMessageId = NanoIdUtils.randomNanoId()
 
-    ChatGPTMessageRecordRepository.addRecord(userId, requestParam.roomId, onceConversationId, systemMessage.content, "user", userMessage.content, "sdf", System.currentTimeSeconds(), chatCompletionRequest.model)
+    chatGPTMessageRecordRepository.addRecord(userId,
+        requestParam.conversationId,
+        openAIConfig.defaultSystemPrompt,
+        ChatMessageRole.USER.value(),
+        requestParam.prompt,
+        userMessageId,
+        System.currentTimeSeconds(),
+        chatCompletionRequest.model,
+        contextCount,
+        TokenizerUtil.numTokensFromMessages(messages, ModelType.GPT_3_5_TURBO)
+    )
 
     StringBuilder sb = new StringBuilder()
     boolean firstChunk = true
@@ -209,8 +234,8 @@ class ChatStrategy extends GPTStrategy {
         .doOnError {
           if (it instanceof SocketException) {
             def result = new ChatWebMessage(id: NanoIdUtils.randomNanoId(),
-                    text: "Network Error",
-                    finishReason: "Network Error"
+                text: "Network Error",
+                finishReason: "Network Error"
             )
             if (firstChunk) {
               outputStream.write(JSON.toJSONBytes(result))
@@ -247,7 +272,15 @@ class ChatStrategy extends GPTStrategy {
             outputStream.flush()
           }
         }
-    ChatGPTMessageRecordRepository.addRecord(userId, requestParam.roomId, onceConversationId, systemMessage.content, "assistant", sb.toString(), messageId, created, model)
+    chatGPTMessageRecordRepository.addRecord(userId,
+        requestParam.conversationId,
+        openAIConfig.defaultSystemPrompt,
+        ChatMessageRole.SYSTEM.value(),
+        sb.toString(),
+        messageId,
+        created, model, contextCount,
+        TokenizerUtil.tokenCount(sb.toString())
+    )
 
     log.info("{}", sb)
   }

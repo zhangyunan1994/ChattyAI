@@ -1,10 +1,6 @@
 package cike.openai;
 
 import cike.openai.dashboard.billing.Usage;
-import com.knuddels.jtokkit.Encodings;
-import com.knuddels.jtokkit.api.Encoding;
-import com.knuddels.jtokkit.api.EncodingRegistry;
-import com.knuddels.jtokkit.api.EncodingType;
 import com.knuddels.jtokkit.api.ModelType;
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
 import com.theokanning.openai.completion.chat.ChatCompletionResult;
@@ -86,7 +82,7 @@ class ChattyAIServiceTest {
     System.out.println(TokenizerUtil.tokenCount(systemPrompt));
     System.out.println(TokenizerUtil.tokenCount(chatCompletion.getChoices().get(0).getMessage().getContent()));
     System.out.println("-----------------TokenizerUtil---------------");
-    System.out.println(TokenizerUtil.num_tokens_from_messages(messages, ModelType.GPT_3_5_TURBO));
+    System.out.println(TokenizerUtil.numTokensFromMessages(messages, ModelType.GPT_3_5_TURBO));
 
   }
 

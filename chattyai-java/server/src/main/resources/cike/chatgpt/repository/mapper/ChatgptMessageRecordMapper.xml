@@ -4,14 +4,16 @@
   <resultMap id="BaseResultMap" type="cike.chatgpt.repository.entity.ChatgptMessageRecord">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="uid" jdbcType="VARCHAR" property="uid" />
-    <result column="once_conversation_id" jdbcType="VARCHAR" property="onceConversationId" />
-    <result column="room_id" jdbcType="VARCHAR" property="roomId" />
+    <result column="conversation_id" jdbcType="VARCHAR" property="conversationId" />
     <result column="system_message" jdbcType="VARCHAR" property="systemMessage" />
     <result column="role" jdbcType="VARCHAR" property="role" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="role_message" jdbcType="VARCHAR" property="roleMessage" />
     <result column="message_id" jdbcType="VARCHAR" property="messageId" />
     <result column="created" jdbcType="BIGINT" property="created" />
     <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="context_count" jdbcType="INTEGER" property="contextCount" />
+    <result column="prompt_tokens" jdbcType="INTEGER" property="promptTokens" />
+    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -73,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `uid`, once_conversation_id, room_id, system_message, `role`, content, message_id, 
-    created, model, create_time
+    id, `uid`, conversation_id, system_message, `role`, role_message, message_id, created, 
+    model, context_count, prompt_tokens, `status`, create_time
   </sql>
   <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecordExample" resultMap="BaseResultMap">
     select
@@ -106,30 +108,26 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord">
-    insert into chatgpt_message_record (id, `uid`, once_conversation_id, 
-      room_id, system_message, `role`, 
-      content, message_id, created, 
-      model, create_time)
-    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{onceConversationId,jdbcType=VARCHAR}, 
-      #{roomId,jdbcType=VARCHAR}, #{systemMessage,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{messageId,jdbcType=VARCHAR}, #{created,jdbcType=BIGINT}, 
-      #{model,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord" useGeneratedKeys="true">
+    insert into chatgpt_message_record (`uid`, conversation_id, system_message, 
+      `role`, role_message, message_id, 
+      created, model, context_count, 
+      prompt_tokens, `status`, create_time
+      )
+    values (#{uid,jdbcType=VARCHAR}, #{conversationId,jdbcType=VARCHAR}, #{systemMessage,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR}, #{roleMessage,jdbcType=VARCHAR}, #{messageId,jdbcType=VARCHAR}, 
+      #{created,jdbcType=BIGINT}, #{model,jdbcType=VARCHAR}, #{contextCount,jdbcType=INTEGER}, 
+      #{promptTokens,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord" useGeneratedKeys="true">
     insert into chatgpt_message_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="uid != null">
         `uid`,
       </if>
-      <if test="onceConversationId != null">
-        once_conversation_id,
-      </if>
-      <if test="roomId != null">
-        room_id,
+      <if test="conversationId != null">
+        conversation_id,
       </if>
       <if test="systemMessage != null">
         system_message,
@@ -137,8 +135,8 @@
       <if test="role != null">
         `role`,
       </if>
-      <if test="content != null">
-        content,
+      <if test="roleMessage != null">
+        role_message,
       </if>
       <if test="messageId != null">
         message_id,
@@ -149,22 +147,25 @@
       <if test="model != null">
         model,
       </if>
+      <if test="contextCount != null">
+        context_count,
+      </if>
+      <if test="promptTokens != null">
+        prompt_tokens,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="uid != null">
         #{uid,jdbcType=VARCHAR},
       </if>
-      <if test="onceConversationId != null">
-        #{onceConversationId,jdbcType=VARCHAR},
-      </if>
-      <if test="roomId != null">
-        #{roomId,jdbcType=VARCHAR},
+      <if test="conversationId != null">
+        #{conversationId,jdbcType=VARCHAR},
       </if>
       <if test="systemMessage != null">
         #{systemMessage,jdbcType=VARCHAR},
@@ -172,8 +173,8 @@
       <if test="role != null">
         #{role,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
+      <if test="roleMessage != null">
+        #{roleMessage,jdbcType=VARCHAR},
       </if>
       <if test="messageId != null">
         #{messageId,jdbcType=VARCHAR},
@@ -183,6 +184,15 @@
       </if>
       <if test="model != null">
         #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="contextCount != null">
+        #{contextCount,jdbcType=INTEGER},
+      </if>
+      <if test="promptTokens != null">
+        #{promptTokens,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -204,11 +214,8 @@
       <if test="record.uid != null">
         `uid` = #{record.uid,jdbcType=VARCHAR},
       </if>
-      <if test="record.onceConversationId != null">
-        once_conversation_id = #{record.onceConversationId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.roomId != null">
-        room_id = #{record.roomId,jdbcType=VARCHAR},
+      <if test="record.conversationId != null">
+        conversation_id = #{record.conversationId,jdbcType=VARCHAR},
       </if>
       <if test="record.systemMessage != null">
         system_message = #{record.systemMessage,jdbcType=VARCHAR},
@@ -216,8 +223,8 @@
       <if test="record.role != null">
         `role` = #{record.role,jdbcType=VARCHAR},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
+      <if test="record.roleMessage != null">
+        role_message = #{record.roleMessage,jdbcType=VARCHAR},
       </if>
       <if test="record.messageId != null">
         message_id = #{record.messageId,jdbcType=VARCHAR},
@@ -227,6 +234,15 @@
       </if>
       <if test="record.model != null">
         model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contextCount != null">
+        context_count = #{record.contextCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.promptTokens != null">
+        prompt_tokens = #{record.promptTokens,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=TINYINT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -240,14 +256,16 @@
     update chatgpt_message_record
     set id = #{record.id,jdbcType=BIGINT},
       `uid` = #{record.uid,jdbcType=VARCHAR},
-      once_conversation_id = #{record.onceConversationId,jdbcType=VARCHAR},
-      room_id = #{record.roomId,jdbcType=VARCHAR},
+      conversation_id = #{record.conversationId,jdbcType=VARCHAR},
       system_message = #{record.systemMessage,jdbcType=VARCHAR},
       `role` = #{record.role,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=VARCHAR},
+      role_message = #{record.roleMessage,jdbcType=VARCHAR},
       message_id = #{record.messageId,jdbcType=VARCHAR},
       created = #{record.created,jdbcType=BIGINT},
       model = #{record.model,jdbcType=VARCHAR},
+      context_count = #{record.contextCount,jdbcType=INTEGER},
+      prompt_tokens = #{record.promptTokens,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -259,11 +277,8 @@
       <if test="uid != null">
         `uid` = #{uid,jdbcType=VARCHAR},
       </if>
-      <if test="onceConversationId != null">
-        once_conversation_id = #{onceConversationId,jdbcType=VARCHAR},
-      </if>
-      <if test="roomId != null">
-        room_id = #{roomId,jdbcType=VARCHAR},
+      <if test="conversationId != null">
+        conversation_id = #{conversationId,jdbcType=VARCHAR},
       </if>
       <if test="systemMessage != null">
         system_message = #{systemMessage,jdbcType=VARCHAR},
@@ -271,8 +286,8 @@
       <if test="role != null">
         `role` = #{role,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
+      <if test="roleMessage != null">
+        role_message = #{roleMessage,jdbcType=VARCHAR},
       </if>
       <if test="messageId != null">
         message_id = #{messageId,jdbcType=VARCHAR},
@@ -283,6 +298,15 @@
       <if test="model != null">
         model = #{model,jdbcType=VARCHAR},
       </if>
+      <if test="contextCount != null">
+        context_count = #{contextCount,jdbcType=INTEGER},
+      </if>
+      <if test="promptTokens != null">
+        prompt_tokens = #{promptTokens,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -292,14 +316,16 @@
   <update id="updateByPrimaryKey" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord">
     update chatgpt_message_record
     set `uid` = #{uid,jdbcType=VARCHAR},
-      once_conversation_id = #{onceConversationId,jdbcType=VARCHAR},
-      room_id = #{roomId,jdbcType=VARCHAR},
+      conversation_id = #{conversationId,jdbcType=VARCHAR},
       system_message = #{systemMessage,jdbcType=VARCHAR},
       `role` = #{role,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
+      role_message = #{roleMessage,jdbcType=VARCHAR},
       message_id = #{messageId,jdbcType=VARCHAR},
       created = #{created,jdbcType=BIGINT},
       model = #{model,jdbcType=VARCHAR},
+      context_count = #{contextCount,jdbcType=INTEGER},
+      prompt_tokens = #{promptTokens,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

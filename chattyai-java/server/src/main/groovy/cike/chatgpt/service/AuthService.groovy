@@ -5,6 +5,7 @@ import cike.chatgpt.SessionManager
 import cike.chatgpt.controller.CommonResponse
 import cike.chatgpt.repository.AuthSessionTokenRepository
 import cike.chatgpt.repository.UserRepository
+import cike.chatgpt.repository.UserStatusEnum
 import cike.chatgpt.repository.entity.User
 import cike.chatgpt.utils.NanoIdUtils
 import com.google.common.base.Preconditions
@@ -36,13 +37,21 @@ class AuthService {
       return new CommonResponse(status: CommonResponse.Fail, message: "Failed to find user")
     }
 
+    if (user.status != UserStatusEnum.NORMAL.code) {
+      return new CommonResponse(status: CommonResponse.Fail, message: "用户状态异常，请联系管理员")
+    }
+
+    if (user.expiredTime && user.expiredTime.before(new Date())) {
+      return new CommonResponse(status: CommonResponse.Fail, message: "用户状态异常，请联系管理员")
+    }
+
     if (user.passwordHash != password) {
       return new CommonResponse(status: CommonResponse.Fail, message: "Password mismatch")
     }
 
     def token = NanoIdUtils.randomNanoId(50)
 
-    AuthSessionTokenRepository.addRecord(token, user.uid, LocalDateTime.now().plusDays(3))
+    AuthSessionTokenRepository.addRecord(token, user.uid, LocalDateTime.now().plusDays(7))
     sessionManager.put(token.toString(), user)
 
     log.info("用户登录 token {}", user.uid)

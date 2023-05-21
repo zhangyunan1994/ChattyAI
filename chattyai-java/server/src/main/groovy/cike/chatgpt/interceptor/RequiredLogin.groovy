@@ -1,6 +1,8 @@
 package cike.chatgpt.interceptor
 
 import cike.chatgpt.SessionManager
+import cike.chatgpt.controller.CommonResponse
+import cike.chatgpt.repository.UserStatusEnum
 import cike.chatgpt.repository.rbac.RABCRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -55,14 +57,25 @@ class RequiredLoginInterceptor implements HandlerInterceptor {
       return false
     }
 
-    def u = sessionManager.get(authorization.substring(7))
-    if (!u) {
+    def currentUser = sessionManager.get(authorization.substring(7))
+
+    if (!currentUser) {
+      response.sendError(401)
+      return false
+    }
+
+    if (currentUser.status != UserStatusEnum.NORMAL.code) {
+      response.sendError(401)
+      return false
+    }
+
+    if (currentUser.expiredTime && currentUser.expiredTime.before(new Date())) {
       response.sendError(401)
       return false
     }
 
     if (requiredLogin.permission() && requiredLogin.permission() != Permission.IGNORE) {
-      return RABCRepository.getUserPermission(u.uid).contains(requiredLogin.permission().getCode())
+      return RABCRepository.getUserPermission(currentUser.uid).contains(requiredLogin.permission().getCode())
     }
     return true
   }

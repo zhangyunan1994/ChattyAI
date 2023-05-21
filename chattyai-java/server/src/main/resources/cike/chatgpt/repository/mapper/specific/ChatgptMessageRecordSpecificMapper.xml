@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cike.chatgpt.repository.mapper.specific.ChatgptMessageRecordSpecificMapper">
+  <resultMap id="BaseResultMap" type="cike.chatgpt.repository.mapper.specific.ChatgptMessageSpecificRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="conversation_id" jdbcType="VARCHAR" property="conversationId" />
+    <result column="system_message" jdbcType="VARCHAR" property="systemMessage" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="role_message" jdbcType="VARCHAR" property="roleMessage" />
+    <result column="message_id" jdbcType="VARCHAR" property="messageId" />
+    <result column="created" jdbcType="BIGINT" property="created" />
+    <result column="model" jdbcType="VARCHAR" property="model" />
+    <result column="context_count" jdbcType="INTEGER" property="contextCount" />
+    <result column="prompt_tokens" jdbcType="INTEGER" property="promptTokens" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+
+  <select id="find" resultType="cike.chatgpt.repository.mapper.specific.ChatgptMessageSpecificRecord">
+    select cmr.id, cmr.`uid`, cmr.conversation_id, cmr.system_message, cmr.`role`, cmr.role_message, cmr.message_id, cmr.created,
+    cmr.model, cmr.context_count, cmr.prompt_tokens, cmr.`status`, cmr.create_time, u.username
+    from chatgpt_message_record cmr join user u on u.uid = cmr.uid
+    <where>
+      <if test="username != null">
+        and u.username like concat('%', #{username}, '%')
+      </if>
+      <if test="searchText != null">
+        and cmr.role_message like concat('%', #{searchText}, '%')
+      </if>
+      <if test="startTime != null">
+        and cmr.create_time >= #{startTime}
+      </if>
+      <if test="endTime != null">
+        and cmr.create_time &lt;= #{endTime}
+      </if>
+    </where>
+  </select>
+
+</mapper>

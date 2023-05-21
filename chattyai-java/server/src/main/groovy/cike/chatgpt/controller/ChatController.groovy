@@ -44,13 +44,11 @@ class ChatController {
 
 class RequestProps {
     String prompt
-    String roomId
     ChatContext options
-    String systemMessage
     Double temperature
     @JsonProperty("top_p")
     Double topP
-    boolean useContext = false
+    String conversationId
 }
 
 class ChatContext {

@@ -7,6 +7,7 @@
     <result column="openai_key" jdbcType="VARCHAR" property="openaiKey" />
     <result column="total_use_token" jdbcType="INTEGER" property="totalUseToken" />
     <result column="total_use_money" jdbcType="INTEGER" property="totalUseMoney" />
+    <result column="max_use_money" jdbcType="INTEGER" property="maxUseMoney" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="expired_time" jdbcType="TIMESTAMP" property="expiredTime" />
@@ -70,8 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, account_id, openai_key, total_use_token, total_use_money, `status`, create_time, 
-    expired_time
+    id, account_id, openai_key, total_use_token, total_use_money, max_use_money, `status`, 
+    create_time, expired_time
   </sql>
   <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfigExample" resultMap="BaseResultMap">
     select
@@ -105,11 +106,13 @@
   </delete>
   <insert id="insert" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfig">
     insert into openai_key_config (id, account_id, openai_key, 
-      total_use_token, total_use_money, `status`, 
-      create_time, expired_time)
+      total_use_token, total_use_money, max_use_money, 
+      `status`, create_time, expired_time
+      )
     values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=VARCHAR}, #{openaiKey,jdbcType=VARCHAR}, 
-      #{totalUseToken,jdbcType=INTEGER}, #{totalUseMoney,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{expiredTime,jdbcType=TIMESTAMP})
+      #{totalUseToken,jdbcType=INTEGER}, #{totalUseMoney,jdbcType=INTEGER}, #{maxUseMoney,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{expiredTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfig">
     insert into openai_key_config
@@ -128,6 +131,9 @@
       </if>
       <if test="totalUseMoney != null">
         total_use_money,
+      </if>
+      <if test="maxUseMoney != null">
+        max_use_money,
       </if>
       <if test="status != null">
         `status`,
@@ -154,6 +160,9 @@
       </if>
       <if test="totalUseMoney != null">
         #{totalUseMoney,jdbcType=INTEGER},
+      </if>
+      <if test="maxUseMoney != null">
+        #{maxUseMoney,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -190,6 +199,9 @@
       <if test="record.totalUseMoney != null">
         total_use_money = #{record.totalUseMoney,jdbcType=INTEGER},
       </if>
+      <if test="record.maxUseMoney != null">
+        max_use_money = #{record.maxUseMoney,jdbcType=INTEGER},
+      </if>
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=TINYINT},
       </if>
@@ -211,6 +223,7 @@
       openai_key = #{record.openaiKey,jdbcType=VARCHAR},
       total_use_token = #{record.totalUseToken,jdbcType=INTEGER},
       total_use_money = #{record.totalUseMoney,jdbcType=INTEGER},
+      max_use_money = #{record.maxUseMoney,jdbcType=INTEGER},
       `status` = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       expired_time = #{record.expiredTime,jdbcType=TIMESTAMP}
@@ -233,6 +246,9 @@
       <if test="totalUseMoney != null">
         total_use_money = #{totalUseMoney,jdbcType=INTEGER},
       </if>
+      <if test="maxUseMoney != null">
+        max_use_money = #{maxUseMoney,jdbcType=INTEGER},
+      </if>
       <if test="status != null">
         `status` = #{status,jdbcType=TINYINT},
       </if>
@@ -251,6 +267,7 @@
       openai_key = #{openaiKey,jdbcType=VARCHAR},
       total_use_token = #{totalUseToken,jdbcType=INTEGER},
       total_use_money = #{totalUseMoney,jdbcType=INTEGER},
+      max_use_money = #{maxUseMoney,jdbcType=INTEGER},
       `status` = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       expired_time = #{expiredTime,jdbcType=TIMESTAMP}

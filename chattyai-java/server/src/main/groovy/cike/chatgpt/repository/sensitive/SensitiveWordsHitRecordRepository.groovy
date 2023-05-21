@@ -1,17 +1,27 @@
 package cike.chatgpt.repository.sensitive
 
 import cike.chatgpt.config.SQLInstance
+import cike.chatgpt.repository.entity.SensitiveWordsHitRecord
+import cike.chatgpt.repository.mapper.SensitiveWordsHitRecordMapper
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Repository
 
+@Repository
 class SensitiveWordsHitRecordRepository {
 
-    static void addHitRecord(String uid, String roomId, String onceConversationId, String systemMessage, String role, String content, String messageId, long created, String model) {
-        SQLInstance.sql.executeInsert("""
-                insert into sensitive_words_hit_record(uid, room_id, once_conversation_id, system_message, role, content, message_id, created, model) 
-                VALUES (?,?,?,?,?,?,?,?,?)
-                """,
-                uid, roomId, onceConversationId, systemMessage, role, content, messageId, created, model,
-        )
-    }
+  @Autowired
+  private SensitiveWordsHitRecordMapper sensitiveWordsHitRecordMapper
+
+
+  void addHitRecord(String uid, String conversationId, String systemMessage, String userMessage) {
+    SensitiveWordsHitRecord sensitiveWordsHitRecord = new SensitiveWordsHitRecord()
+    sensitiveWordsHitRecord.setUid(uid)
+    sensitiveWordsHitRecord.setConversationId(conversationId)
+    sensitiveWordsHitRecord.setSystemMessage(systemMessage)
+    sensitiveWordsHitRecord.setUserMessage(userMessage)
+    sensitiveWordsHitRecord.setUid(uid)
+    sensitiveWordsHitRecordMapper.insertSelective(sensitiveWordsHitRecord)
+  }
 
 
 }

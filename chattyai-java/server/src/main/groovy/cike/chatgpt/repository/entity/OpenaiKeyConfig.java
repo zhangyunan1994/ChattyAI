@@ -13,6 +13,8 @@ public class OpenaiKeyConfig {
 
     private Integer totalUseMoney;
 
+    private Integer maxUseMoney;
+
     private Byte status;
 
     private Date createTime;
@@ -57,6 +59,14 @@ public class OpenaiKeyConfig {
 
     public void setTotalUseMoney(Integer totalUseMoney) {
         this.totalUseMoney = totalUseMoney;
+    }
+
+    public Integer getMaxUseMoney() {
+        return maxUseMoney;
+    }
+
+    public void setMaxUseMoney(Integer maxUseMoney) {
+        this.maxUseMoney = maxUseMoney;
     }
 
     public Byte getStatus() {

@@ -1,10 +1,17 @@
 package cike.chatgpt.repository
 
 import cike.chatgpt.config.SQLInstance
+import org.apache.ibatis.jdbc.SQL
+import org.springframework.stereotype.Repository
 
 import java.time.LocalDateTime
 
+@Repository
 class AuthSessionTokenRepository {
+
+    void expiredAllToken(String uid) {
+        SQLInstance.sql.execute("update auth_session_token set expired_time = now() where user_id = ? and expired_time > now()", uid)
+    }
 
     static AuthSessionToken findByUid(String uid) {
         def row = SQLInstance.sql.firstRow("select id, token, user_id, create_time, expired_time from auth_session_token where token = ?", uid)

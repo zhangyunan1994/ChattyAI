@@ -19,8 +19,11 @@ class SensitiveWordsController {
   private SensitiveWordsService sensitiveWordsService
 
   @GetMapping("pageList")
-  CommonResponse<PageList<SensitiveWords>> pageList(int currentPage, int pageSize, @RequestParam(required = false) String searchText) {
-    new CommonResponse<PageList<SensitiveWords>>(status: CommonResponse.Success, data: sensitiveWordsService.pageList(currentPage, pageSize, searchText))
+  CommonResponse<PageList<SensitiveWords>> pageList(int currentPage, int pageSize,
+                                                    @RequestParam(required = false) String searchText,
+                                                    String startTime,
+                                                    String endTime) {
+    new CommonResponse<PageList<SensitiveWords>>(status: CommonResponse.Success, data: sensitiveWordsService.pageList(currentPage, pageSize, searchText, startTime, endTime))
   }
 
   @PostMapping("add")

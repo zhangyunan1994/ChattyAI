@@ -7,21 +7,25 @@ public class ChatgptMessageRecord {
 
     private String uid;
 
-    private String onceConversationId;
-
-    private String roomId;
+    private String conversationId;
 
     private String systemMessage;
 
     private String role;
 
-    private String content;
+    private String roleMessage;
 
     private String messageId;
 
     private Long created;
 
     private String model;
+
+    private Integer contextCount;
+
+    private Integer promptTokens;
+
+    private Byte status;
 
     private Date createTime;
 
@@ -41,20 +45,12 @@ public class ChatgptMessageRecord {
         this.uid = uid;
     }
 
-    public String getOnceConversationId() {
-        return onceConversationId;
+    public String getConversationId() {
+        return conversationId;
     }
 
-    public void setOnceConversationId(String onceConversationId) {
-        this.onceConversationId = onceConversationId;
-    }
-
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
     }
 
     public String getSystemMessage() {
@@ -73,12 +69,12 @@ public class ChatgptMessageRecord {
         this.role = role;
     }
 
-    public String getContent() {
-        return content;
+    public String getRoleMessage() {
+        return roleMessage;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setRoleMessage(String roleMessage) {
+        this.roleMessage = roleMessage;
     }
 
     public String getMessageId() {
@@ -103,6 +99,30 @@ public class ChatgptMessageRecord {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public Integer getContextCount() {
+        return contextCount;
+    }
+
+    public void setContextCount(Integer contextCount) {
+        this.contextCount = contextCount;
+    }
+
+    public Integer getPromptTokens() {
+        return promptTokens;
+    }
+
+    public void setPromptTokens(Integer promptTokens) {
+        this.promptTokens = promptTokens;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {

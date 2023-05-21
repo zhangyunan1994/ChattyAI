@@ -20,12 +20,14 @@ class UserController {
   @GetMapping("pageList")
   CommonResponse<PageList<User>> pageList(int currentPage,
                                           @RequestParam(required = false) Integer pageSize,
-                                          @RequestParam(required = false) String username) {
+                                          @RequestParam(required = false) String searchText,
+                                          String startTime,
+                                          String endTime) {
     if (pageSize == null) {
       pageSize = 10
     }
 
-    return new CommonResponse<PageList<User>>(status: CommonResponse.Success, data: userService.pageList(currentPage, pageSize, username))
+    return new CommonResponse<PageList<User>>(status: CommonResponse.Success, data: userService.pageList(currentPage, pageSize, searchText, startTime, endTime))
   }
 
   @PostMapping("add")

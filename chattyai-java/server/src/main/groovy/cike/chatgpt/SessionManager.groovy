@@ -3,6 +3,7 @@ package cike.chatgpt
 
 import cike.chatgpt.repository.AuthSessionTokenRepository
 import cike.chatgpt.repository.UserRepository
+import cike.chatgpt.repository.UserStatusEnum
 import cike.chatgpt.repository.entity.User
 import com.github.benmanes.caffeine.cache.Cache
 import com.github.benmanes.caffeine.cache.CacheLoader
@@ -28,14 +29,17 @@ class SessionManager {
   @PostConstruct
   void init() {
     cache = Caffeine.newBuilder()
-        .expireAfterWrite(12, TimeUnit.HOURS)
-        .maximumSize(2_000)
+        .expireAfterWrite(10, TimeUnit.MINUTES)
+        .maximumSize(2_0000)
         .build(new CacheLoader<String, User>() {
           @Override
           User load(String s) throws Exception {
             def token = AuthSessionTokenRepository.findByUid(s)
             if (token && LocalDateTime.now().isBefore(token.expiredTime)) {
-              return userRepository.findByUid(token.userId)
+              def user = userRepository.findByUid(token.userId)
+              if (user && user.getStatus() == UserStatusEnum.NORMAL.code) {
+                return user
+              }
             }
             null
           }
