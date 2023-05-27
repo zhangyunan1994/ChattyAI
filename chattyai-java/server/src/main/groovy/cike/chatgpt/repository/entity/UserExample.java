@@ -845,6 +845,146 @@ public class UserExample {
             return (Criteria) this;
         }
 
+        public Criteria andInvitationCodeIsNull() {
+            addCriterion("invitation_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeIsNotNull() {
+            addCriterion("invitation_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeEqualTo(String value) {
+            addCriterion("invitation_code =", value, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeNotEqualTo(String value) {
+            addCriterion("invitation_code <>", value, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeGreaterThan(String value) {
+            addCriterion("invitation_code >", value, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("invitation_code >=", value, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeLessThan(String value) {
+            addCriterion("invitation_code <", value, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeLessThanOrEqualTo(String value) {
+            addCriterion("invitation_code <=", value, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeLike(String value) {
+            addCriterion("invitation_code like", value, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeNotLike(String value) {
+            addCriterion("invitation_code not like", value, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeIn(List<String> values) {
+            addCriterion("invitation_code in", values, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeNotIn(List<String> values) {
+            addCriterion("invitation_code not in", values, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeBetween(String value1, String value2) {
+            addCriterion("invitation_code between", value1, value2, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationCodeNotBetween(String value1, String value2) {
+            addCriterion("invitation_code not between", value1, value2, "invitationCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromIsNull() {
+            addCriterion("invitation_from is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromIsNotNull() {
+            addCriterion("invitation_from is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromEqualTo(String value) {
+            addCriterion("invitation_from =", value, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromNotEqualTo(String value) {
+            addCriterion("invitation_from <>", value, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromGreaterThan(String value) {
+            addCriterion("invitation_from >", value, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromGreaterThanOrEqualTo(String value) {
+            addCriterion("invitation_from >=", value, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromLessThan(String value) {
+            addCriterion("invitation_from <", value, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromLessThanOrEqualTo(String value) {
+            addCriterion("invitation_from <=", value, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromLike(String value) {
+            addCriterion("invitation_from like", value, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromNotLike(String value) {
+            addCriterion("invitation_from not like", value, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromIn(List<String> values) {
+            addCriterion("invitation_from in", values, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromNotIn(List<String> values) {
+            addCriterion("invitation_from not in", values, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromBetween(String value1, String value2) {
+            addCriterion("invitation_from between", value1, value2, "invitationFrom");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvitationFromNotBetween(String value1, String value2) {
+            addCriterion("invitation_from not between", value1, value2, "invitationFrom");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("create_time is null");
             return (Criteria) this;

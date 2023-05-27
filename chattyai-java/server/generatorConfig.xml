@@ -21,11 +21,19 @@
       <property name="suppressAllComments" value="true"/>
     </commentGenerator>
 
+<!--    <jdbcConnection-->
+<!--      connectionURL="jdbc:mysql://127.0.0.1:13306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"-->
+<!--      driverClass="com.mysql.cj.jdbc.Driver"-->
+<!--      password="123456"-->
+<!--      userId="root">-->
+<!--      <property name="nullCatalogMeansCurrent" value="true"/>-->
+<!--    </jdbcConnection>-->
+
     <jdbcConnection
-      connectionURL="jdbc:mysql://127.0.0.1:13306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"
+      connectionURL="jdbc:mysql://www.zhangshenzhao.cn:3306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"
       driverClass="com.mysql.cj.jdbc.Driver"
-      password="123456"
-      userId="root">
+      password="3k>kj!tv6ikF"
+      userId="zhangyunan">
       <property name="nullCatalogMeansCurrent" value="true"/>
     </jdbcConnection>
 
@@ -43,5 +51,7 @@
     <table tableName="user"/>
     <table tableName="role"/>
     <table tableName="user_role"/>
+    <table tableName="member_wallet"/>
+    <table tableName="member_wallet_record"/>
   </context>
 </generatorConfiguration>

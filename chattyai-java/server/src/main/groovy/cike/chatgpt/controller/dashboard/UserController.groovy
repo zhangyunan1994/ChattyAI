@@ -5,7 +5,7 @@ import cike.chatgpt.controller.PageList
 import cike.chatgpt.interceptor.Permission
 import cike.chatgpt.interceptor.RequiredLogin
 import cike.chatgpt.repository.entity.User
-import cike.chatgpt.service.UserService
+import cike.chatgpt.service.MemberService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*
 class UserController {
 
   @Autowired
-  private UserService userService
+  private MemberService userService
 
   @GetMapping("pageList")
   CommonResponse<PageList<User>> pageList(int currentPage,

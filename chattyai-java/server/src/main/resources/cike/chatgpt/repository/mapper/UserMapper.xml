@@ -13,6 +13,8 @@
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="expired_time" jdbcType="TIMESTAMP" property="expiredTime" />
+    <result column="invitation_code" jdbcType="VARCHAR" property="invitationCode" />
+    <result column="invitation_from" jdbcType="VARCHAR" property="invitationFrom" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -76,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, `uid`, username, `role`, nickname, password_hash, email, avatar, `status`, description, 
-    expired_time, create_time, update_time
+    expired_time, invitation_code, invitation_from, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -112,13 +114,15 @@
     insert into user (id, `uid`, username, 
       `role`, nickname, password_hash, 
       email, avatar, `status`, 
-      description, expired_time, create_time, 
-      update_time)
+      description, expired_time, invitation_code, 
+      invitation_from, create_time, update_time
+      )
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
       #{role,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{passwordHash,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{description,jdbcType=VARCHAR}, #{expiredTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{description,jdbcType=VARCHAR}, #{expiredTime,jdbcType=TIMESTAMP}, #{invitationCode,jdbcType=VARCHAR}, 
+      #{invitationFrom,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cike.chatgpt.repository.entity.User">
     insert into user
@@ -155,6 +159,12 @@
       </if>
       <if test="expiredTime != null">
         expired_time,
+      </if>
+      <if test="invitationCode != null">
+        invitation_code,
+      </if>
+      <if test="invitationFrom != null">
+        invitation_from,
       </if>
       <if test="createTime != null">
         create_time,
@@ -196,6 +206,12 @@
       </if>
       <if test="expiredTime != null">
         #{expiredTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invitationCode != null">
+        #{invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="invitationFrom != null">
+        #{invitationFrom,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -247,6 +263,12 @@
       <if test="record.expiredTime != null">
         expired_time = #{record.expiredTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.invitationCode != null">
+        invitation_code = #{record.invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invitationFrom != null">
+        invitation_from = #{record.invitationFrom,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -271,6 +293,8 @@
       `status` = #{record.status,jdbcType=TINYINT},
       description = #{record.description,jdbcType=VARCHAR},
       expired_time = #{record.expiredTime,jdbcType=TIMESTAMP},
+      invitation_code = #{record.invitationCode,jdbcType=VARCHAR},
+      invitation_from = #{record.invitationFrom,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -310,6 +334,12 @@
       <if test="expiredTime != null">
         expired_time = #{expiredTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="invitationCode != null">
+        invitation_code = #{invitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="invitationFrom != null">
+        invitation_from = #{invitationFrom,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -331,6 +361,8 @@
       `status` = #{status,jdbcType=TINYINT},
       description = #{description,jdbcType=VARCHAR},
       expired_time = #{expiredTime,jdbcType=TIMESTAMP},
+      invitation_code = #{invitationCode,jdbcType=VARCHAR},
+      invitation_from = #{invitationFrom,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

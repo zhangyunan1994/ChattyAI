@@ -4,7 +4,8 @@ enum Permission {
 
     IGNORE(""),
     CHAT("chat"),
-    DASH("dash")
+    DASH("dash"),
+    MEMBER("member")
 
     private final String code
 

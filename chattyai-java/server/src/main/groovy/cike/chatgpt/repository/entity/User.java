@@ -25,6 +25,10 @@ public class User {
 
     private Date expiredTime;
 
+    private String invitationCode;
+
+    private String invitationFrom;
+
     private Date createTime;
 
     private Date updateTime;
@@ -115,6 +119,22 @@ public class User {
 
     public void setExpiredTime(Date expiredTime) {
         this.expiredTime = expiredTime;
+    }
+
+    public String getInvitationCode() {
+        return invitationCode;
+    }
+
+    public void setInvitationCode(String invitationCode) {
+        this.invitationCode = invitationCode;
+    }
+
+    public String getInvitationFrom() {
+        return invitationFrom;
+    }
+
+    public void setInvitationFrom(String invitationFrom) {
+        this.invitationFrom = invitationFrom;
     }
 
     public Date getCreateTime() {

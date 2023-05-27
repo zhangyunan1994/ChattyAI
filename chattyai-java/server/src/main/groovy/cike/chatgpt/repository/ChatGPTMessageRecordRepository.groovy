@@ -3,6 +3,7 @@ package cike.chatgpt.repository
 import cike.chatgpt.config.SQLInstance
 import cike.chatgpt.repository.entity.ChatgptMessageRecord
 import cike.chatgpt.repository.entity.ChatgptMessageRecordExample
+import cike.chatgpt.repository.enums.ChatMessageRecordStatusEnum
 import cike.chatgpt.repository.mapper.ChatgptMessageRecordMapper
 import cike.chatgpt.repository.mapper.specific.ChatgptMessageRecordSpecificMapper
 import cike.chatgpt.repository.mapper.specific.ChatgptMessageSpecificRecord
@@ -36,6 +37,7 @@ class ChatGPTMessageRecordRepository {
     messageRecord.conversationId = conversationId
     messageRecord.systemMessage = systemMessage
     messageRecord.role = role
+    messageRecord.status = ChatMessageRecordStatusEnum.SUCCESS_PART.code
     messageRecord.roleMessage = content
     messageRecord.messageId = messageId
     messageRecord.created = created

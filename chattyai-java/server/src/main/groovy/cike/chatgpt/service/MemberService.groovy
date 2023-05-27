@@ -1,21 +1,32 @@
 package cike.chatgpt.service
 
+import cike.chatgpt.controller.CommonResponse
+import cike.chatgpt.controller.InvitationMemberInfo
+import cike.chatgpt.controller.MemberInfo
 import cike.chatgpt.controller.PageList
+import cike.chatgpt.controller.WalletInfoRecord
 import cike.chatgpt.repository.AuthSessionTokenRepository
 import cike.chatgpt.repository.UserRepository
+import cike.chatgpt.repository.entity.MemberWalletRecord
 import cike.chatgpt.repository.enums.UserRoleEnum
 import cike.chatgpt.repository.enums.UserStatusEnum
 import cike.chatgpt.repository.entity.User
+import cike.chatgpt.repository.enums.WalletInfoRecordTypeEnum
 import cike.chatgpt.repository.rbac.RABCRepository
+import cike.chatgpt.utils.CollectionUtil
 import cike.chatgpt.utils.NanoIdUtils
+import cike.chatgpt.utils.RandomStringUtil
+import cike.chatgpt.utils.RandomUtil
 import com.github.pagehelper.Page
 import com.github.pagehelper.PageHelper
 import com.google.common.base.Preconditions
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
+import java.util.stream.Collectors
+
 @Service
-class UserService {
+class MemberService {
 
   @Autowired
   private UserRepository userRepository
@@ -46,6 +57,16 @@ class UserService {
     Preconditions.checkArgument(roleEnum != null, "用户角色错误" + user.role)
     Preconditions.checkArgument(userRepository.findByUsername(user.username) == null, "用户名已存在，不能添加")
 
+    // 生成一个邀请码
+
+    def invitationCode = RandomStringUtil.randomFromNumberAndUpLetter(10)
+    def existsUser = userRepository.findUserByInvitationCode(invitationCode)
+    while (existsUser) {
+      invitationCode = RandomStringUtil.randomFromNumberAndUpLetter(10)
+      existsUser = userRepository.findUserByInvitationCode(invitationCode)
+    }
+
+    user.setInvitationCode(invitationCode)
     user.setId(null)
     user.setUid(NanoIdUtils.randomNanoId())
     userRepository.addUser(user)
@@ -75,6 +96,7 @@ class UserService {
     param.setCreateTime(null)
     param.setUpdateTime(new Date())
     param.setPasswordHash(null)
+    param.setInvitationCode(null)
 
     userRepository.modifyUser(param)
     rabcRepository.setUserRole(existsUser.getUid(), roleEnum)
@@ -82,5 +104,59 @@ class UserService {
     if (param.status != UserStatusEnum.NORMAL.code) {
       authSessionTokenRepository.expiredAllToken(existsUser.uid)
     }
+  }
+
+  void modifyPwd(String uid, String oldPassword, String newPassword) {
+    if (!oldPassword || !newPassword) {
+      throw new IllegalArgumentException("老密码和新密码都不能为空")
+    }
+
+    def existsUser = userRepository.findByUid(uid)
+    if (existsUser.passwordHash != oldPassword) {
+      throw new IllegalArgumentException("密码错误")
+    }
+
+    User newMember = new User(id: existsUser.id, passwordHash: newPassword)
+
+    userRepository.modifyUser(newMember)
+  }
+
+  MemberInfo getMemberInfo(String uid) {
+    def user = userRepository.findByUid(uid)
+    return new MemberInfo(
+            nickname: user.nickname,
+            avatar: user.avatar,
+            username: user.username,
+            invitationCode: user.invitationCode
+    )
+  }
+
+  PageList<InvitationMemberInfo> getInvitationMemberInfo(String uid, int currentPage, int pageSize) {
+    Page<InvitationMemberInfo> page = PageHelper.startPage(currentPage, pageSize);
+    def user = userRepository.findByUid(uid)
+
+    List<User> from = userRepository.findUserByInvitationFrom(user.invitationCode)
+
+    if (CollectionUtil.isEmpty(from)) {
+      return PageList<WalletInfoRecord>.of(currentPage, pageSize, page.getTotal(), [] as List<InvitationMemberInfo>)
+    } else {
+      def collect = from.stream().map( it -> {
+        return new InvitationMemberInfo(nickname: it.nickname, username: it.username, invitationDate: it.createTime)
+      }).collect(Collectors.toList())
+
+      return PageList<InvitationMemberInfo>.of(currentPage, pageSize, page.getTotal(), collect)
+    }
+  }
+
+  CommonResponse<String> modifyAvatarAndNickname(String uid, String avatar, String nickname) {
+    if (!avatar || !nickname) {
+      return new CommonResponse<String>(status: CommonResponse.Fail, message: "头像或者昵称不能为空")
+    }
+
+    def user = userRepository.findByUid(uid)
+    User newMember = new User(id: user.id, avatar: avatar, nickname: nickname)
+    userRepository.modifyUser(newMember)
+    return new CommonResponse<String>(status: CommonResponse.Success, message: "修改成功")
+
   }
 }

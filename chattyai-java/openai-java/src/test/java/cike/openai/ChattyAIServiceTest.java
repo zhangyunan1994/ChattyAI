@@ -24,10 +24,13 @@ class ChattyAIServiceTest {
   String userPrompt = "go 截取字符串指定长度";
   String systemPrompt = "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.";
 
+  String key = "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";
+
   @BeforeAll
   void setup() {
 //    baseUrl = "https://api.openai.com";
-//    baseUrl = "http://52.15.253.100:38820";
+    baseUrl = "http://52.15.253.100:38820";
+
   }
 
   @Test
@@ -35,7 +38,7 @@ class ChattyAIServiceTest {
 
     List<OpenAIAccount> openAIAccountList = new ArrayList<>();
 
-    openAIAccountList.add(new OpenAIAccount("zz", "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"));
+    openAIAccountList.add(new OpenAIAccount("zz", key));
 
     DecimalFormat df = new DecimalFormat("#.000");
 
@@ -51,16 +54,14 @@ class ChattyAIServiceTest {
 
   @Test
   void tokenDiff() {
-    ChattyAIService chattyAIService = new ChattyAIService("sk-", Duration.ofSeconds(120),
+    ChattyAIService chattyAIService = new ChattyAIService(key, Duration.ofSeconds(120),
         baseUrl);
-
 
     List<ChatMessage> messages = new ArrayList<>();
     ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), systemPrompt);
-
     messages.add(systemMessage);
 
-    ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), userPrompt);
+    ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "我几个有一本书讲述一个二维空间的世界，好像居民都是几个图形。主人公是个正方形。有一天，一个来自名叫空间的三维球体跑来拜访这个正方形。平面国的居民眼看这个球体可以随意变化大小（进出平面），吓得目瞪口呆。这是哪本书？给我具体的介绍，并推荐几本类似的。");
     messages.add(userMessage);
 
     ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
@@ -73,16 +74,64 @@ class ChattyAIServiceTest {
         .logitBias(new HashMap<>())
         .build();
 
+    // ----------------------------------------------------------------
     ChatCompletionResult chatCompletion = chattyAIService.createChatCompletion(chatCompletionRequest);
     System.out.println(chatCompletion);
     System.out.println("-----------------chatCompletion---------------");
     System.out.println(chatCompletion.getUsage());
     System.out.println("-----------------TokenizerUtil---------------");
-    System.out.println(TokenizerUtil.tokenCount(userPrompt));
-    System.out.println(TokenizerUtil.tokenCount(systemPrompt));
+    System.out.println(TokenizerUtil.numTokensFromMessages(messages, ModelType.GPT_3_5_TURBO));
     System.out.println(TokenizerUtil.tokenCount(chatCompletion.getChoices().get(0).getMessage().getContent()));
+    // ----------------------------------------------------------------
+
+
+    messages.add(new ChatMessage(ChatMessageRole.ASSISTANT.value(), chatCompletion.getChoices().get(0).getMessage().getContent()));
+    messages.add(new ChatMessage(ChatMessageRole.USER.value(), "三体简介"));
+
+    chatCompletionRequest = ChatCompletionRequest
+        .builder()
+        .model("gpt-3.5-turbo")
+        .messages(messages)
+        .maxTokens(1000)
+        .temperature(0.5D)
+        .topP(0.8D)
+        .logitBias(new HashMap<>())
+        .build();
+
+    // ----------------------------------------------------------------
+    chatCompletion = chattyAIService.createChatCompletion(chatCompletionRequest);
+    System.out.println(chatCompletion);
+    System.out.println("-----------------chatCompletion---------------");
+    System.out.println(chatCompletion.getUsage());
     System.out.println("-----------------TokenizerUtil---------------");
     System.out.println(TokenizerUtil.numTokensFromMessages(messages, ModelType.GPT_3_5_TURBO));
+    System.out.println(TokenizerUtil.tokenCount(chatCompletion.getChoices().get(0).getMessage().getContent()));
+    System.out.println("-----------------TokenizerUtil---------------");
+    // ----------------------------------------------------------------
+
+    messages.add(new ChatMessage(ChatMessageRole.ASSISTANT.value(), chatCompletion.getChoices().get(0).getMessage().getContent()));
+    messages.add(new ChatMessage(ChatMessageRole.USER.value(), "三体中智子是神恶魔"));
+
+    chatCompletionRequest = ChatCompletionRequest
+        .builder()
+        .model("gpt-3.5-turbo")
+        .messages(messages)
+        .maxTokens(1000)
+        .temperature(0.5D)
+        .topP(0.8D)
+        .logitBias(new HashMap<>())
+        .build();
+
+    // ----------------------------------------------------------------
+    chatCompletion = chattyAIService.createChatCompletion(chatCompletionRequest);
+    System.out.println(chatCompletion);
+    System.out.println("-----------------chatCompletion---------------");
+    System.out.println(chatCompletion.getUsage());
+    System.out.println("-----------------TokenizerUtil---------------");
+    System.out.println(TokenizerUtil.numTokensFromMessages(messages, ModelType.GPT_3_5_TURBO));
+    System.out.println(TokenizerUtil.tokenCount(chatCompletion.getChoices().get(0).getMessage().getContent()));
+    System.out.println("-----------------TokenizerUtil---------------");
+    // ----------------------------------------------------------------
 
   }
 

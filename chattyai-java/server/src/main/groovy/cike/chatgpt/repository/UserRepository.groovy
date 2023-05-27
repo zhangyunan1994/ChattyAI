@@ -66,4 +66,16 @@ class UserRepository {
   void modifyUser(User user) {
     userMapper.updateByPrimaryKeySelective(user)
   }
+
+  User findUserByInvitationCode(String invitationCode) {
+    UserExample example = new UserExample()
+    example.createCriteria().andInvitationCodeEqualTo(invitationCode)
+    CollectionUtil.getFirstElseNull(userMapper.selectByExample(example))
+  }
+
+  List<User> findUserByInvitationFrom(String invitationCode) {
+    UserExample example = new UserExample()
+    example.createCriteria().andInvitationFromEqualTo(invitationCode)
+    userMapper.selectByExample(example)
+  }
 }
