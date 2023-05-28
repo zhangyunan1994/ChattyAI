@@ -30,6 +30,10 @@ class MemberWalletRepository {
         CollectionUtil.getFirstElseNull(memberWallets)
     }
 
+    void addWallet(MemberWallet memberWallet) {
+        mapper.insertSelective(memberWallet)
+    }
+
     List<MemberWalletRecord> getWalletDetailRecordByUidOrderById(String uid) {
         def example = new MemberWalletRecordExample()
         example.createCriteria().andUidEqualTo(uid)
@@ -46,6 +50,15 @@ class MemberWalletRepository {
         MemberWallet memberWallet = new MemberWallet()
         memberWallet.setId(wallet.getId())
         memberWallet.setAvailableValue(wallet.availableValue - token)
+        mapper.updateByPrimaryKeySelective(memberWallet)
+    }
+
+    void addMemberWalletToken(String uid, int token) {
+        def wallet = getTokenWalletByUid(uid)
+        MemberWallet memberWallet = new MemberWallet()
+        memberWallet.setId(wallet.getId())
+        memberWallet.setAvailableValue(wallet.availableValue + token)
+        memberWallet.setTotalValue(wallet.totalValue + token)
         mapper.updateByPrimaryKeySelective(memberWallet)
     }
 }

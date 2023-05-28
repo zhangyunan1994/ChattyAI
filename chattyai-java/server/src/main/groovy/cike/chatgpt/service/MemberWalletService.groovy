@@ -9,6 +9,7 @@ import cike.chatgpt.controller.WalletInfoRecord
 import cike.chatgpt.repository.MemberWalletRepository
 import cike.chatgpt.repository.entity.MemberWallet
 import cike.chatgpt.repository.entity.MemberWalletRecord
+import cike.chatgpt.repository.enums.MemberWalletTypeEnum
 import cike.chatgpt.repository.enums.WalletInfoRecordTypeEnum
 import cike.chatgpt.utils.CollectionUtil
 import cike.chatgpt.utils.RandomUtil
@@ -53,15 +54,37 @@ class MemberWalletService {
     void chattyAITokenSub(String uid, int token) {
         MemberWalletRecord walletRecord = new MemberWalletRecord()
         walletRecord.setUid(uid)
-
         walletRecord.setSid(RandomUtil.nextLong())
         walletRecord.setType((byte)3);
         walletRecord.setTokenCount(-token);
+        memberWalletRepository.addMemberWalletRecord(walletRecord)
+        memberWalletRepository.subMemberWalletToken(uid, token)
+    }
 
+    void chattyAITokenAdd(String uid, int token, WalletInfoRecordTypeEnum recordType) {
+        MemberWalletRecord walletRecord = new MemberWalletRecord()
+        walletRecord.setUid(uid)
+        walletRecord.setSid(RandomUtil.nextLong())
+        walletRecord.setType(recordType.code);
+        walletRecord.setTokenCount(token);
+        memberWalletRepository.addMemberWalletRecord(walletRecord)
+        memberWalletRepository.addMemberWalletToken(uid, token)
+    }
+
+    void chattyAIRegisterToken(String uid, int token) {
+        MemberWalletRecord walletRecord = new MemberWalletRecord()
+        walletRecord.setUid(uid)
+        walletRecord.setSid(RandomUtil.nextLong())
+        walletRecord.setType(WalletInfoRecordTypeEnum.REGISTER.code);
+        walletRecord.setTokenCount(token);
         memberWalletRepository.addMemberWalletRecord(walletRecord)
 
-        memberWalletRepository.subMemberWalletToken(uid, token)
+        MemberWallet wallet = new MemberWallet(uid: uid,
+                type: MemberWalletTypeEnum.CHAT.code,
+                totalValue: token,
+                availableValue: token,
+        )
 
-
+        memberWalletRepository.addWallet(wallet)
     }
 }

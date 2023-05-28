@@ -8,4 +8,12 @@ class CommonResponse<T> {
     String status
     String message
     T data
+
+    static <T> CommonResponse<T> failure(String message) {
+        new CommonResponse<T>(status: Fail, message: message)
+    }
+
+    static <T> CommonResponse<T> success(T data) {
+        new CommonResponse<T>(status: Fail, data: data)
+    }
 }

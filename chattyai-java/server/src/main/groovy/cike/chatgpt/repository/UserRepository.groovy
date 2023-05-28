@@ -26,6 +26,12 @@ class UserRepository {
     CollectionUtil.getFirstElseNull(userMapper.selectByExample(example))
   }
 
+  User findByEmail(String email) {
+    UserExample example = new UserExample()
+    example.createCriteria().andEmailEqualTo(email)
+    CollectionUtil.getFirstElseNull(userMapper.selectByExample(example))
+  }
+
   User findByUid(String uid) {
     UserExample example = new UserExample()
     example.createCriteria().andUidEqualTo(uid)

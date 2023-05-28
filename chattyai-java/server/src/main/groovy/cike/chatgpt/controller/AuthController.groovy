@@ -2,6 +2,7 @@ package cike.chatgpt.controller
 
 import cike.chatgpt.interceptor.RequiredLogin
 import cike.chatgpt.service.AuthService
+import cike.chatgpt.service.MemberWalletService
 import cike.chatgpt.service.UserDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -14,8 +15,13 @@ class AuthController {
   @Autowired
   private AuthService authService;
 
+  @PostMapping("signup")
+  CommonResponse<String> signup(@RequestBody AuthParam loginParam) {
+    authService.signup(loginParam);
+  }
+
   @PostMapping("/login/withPassword")
-  CommonResponse<String> loginByPassword(@RequestBody LoginParam loginParam) {
+  CommonResponse<String> loginByPassword(@RequestBody AuthParam loginParam) {
     authService.loginByPassword(loginParam.username, loginParam.password, loginParam.verifyCode);
   }
 
@@ -29,8 +35,12 @@ class AuthController {
   }
 }
 
-class LoginParam {
+
+
+class AuthParam {
   String username;
   String verifyCode;
   String password;
+  String email
+  String invitationCode
 }
