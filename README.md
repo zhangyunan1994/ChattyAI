@@ -19,8 +19,8 @@ git submodule update
 
 **其中 2 个前端项目：**
 
-- @chatgpt-web 用于给用户使用的前端项目，主要提供聊天使用，可以到对应的项目查看部署文档。
-- @chatgpt-manager-ui 主要用于给管理员使用，提供一部分配置和管理功能。如果不想部署这部分，可以通过修改数据库实现这部分的功能
+- @chattyai-web 用于给用户使用的前端项目，主要提供聊天使用，可以到对应的项目查看部署文档。
+- @chattyai-web-ui 主要用于给管理员使用，提供一部分配置和管理功能。如果不想部署这部分，可以通过修改数据库实现这部分的功能
 
 **任选一个后端项目部署**
 
@@ -57,13 +57,13 @@ git submodule update
       <td><a href='https://gitee.com/zhangyunan1994/ChattyAI'><img src='https://gitee.com/zhangyunan1994/ChattyAI/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
     </tr>
     <tr>
-      <td><a href="https://github.com/cike-projects/chatgpt-web"><b>chatgpt-web</b></a></td>
-      <td><a href="https://github.com/cike-projects/chatgpt-web/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
-      <td><a href="https://github.com/cike-projects/chatgpt-web/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
-      <td><a href="https://github.com/cike-projects/chatgpt-web/issues"><img alt="Issues" src="https://img.shields.io/github/issues/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
-      <td><a href="https://github.com/cike-projects/chatgpt-web/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/cike-projects/chatgpt-web?style=flat-square&labelColor=343b41"/></a></td>
-      <td><a target="_blank" rel="noopener" href="https://github.com/cike-projects/chatgpt-web/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/cike-projects/chatgpt-web?color=1e94de&amp;style=for-the-badge&amp;logo=github"></a></td>
-      <td><a href='https://gitee.com/zhangyunan1994/chatgpt-web'><img src='https://gitee.com/zhangyunan1994/chatgpt-web/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web"><b>chattyai-web</b></a></td>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/zhangyunan1994/chattyai-web?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/zhangyunan1994/chattyai-web?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zhangyunan1994/chattyai-web?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/zhangyunan1994/chattyai-web?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a target="_blank" rel="noopener" href="https://github.com/zhangyunan1994/chattyai-web/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/zhangyunan1994/chattyai-web?color=1e94de&amp;style=for-the-badge&amp;logo=github"></a></td>
+      <td><a href='https://gitee.com/zhangyunan1994/chattyai-web'><img src='https://gitee.com/zhangyunan1994/chattyai-web/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
     </tr>
     <tr>
       <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui"><b>chattyai-web-ui</b></a></td>
