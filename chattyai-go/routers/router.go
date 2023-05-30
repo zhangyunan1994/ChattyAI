@@ -1,6 +1,7 @@
 package routers
 
 import (
+	myhandler "chattyai-go/handler"
 	"chattyai-go/middlewares"
 	"chattyai-go/setting"
 	"github.com/gin-gonic/gin"
@@ -35,6 +36,9 @@ func NewSuccessCommonResponseWithData(data interface{}) *CommonResponse {
 }
 
 func InitRouter() *gin.Engine {
+
+	chathandler := myhandler.NewChatHandler()
+
 	r := gin.Default()
 	r.BasePath()
 	gin.SetMode(setting.ServerSetting.RunMode)
@@ -56,7 +60,7 @@ func InitRouter() *gin.Engine {
 		}
 		{
 			chatGroup := chattyaiGroup.Group("chat")
-			chatGroup.POST("chat", ChatStream)
+			chatGroup.POST("stream", chathandler.ChatStream)
 		}
 	}
 
