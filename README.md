@@ -1,12 +1,14 @@
 # ChattyAI
 This project is a ChatGPT UI system that utilizes OpenAI to provide a chatbot service with user management, billing, and sensitive word filtering. The system has a simple and user-friendly interface and is cloud-based for secure and stable operation globally.
 
-![image](https://user-images.githubusercontent.com/27502286/236810020-527636ae-4d04-4bc1-8462-e92bffe52ae5.png)
+![image](https://github.com/zhangyunan1994/ChattyAI/assets/27502286/4dbc00b9-036b-4ea0-92b7-402ad8b57c3d)
 
-```shell
-git submodule init
-git submodule update
-```
+
+![image](https://github.com/zhangyunan1994/ChattyAI/assets/27502286/2e88ff17-e649-4a75-9819-4a4b95131439)
+
+
+
+详细介绍见 [ChattyAI](https://ceks9foaej.feishu.cn/docx/Ksl3drMeroo2etxpalccf1JDnfe)
 
 ## 计划
 
