@@ -2,8 +2,6 @@ package cike.chatgpt.service
 
 import cike.chatgpt.controller.PageList
 import cike.chatgpt.repository.ChatGPTMessageRecordRepository
-import cike.chatgpt.repository.entity.ChatgptMessageRecord
-import cike.chatgpt.repository.entity.SensitiveWordsHitRecord
 import cike.chatgpt.repository.mapper.specific.ChatgptMessageSpecificRecord
 import com.github.pagehelper.Page
 import com.github.pagehelper.PageHelper

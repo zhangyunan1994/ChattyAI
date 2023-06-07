@@ -3,53 +3,54 @@ package cike.chatgpt.repository.entity;
 import java.util.Date;
 
 public class SensitiveWords {
-    private Integer id;
 
-    private String word;
+  private Integer id;
 
-    private String category;
+  private String word;
 
-    private Date createdAt;
+  private String category;
 
-    private Date updatedAt;
+  private Date createdAt;
 
-    public Integer getId() {
-        return id;
-    }
+  private Date updatedAt;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public String getWord() {
-        return word;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public void setWord(String word) {
-        this.word = word;
-    }
+  public String getWord() {
+    return word;
+  }
 
-    public String getCategory() {
-        return category;
-    }
+  public void setWord(String word) {
+    this.word = word;
+  }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+  public String getCategory() {
+    return category;
+  }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
+  public void setCategory(String category) {
+    this.category = category;
+  }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
+  public Date getCreatedAt() {
+    return createdAt;
+  }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
+  public void setCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
+  }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+  public Date getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(Date updatedAt) {
+    this.updatedAt = updatedAt;
+  }
 }

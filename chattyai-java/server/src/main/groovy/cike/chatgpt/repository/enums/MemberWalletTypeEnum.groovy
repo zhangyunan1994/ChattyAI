@@ -7,7 +7,7 @@ enum MemberWalletTypeEnum {
   final byte code
   final String desc
 
-    MemberWalletTypeEnum(byte code, String desc) {
+  MemberWalletTypeEnum(byte code, String desc) {
     this.code = code
     this.desc = desc
   }

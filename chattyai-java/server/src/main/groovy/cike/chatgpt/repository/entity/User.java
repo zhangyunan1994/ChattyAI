@@ -3,153 +3,154 @@ package cike.chatgpt.repository.entity;
 import java.util.Date;
 
 public class User {
-    private Integer id;
 
-    private String uid;
+  private Integer id;
 
-    private String username;
+  private String uid;
 
-    private String role;
+  private String username;
 
-    private String nickname;
+  private String role;
 
-    private String passwordHash;
+  private String nickname;
 
-    private String email;
+  private String passwordHash;
 
-    private String avatar;
+  private String email;
 
-    private Byte status;
+  private String avatar;
 
-    private String description;
+  private Byte status;
 
-    private Date expiredTime;
+  private String description;
 
-    private String invitationCode;
+  private Date expiredTime;
 
-    private String invitationFrom;
+  private String invitationCode;
 
-    private Date createTime;
+  private String invitationFrom;
 
-    private Date updateTime;
+  private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
+  private Date updateTime;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public String getUid() {
-        return uid;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+  public String getUid() {
+    return uid;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public String getRole() {
-        return role;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+  public String getRole() {
+    return role;
+  }
 
-    public String getNickname() {
-        return nickname;
-    }
+  public void setRole(String role) {
+    this.role = role;
+  }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+  public String getNickname() {
+    return nickname;
+  }
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
+  }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
+  public String getPasswordHash() {
+    return passwordHash;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public void setPasswordHash(String passwordHash) {
+    this.passwordHash = passwordHash;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public String getAvatar() {
-        return avatar;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
+  public String getAvatar() {
+    return avatar;
+  }
 
-    public Byte getStatus() {
-        return status;
-    }
+  public void setAvatar(String avatar) {
+    this.avatar = avatar;
+  }
 
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
+  public Byte getStatus() {
+    return status;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setStatus(Byte status) {
+    this.status = status;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public Date getExpiredTime() {
-        return expiredTime;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setExpiredTime(Date expiredTime) {
-        this.expiredTime = expiredTime;
-    }
+  public Date getExpiredTime() {
+    return expiredTime;
+  }
 
-    public String getInvitationCode() {
-        return invitationCode;
-    }
+  public void setExpiredTime(Date expiredTime) {
+    this.expiredTime = expiredTime;
+  }
 
-    public void setInvitationCode(String invitationCode) {
-        this.invitationCode = invitationCode;
-    }
+  public String getInvitationCode() {
+    return invitationCode;
+  }
 
-    public String getInvitationFrom() {
-        return invitationFrom;
-    }
+  public void setInvitationCode(String invitationCode) {
+    this.invitationCode = invitationCode;
+  }
 
-    public void setInvitationFrom(String invitationFrom) {
-        this.invitationFrom = invitationFrom;
-    }
+  public String getInvitationFrom() {
+    return invitationFrom;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setInvitationFrom(String invitationFrom) {
+    this.invitationFrom = invitationFrom;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+  public Date getCreateTime() {
+    return createTime;
+  }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+  public Date getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Date updateTime) {
+    this.updateTime = updateTime;
+  }
 }

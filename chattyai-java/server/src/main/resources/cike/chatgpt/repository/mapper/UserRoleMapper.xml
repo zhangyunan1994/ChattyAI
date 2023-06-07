@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cike.chatgpt.repository.mapper.UserRoleMapper">
   <resultMap id="BaseResultMap" type="cike.chatgpt.repository.entity.UserRole">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+    <result column="role_id" jdbcType="INTEGER" property="roleId"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,36 +72,35 @@
     <if test="distinct">
       distinct
     </if>
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from user_role
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from user_role
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user_role
+    delete
+    from user_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="cike.chatgpt.repository.entity.UserRoleExample">
     delete from user_role
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </delete>
   <insert id="insert" parameterType="cike.chatgpt.repository.entity.UserRole">
-    insert into user_role (id, user_id, role_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}
-      )
+    insert into user_role (id, user_id, role_id)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cike.chatgpt.repository.entity.UserRole">
     insert into user_role
@@ -128,10 +127,11 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cike.chatgpt.repository.entity.UserRoleExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cike.chatgpt.repository.entity.UserRoleExample"
+    resultType="java.lang.Long">
     select count(*) from user_role
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
@@ -148,16 +148,16 @@
       </if>
     </set>
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
     update user_role
     set id = #{record.id,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=VARCHAR},
-      role_id = #{record.roleId,jdbcType=INTEGER}
+    user_id = #{record.userId,jdbcType=VARCHAR},
+    role_id = #{record.roleId,jdbcType=INTEGER}
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="cike.chatgpt.repository.entity.UserRole">
@@ -175,7 +175,7 @@
   <update id="updateByPrimaryKey" parameterType="cike.chatgpt.repository.entity.UserRole">
     update user_role
     set user_id = #{userId,jdbcType=VARCHAR},
-      role_id = #{roleId,jdbcType=INTEGER}
+        role_id = #{roleId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

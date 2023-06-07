@@ -1,14 +1,13 @@
 package cike.chatgpt.service
 
-
 import cike.chatgpt.SessionManager
 import cike.chatgpt.controller.AuthParam
 import cike.chatgpt.controller.CommonResponse
 import cike.chatgpt.repository.AuthSessionTokenRepository
 import cike.chatgpt.repository.UserRepository
+import cike.chatgpt.repository.entity.User
 import cike.chatgpt.repository.enums.UserRoleEnum
 import cike.chatgpt.repository.enums.UserStatusEnum
-import cike.chatgpt.repository.entity.User
 import cike.chatgpt.repository.enums.WalletInfoRecordTypeEnum
 import cike.chatgpt.utils.NanoIdUtils
 import com.google.common.base.Preconditions
@@ -104,7 +103,7 @@ class AuthService {
     memberInfo.setPasswordHash(authParam.password)
     memberInfo.setEmail(authParam.email)
     memberInfo.setAvatar("https://img.syt5.com/2020/1209/20201209013502145.jpg.420.420.jpg")
-    memberInfo.setStatus((byte)1)
+    memberInfo.setStatus((byte) 1)
     LocalDateTime expiredTime = LocalDateTime.now().plusYears(3);
     Instant instant = expiredTime.atZone(ZoneId.systemDefault()).toInstant();
     memberInfo.setExpiredTime(Date.from(instant))
@@ -117,13 +116,10 @@ class AuthService {
       memberWalletService.chattyAITokenAdd(invitationCodeUser.uid, 66666, WalletInfoRecordTypeEnum.INVITATION_CODE)
     }
 
-
     def token = NanoIdUtils.randomNanoId(50)
 
     AuthSessionTokenRepository.addRecord(token, uid, LocalDateTime.now().plusDays(7))
     sessionManager.put(token.toString(), memberInfo)
-
-
 
     log.info("用户注册 token {}", uid)
     return new CommonResponse(status: CommonResponse.Success, data: token)

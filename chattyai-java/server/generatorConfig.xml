@@ -21,13 +21,13 @@
       <property name="suppressAllComments" value="true"/>
     </commentGenerator>
 
-<!--    <jdbcConnection-->
-<!--      connectionURL="jdbc:mysql://127.0.0.1:13306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"-->
-<!--      driverClass="com.mysql.cj.jdbc.Driver"-->
-<!--      password="123456"-->
-<!--      userId="root">-->
-<!--      <property name="nullCatalogMeansCurrent" value="true"/>-->
-<!--    </jdbcConnection>-->
+    <!--    <jdbcConnection-->
+    <!--      connectionURL="jdbc:mysql://127.0.0.1:13306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"-->
+    <!--      driverClass="com.mysql.cj.jdbc.Driver"-->
+    <!--      password="123456"-->
+    <!--      userId="root">-->
+    <!--      <property name="nullCatalogMeansCurrent" value="true"/>-->
+    <!--    </jdbcConnection>-->
 
     <jdbcConnection
       connectionURL="jdbc:mysql://www.zhangshenzhao.cn:3306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"

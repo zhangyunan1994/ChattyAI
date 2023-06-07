@@ -6,25 +6,28 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SensitiveWordsHitRecordMapper {
-    long countByExample(SensitiveWordsHitRecordExample example);
 
-    int deleteByExample(SensitiveWordsHitRecordExample example);
+  long countByExample(SensitiveWordsHitRecordExample example);
 
-    int deleteByPrimaryKey(Long id);
+  int deleteByExample(SensitiveWordsHitRecordExample example);
 
-    int insert(SensitiveWordsHitRecord record);
+  int deleteByPrimaryKey(Long id);
 
-    int insertSelective(SensitiveWordsHitRecord record);
+  int insert(SensitiveWordsHitRecord record);
 
-    List<SensitiveWordsHitRecord> selectByExample(SensitiveWordsHitRecordExample example);
+  int insertSelective(SensitiveWordsHitRecord record);
 
-    SensitiveWordsHitRecord selectByPrimaryKey(Long id);
+  List<SensitiveWordsHitRecord> selectByExample(SensitiveWordsHitRecordExample example);
 
-    int updateByExampleSelective(@Param("record") SensitiveWordsHitRecord record, @Param("example") SensitiveWordsHitRecordExample example);
+  SensitiveWordsHitRecord selectByPrimaryKey(Long id);
 
-    int updateByExample(@Param("record") SensitiveWordsHitRecord record, @Param("example") SensitiveWordsHitRecordExample example);
+  int updateByExampleSelective(@Param("record") SensitiveWordsHitRecord record,
+      @Param("example") SensitiveWordsHitRecordExample example);
 
-    int updateByPrimaryKeySelective(SensitiveWordsHitRecord record);
+  int updateByExample(@Param("record") SensitiveWordsHitRecord record,
+      @Param("example") SensitiveWordsHitRecordExample example);
 
-    int updateByPrimaryKey(SensitiveWordsHitRecord record);
+  int updateByPrimaryKeySelective(SensitiveWordsHitRecord record);
+
+  int updateByPrimaryKey(SensitiveWordsHitRecord record);
 }

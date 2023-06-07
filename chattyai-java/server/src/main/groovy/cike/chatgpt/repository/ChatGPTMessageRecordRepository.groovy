@@ -2,15 +2,12 @@ package cike.chatgpt.repository
 
 import cike.chatgpt.config.SQLInstance
 import cike.chatgpt.repository.entity.ChatgptMessageRecord
-import cike.chatgpt.repository.entity.ChatgptMessageRecordExample
 import cike.chatgpt.repository.enums.ChatMessageRecordStatusEnum
 import cike.chatgpt.repository.mapper.ChatgptMessageRecordMapper
 import cike.chatgpt.repository.mapper.specific.ChatgptMessageRecordSpecificMapper
 import cike.chatgpt.repository.mapper.specific.ChatgptMessageSpecificRecord
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
-
-import java.text.SimpleDateFormat
 
 @Repository
 class ChatGPTMessageRecordRepository {

@@ -6,25 +6,26 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserRoleMapper {
-    long countByExample(UserRoleExample example);
 
-    int deleteByExample(UserRoleExample example);
+  long countByExample(UserRoleExample example);
 
-    int deleteByPrimaryKey(Integer id);
+  int deleteByExample(UserRoleExample example);
 
-    int insert(UserRole record);
+  int deleteByPrimaryKey(Integer id);
 
-    int insertSelective(UserRole record);
+  int insert(UserRole record);
 
-    List<UserRole> selectByExample(UserRoleExample example);
+  int insertSelective(UserRole record);
 
-    UserRole selectByPrimaryKey(Integer id);
+  List<UserRole> selectByExample(UserRoleExample example);
 
-    int updateByExampleSelective(@Param("record") UserRole record, @Param("example") UserRoleExample example);
+  UserRole selectByPrimaryKey(Integer id);
 
-    int updateByExample(@Param("record") UserRole record, @Param("example") UserRoleExample example);
+  int updateByExampleSelective(@Param("record") UserRole record, @Param("example") UserRoleExample example);
 
-    int updateByPrimaryKeySelective(UserRole record);
+  int updateByExample(@Param("record") UserRole record, @Param("example") UserRoleExample example);
 
-    int updateByPrimaryKey(UserRole record);
+  int updateByPrimaryKeySelective(UserRole record);
+
+  int updateByPrimaryKey(UserRole record);
 }

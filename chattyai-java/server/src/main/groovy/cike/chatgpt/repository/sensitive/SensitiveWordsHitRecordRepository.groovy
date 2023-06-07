@@ -1,6 +1,6 @@
 package cike.chatgpt.repository.sensitive
 
-import cike.chatgpt.config.SQLInstance
+
 import cike.chatgpt.repository.entity.SensitiveWordsHitRecord
 import cike.chatgpt.repository.mapper.SensitiveWordsHitRecordMapper
 import org.springframework.beans.factory.annotation.Autowired

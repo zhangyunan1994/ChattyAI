@@ -3,63 +3,64 @@ package cike.chatgpt.repository.entity;
 import java.util.Date;
 
 public class SensitiveWordsHitRecord {
-    private Long id;
 
-    private String uid;
+  private Long id;
 
-    private String conversationId;
+  private String uid;
 
-    private String systemMessage;
+  private String conversationId;
 
-    private String userMessage;
+  private String systemMessage;
 
-    private Date createTime;
+  private String userMessage;
 
-    public Long getId() {
-        return id;
-    }
+  private Date createTime;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getUid() {
-        return uid;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+  public String getUid() {
+    return uid;
+  }
 
-    public String getConversationId() {
-        return conversationId;
-    }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
 
-    public void setConversationId(String conversationId) {
-        this.conversationId = conversationId;
-    }
+  public String getConversationId() {
+    return conversationId;
+  }
 
-    public String getSystemMessage() {
-        return systemMessage;
-    }
+  public void setConversationId(String conversationId) {
+    this.conversationId = conversationId;
+  }
 
-    public void setSystemMessage(String systemMessage) {
-        this.systemMessage = systemMessage;
-    }
+  public String getSystemMessage() {
+    return systemMessage;
+  }
 
-    public String getUserMessage() {
-        return userMessage;
-    }
+  public void setSystemMessage(String systemMessage) {
+    this.systemMessage = systemMessage;
+  }
 
-    public void setUserMessage(String userMessage) {
-        this.userMessage = userMessage;
-    }
+  public String getUserMessage() {
+    return userMessage;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setUserMessage(String userMessage) {
+    this.userMessage = userMessage;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+  public Date getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
 }

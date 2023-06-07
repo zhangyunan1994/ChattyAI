@@ -60,7 +60,6 @@ class UserRepository {
     }
 
 
-
     example.setOrderByClause("id desc")
     userMapper.selectByExample(example)
   }

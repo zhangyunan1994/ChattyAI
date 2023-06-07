@@ -10,15 +10,15 @@ import javax.sql.DataSource
 
 @Component
 class SQLInstance {
-    static Sql sql
+  static Sql sql
 
-    @Autowired
-    DataSource dataSource
+  @Autowired
+  DataSource dataSource
 
-    @PostConstruct
-    void init() {
-        sql = new Sql(dataSource)
-    }
+  @PostConstruct
+  void init() {
+    sql = new Sql(dataSource)
+  }
 }
 
 

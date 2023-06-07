@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration
 @ToString
 class OpenAIConfig {
 
-    String defaultSystemPrompt = "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown."
-    String baseUrl = "https://api.openai.com"
+  String defaultSystemPrompt = "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown."
+  String baseUrl = "https://api.openai.com"
 
-    String model
+  String model
 
-    Long timeoutSeconds
+  Long timeoutSeconds
 }

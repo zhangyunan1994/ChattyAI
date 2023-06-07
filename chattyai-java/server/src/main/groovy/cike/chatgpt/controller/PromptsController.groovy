@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("prompts")
 class PromptsController {
 
-    @GetMapping("lists")
-    List<Prompts> lists() { return PromptsRepository.findAll() }
+  @GetMapping("lists")
+  List<Prompts> lists() { return PromptsRepository.findAll() }
 
 }

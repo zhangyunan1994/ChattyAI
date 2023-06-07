@@ -18,9 +18,6 @@
   </properties>
 
   <dependencies>
-
-
-
     <dependency>
       <groupId>cick</groupId>
       <artifactId>openai-java</artifactId>
@@ -155,7 +152,6 @@
 
   <build>
     <finalName>chattyai-server</finalName>
-
     <plugins>
       <plugin>
         <groupId>org.mybatis.generator</groupId>
@@ -219,5 +215,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>

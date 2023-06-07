@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cike.chatgpt.repository.mapper.ChatgptMessageRecordMapper">
   <resultMap id="BaseResultMap" type="cike.chatgpt.repository.entity.ChatgptMessageRecord">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
-    <result column="conversation_id" jdbcType="VARCHAR" property="conversationId" />
-    <result column="system_message" jdbcType="VARCHAR" property="systemMessage" />
-    <result column="role" jdbcType="VARCHAR" property="role" />
-    <result column="role_message" jdbcType="VARCHAR" property="roleMessage" />
-    <result column="message_id" jdbcType="VARCHAR" property="messageId" />
-    <result column="created" jdbcType="BIGINT" property="created" />
-    <result column="model" jdbcType="VARCHAR" property="model" />
-    <result column="context_count" jdbcType="INTEGER" property="contextCount" />
-    <result column="prompt_tokens" jdbcType="INTEGER" property="promptTokens" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="uid" jdbcType="VARCHAR" property="uid"/>
+    <result column="conversation_id" jdbcType="VARCHAR" property="conversationId"/>
+    <result column="system_message" jdbcType="VARCHAR" property="systemMessage"/>
+    <result column="role" jdbcType="VARCHAR" property="role"/>
+    <result column="role_message" jdbcType="VARCHAR" property="roleMessage"/>
+    <result column="message_id" jdbcType="VARCHAR" property="messageId"/>
+    <result column="created" jdbcType="BIGINT" property="created"/>
+    <result column="model" jdbcType="VARCHAR" property="model"/>
+    <result column="context_count" jdbcType="INTEGER" property="contextCount"/>
+    <result column="prompt_tokens" jdbcType="INTEGER" property="promptTokens"/>
+    <result column="status" jdbcType="TINYINT" property="status"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,49 +78,51 @@
     id, `uid`, conversation_id, system_message, `role`, role_message, message_id, created, 
     model, context_count, prompt_tokens, `status`, create_time
   </sql>
-  <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecordExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecordExample"
+    resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from chatgpt_message_record
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from chatgpt_message_record
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from chatgpt_message_record
+    delete
+    from chatgpt_message_record
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecordExample">
     delete from chatgpt_message_record
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord" useGeneratedKeys="true">
-    insert into chatgpt_message_record (`uid`, conversation_id, system_message, 
-      `role`, role_message, message_id, 
-      created, model, context_count, 
-      prompt_tokens, `status`, create_time
-      )
-    values (#{uid,jdbcType=VARCHAR}, #{conversationId,jdbcType=VARCHAR}, #{systemMessage,jdbcType=VARCHAR}, 
-      #{role,jdbcType=VARCHAR}, #{roleMessage,jdbcType=VARCHAR}, #{messageId,jdbcType=VARCHAR}, 
-      #{created,jdbcType=BIGINT}, #{model,jdbcType=VARCHAR}, #{contextCount,jdbcType=INTEGER}, 
-      #{promptTokens,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" keyColumn="id" keyProperty="id"
+    parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord" useGeneratedKeys="true">
+    insert into chatgpt_message_record (`uid`, conversation_id, system_message,
+                                        `role`, role_message, message_id,
+                                        created, model, context_count,
+                                        prompt_tokens, `status`, create_time)
+    values (#{uid,jdbcType=VARCHAR}, #{conversationId,jdbcType=VARCHAR}, #{systemMessage,jdbcType=VARCHAR},
+            #{role,jdbcType=VARCHAR}, #{roleMessage,jdbcType=VARCHAR}, #{messageId,jdbcType=VARCHAR},
+            #{created,jdbcType=BIGINT}, #{model,jdbcType=VARCHAR}, #{contextCount,jdbcType=INTEGER},
+            #{promptTokens,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id"
+    parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord" useGeneratedKeys="true">
     insert into chatgpt_message_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -199,10 +201,11 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecordExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecordExample"
+    resultType="java.lang.Long">
     select count(*) from chatgpt_message_record
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
@@ -249,26 +252,26 @@
       </if>
     </set>
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
     update chatgpt_message_record
     set id = #{record.id,jdbcType=BIGINT},
-      `uid` = #{record.uid,jdbcType=VARCHAR},
-      conversation_id = #{record.conversationId,jdbcType=VARCHAR},
-      system_message = #{record.systemMessage,jdbcType=VARCHAR},
-      `role` = #{record.role,jdbcType=VARCHAR},
-      role_message = #{record.roleMessage,jdbcType=VARCHAR},
-      message_id = #{record.messageId,jdbcType=VARCHAR},
-      created = #{record.created,jdbcType=BIGINT},
-      model = #{record.model,jdbcType=VARCHAR},
-      context_count = #{record.contextCount,jdbcType=INTEGER},
-      prompt_tokens = #{record.promptTokens,jdbcType=INTEGER},
-      `status` = #{record.status,jdbcType=TINYINT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    `uid` = #{record.uid,jdbcType=VARCHAR},
+    conversation_id = #{record.conversationId,jdbcType=VARCHAR},
+    system_message = #{record.systemMessage,jdbcType=VARCHAR},
+    `role` = #{record.role,jdbcType=VARCHAR},
+    role_message = #{record.roleMessage,jdbcType=VARCHAR},
+    message_id = #{record.messageId,jdbcType=VARCHAR},
+    created = #{record.created,jdbcType=BIGINT},
+    model = #{record.model,jdbcType=VARCHAR},
+    context_count = #{record.contextCount,jdbcType=INTEGER},
+    prompt_tokens = #{record.promptTokens,jdbcType=INTEGER},
+    `status` = #{record.status,jdbcType=TINYINT},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord">
@@ -315,18 +318,18 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cike.chatgpt.repository.entity.ChatgptMessageRecord">
     update chatgpt_message_record
-    set `uid` = #{uid,jdbcType=VARCHAR},
-      conversation_id = #{conversationId,jdbcType=VARCHAR},
-      system_message = #{systemMessage,jdbcType=VARCHAR},
-      `role` = #{role,jdbcType=VARCHAR},
-      role_message = #{roleMessage,jdbcType=VARCHAR},
-      message_id = #{messageId,jdbcType=VARCHAR},
-      created = #{created,jdbcType=BIGINT},
-      model = #{model,jdbcType=VARCHAR},
-      context_count = #{contextCount,jdbcType=INTEGER},
-      prompt_tokens = #{promptTokens,jdbcType=INTEGER},
-      `status` = #{status,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+    set `uid`           = #{uid,jdbcType=VARCHAR},
+        conversation_id = #{conversationId,jdbcType=VARCHAR},
+        system_message  = #{systemMessage,jdbcType=VARCHAR},
+        `role`          = #{role,jdbcType=VARCHAR},
+        role_message    = #{roleMessage,jdbcType=VARCHAR},
+        message_id      = #{messageId,jdbcType=VARCHAR},
+        created         = #{created,jdbcType=BIGINT},
+        model           = #{model,jdbcType=VARCHAR},
+        context_count   = #{contextCount,jdbcType=INTEGER},
+        prompt_tokens   = #{promptTokens,jdbcType=INTEGER},
+        `status`        = #{status,jdbcType=TINYINT},
+        create_time     = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

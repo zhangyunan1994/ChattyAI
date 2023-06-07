@@ -3,73 +3,74 @@ package cike.chatgpt.repository.entity;
 import java.util.Date;
 
 public class MemberWallet {
-    private Integer id;
 
-    private String uid;
+  private Integer id;
 
-    private Byte type;
+  private String uid;
 
-    private Integer totalValue;
+  private Byte type;
 
-    private Integer availableValue;
+  private Integer totalValue;
 
-    private Date createTime;
+  private Integer availableValue;
 
-    private Date updateTime;
+  private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
+  private Date updateTime;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public String getUid() {
-        return uid;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+  public String getUid() {
+    return uid;
+  }
 
-    public Byte getType() {
-        return type;
-    }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
 
-    public void setType(Byte type) {
-        this.type = type;
-    }
+  public Byte getType() {
+    return type;
+  }
 
-    public Integer getTotalValue() {
-        return totalValue;
-    }
+  public void setType(Byte type) {
+    this.type = type;
+  }
 
-    public void setTotalValue(Integer totalValue) {
-        this.totalValue = totalValue;
-    }
+  public Integer getTotalValue() {
+    return totalValue;
+  }
 
-    public Integer getAvailableValue() {
-        return availableValue;
-    }
+  public void setTotalValue(Integer totalValue) {
+    this.totalValue = totalValue;
+  }
 
-    public void setAvailableValue(Integer availableValue) {
-        this.availableValue = availableValue;
-    }
+  public Integer getAvailableValue() {
+    return availableValue;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setAvailableValue(Integer availableValue) {
+    this.availableValue = availableValue;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+  public Date getCreateTime() {
+    return createTime;
+  }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+  public Date getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Date updateTime) {
+    this.updateTime = updateTime;
+  }
 }

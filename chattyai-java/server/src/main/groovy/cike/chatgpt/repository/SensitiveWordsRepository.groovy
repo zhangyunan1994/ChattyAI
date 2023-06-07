@@ -69,8 +69,7 @@ class SensitiveWordsRepository {
         criteria.andCreatedAtLessThanOrEqualTo(endDate)
         or.andCreatedAtLessThanOrEqualTo(endDate)
       }
-    }
-    else if (endTime || startTime) {
+    } else if (endTime || startTime) {
       def criteria = example.createCriteria()
 
       if (startTime) {

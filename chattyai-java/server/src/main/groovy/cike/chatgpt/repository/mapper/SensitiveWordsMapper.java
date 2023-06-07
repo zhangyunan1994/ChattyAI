@@ -6,25 +6,26 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SensitiveWordsMapper {
-    long countByExample(SensitiveWordsExample example);
 
-    int deleteByExample(SensitiveWordsExample example);
+  long countByExample(SensitiveWordsExample example);
 
-    int deleteByPrimaryKey(Integer id);
+  int deleteByExample(SensitiveWordsExample example);
 
-    int insert(SensitiveWords record);
+  int deleteByPrimaryKey(Integer id);
 
-    int insertSelective(SensitiveWords record);
+  int insert(SensitiveWords record);
 
-    List<SensitiveWords> selectByExample(SensitiveWordsExample example);
+  int insertSelective(SensitiveWords record);
 
-    SensitiveWords selectByPrimaryKey(Integer id);
+  List<SensitiveWords> selectByExample(SensitiveWordsExample example);
 
-    int updateByExampleSelective(@Param("record") SensitiveWords record, @Param("example") SensitiveWordsExample example);
+  SensitiveWords selectByPrimaryKey(Integer id);
 
-    int updateByExample(@Param("record") SensitiveWords record, @Param("example") SensitiveWordsExample example);
+  int updateByExampleSelective(@Param("record") SensitiveWords record, @Param("example") SensitiveWordsExample example);
 
-    int updateByPrimaryKeySelective(SensitiveWords record);
+  int updateByExample(@Param("record") SensitiveWords record, @Param("example") SensitiveWordsExample example);
 
-    int updateByPrimaryKey(SensitiveWords record);
+  int updateByPrimaryKeySelective(SensitiveWords record);
+
+  int updateByPrimaryKey(SensitiveWords record);
 }

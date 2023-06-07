@@ -53,13 +53,13 @@ class OpenAiServicePool {
         String openAIKey = config.openaiKey
         currentKeys.add(openAIKey)
         ChattyAIService chattyAIService = openAiServiceMap.computeIfAbsent(openAIKey,
-                k -> new ChattyAIService(openAIKey, Duration.ofSeconds(openAIConfig.timeoutSeconds ?: 10), openAIConfig.baseUrl ?: ChattyAIService.BASE_URL))
+            k -> new ChattyAIService(openAIKey, Duration.ofSeconds(openAIConfig.timeoutSeconds ?: 10), openAIConfig.baseUrl ?: ChattyAIService.BASE_URL))
         refreshKeys.add(chattyAIService)
       }
       enabledKeys = refreshKeys
 
       // 移除 map 中已经不使用的 openai 实例
-      openAiServiceMap.keySet().stream().filter {!currentKeys.contains(it)} collect(Collectors.toList()) forEach { openAiServiceMap.remove(it) }
+      openAiServiceMap.keySet().stream().filter { !currentKeys.contains(it) } collect(Collectors.toList()) forEach { openAiServiceMap.remove(it) }
 
     }
   }

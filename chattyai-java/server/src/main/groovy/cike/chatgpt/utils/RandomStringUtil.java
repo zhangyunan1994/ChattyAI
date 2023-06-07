@@ -8,7 +8,7 @@ public final class RandomStringUtil {
 
   private static final Random RANDOM = new Random();
 
-  private static final String RANDOM_STR  = "0123456789QWERTYUIOPASDFGHJKLZXCVBNM";
+  private static final String RANDOM_STR = "0123456789QWERTYUIOPASDFGHJKLZXCVBNM";
 
   private RandomStringUtil() {
   }
@@ -90,7 +90,8 @@ public final class RandomStringUtil {
       final char[] chars, final Random random) {
     if (count == 0) {
       return "";
-    } else if (count < 0) {
+    }
+    else if (count < 0) {
       throw new IllegalArgumentException(
           "Requested random string length " + count + " is less than 0.");
     }
@@ -101,15 +102,18 @@ public final class RandomStringUtil {
     if (start == 0 && end == 0) {
       if (chars != null) {
         end = chars.length;
-      } else {
+      }
+      else {
         if (!letters && !numbers) {
           end = Character.MAX_CODE_POINT;
-        } else {
+        }
+        else {
           end = 'z' + 1;
           start = ' ';
         }
       }
-    } else {
+    }
+    else {
       if (end <= start) {
         throw new IllegalArgumentException(
             "Parameter end (" + end + ") must be greater than start (" + start + ")");
@@ -143,7 +147,8 @@ public final class RandomStringUtil {
             continue;
         }
 
-      } else {
+      }
+      else {
         codePoint = chars[random.nextInt(gap) + start];
       }
 
@@ -162,7 +167,8 @@ public final class RandomStringUtil {
           count--;
         }
 
-      } else {
+      }
+      else {
         count++;
       }
     }

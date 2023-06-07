@@ -1,33 +1,34 @@
 package cike.chatgpt.repository.entity;
 
 public class UserRole {
-    private Integer id;
 
-    private String userId;
+  private Integer id;
 
-    private Integer roleId;
+  private String userId;
 
-    public Integer getId() {
-        return id;
-    }
+  private Integer roleId;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public String getUserId() {
-        return userId;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+  public String getUserId() {
+    return userId;
+  }
 
-    public Integer getRoleId() {
-        return roleId;
-    }
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
+  public Integer getRoleId() {
+    return roleId;
+  }
+
+  public void setRoleId(Integer roleId) {
+    this.roleId = roleId;
+  }
 }

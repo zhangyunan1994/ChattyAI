@@ -1,6 +1,5 @@
 package cike.chatgpt.controller
 
-
 import cike.chatgpt.component.chat.ChatHelper
 import cike.chatgpt.interceptor.Permission
 import cike.chatgpt.interceptor.RequiredLogin
@@ -16,7 +15,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody
 
@@ -25,34 +23,34 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 @RequestMapping("chat")
 class ChatController {
 
-    static Logger log = LoggerFactory.getLogger(ChatController.class)
+  static Logger log = LoggerFactory.getLogger(ChatController.class)
 
-    @Autowired
-    private ChatHelper chatHelper;
+  @Autowired
+  private ChatHelper chatHelper;
 
-    @Autowired
-    private SessionHolder sessionHolder
+  @Autowired
+  private SessionHolder sessionHolder
 
-    @PostMapping(path = "stream")
-    ResponseEntity<StreamingResponseBody> chatStream(@RequestBody RequestProps requestParam) throws IOException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        StreamingResponseBody streamingResponse = chatHelper.sendChat(sessionHolder.getCurrentUserUID(), requestParam)
-        return new ResponseEntity<>(streamingResponse, headers, HttpStatus.OK);
-    }
+  @PostMapping(path = "stream")
+  ResponseEntity<StreamingResponseBody> chatStream(@RequestBody RequestProps requestParam) throws IOException {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+    StreamingResponseBody streamingResponse = chatHelper.sendChat(sessionHolder.getCurrentUserUID(), requestParam)
+    return new ResponseEntity<>(streamingResponse, headers, HttpStatus.OK);
+  }
 }
 
 class RequestProps {
-    String prompt
-    ChatContext options
-    Double temperature
-    @JsonProperty("top_p")
-    Double topP
-    String conversationId
+  String prompt
+  ChatContext options
+  Double temperature
+  @JsonProperty("top_p")
+  Double topP
+  String conversationId
 }
 
 class ChatContext {
-    String conversationId
-    String parentMessageId
+  String conversationId
+  String parentMessageId
 }
 

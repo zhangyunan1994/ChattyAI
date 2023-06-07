@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cike.chatgpt.repository.mapper.OpenaiKeyConfigMapper">
   <resultMap id="BaseResultMap" type="cike.chatgpt.repository.entity.OpenaiKeyConfig">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="account_id" jdbcType="VARCHAR" property="accountId" />
-    <result column="openai_key" jdbcType="VARCHAR" property="openaiKey" />
-    <result column="support_model" jdbcType="VARCHAR" property="supportModel" />
-    <result column="total_use_token" jdbcType="INTEGER" property="totalUseToken" />
-    <result column="total_use_money" jdbcType="INTEGER" property="totalUseMoney" />
-    <result column="max_use_money" jdbcType="INTEGER" property="maxUseMoney" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="expired_time" jdbcType="TIMESTAMP" property="expiredTime" />
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="account_id" jdbcType="VARCHAR" property="accountId"/>
+    <result column="openai_key" jdbcType="VARCHAR" property="openaiKey"/>
+    <result column="support_model" jdbcType="VARCHAR" property="supportModel"/>
+    <result column="total_use_token" jdbcType="INTEGER" property="totalUseToken"/>
+    <result column="total_use_money" jdbcType="INTEGER" property="totalUseMoney"/>
+    <result column="max_use_money" jdbcType="INTEGER" property="maxUseMoney"/>
+    <result column="status" jdbcType="TINYINT" property="status"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="expired_time" jdbcType="TIMESTAMP" property="expiredTime"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,45 +75,47 @@
     id, account_id, openai_key, support_model, total_use_token, total_use_money, max_use_money, 
     `status`, create_time, expired_time
   </sql>
-  <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfigExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfigExample"
+    resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from openai_key_config
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from openai_key_config
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from openai_key_config
+    delete
+    from openai_key_config
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfigExample">
     delete from openai_key_config
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </delete>
   <insert id="insert" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfig">
-    insert into openai_key_config (id, account_id, openai_key, 
-      support_model, total_use_token, total_use_money, 
-      max_use_money, `status`, create_time, 
-      expired_time)
-    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=VARCHAR}, #{openaiKey,jdbcType=VARCHAR}, 
-      #{supportModel,jdbcType=VARCHAR}, #{totalUseToken,jdbcType=INTEGER}, #{totalUseMoney,jdbcType=INTEGER}, 
-      #{maxUseMoney,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{expiredTime,jdbcType=TIMESTAMP})
+    insert into openai_key_config (id, account_id, openai_key,
+                                   support_model, total_use_token, total_use_money,
+                                   max_use_money, `status`, create_time,
+                                   expired_time)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=VARCHAR}, #{openaiKey,jdbcType=VARCHAR},
+            #{supportModel,jdbcType=VARCHAR}, #{totalUseToken,jdbcType=INTEGER}, #{totalUseMoney,jdbcType=INTEGER},
+            #{maxUseMoney,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+            #{expiredTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfig">
     insert into openai_key_config
@@ -182,10 +184,11 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfigExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfigExample"
+    resultType="java.lang.Long">
     select count(*) from openai_key_config
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
@@ -223,23 +226,23 @@
       </if>
     </set>
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
     update openai_key_config
     set id = #{record.id,jdbcType=BIGINT},
-      account_id = #{record.accountId,jdbcType=VARCHAR},
-      openai_key = #{record.openaiKey,jdbcType=VARCHAR},
-      support_model = #{record.supportModel,jdbcType=VARCHAR},
-      total_use_token = #{record.totalUseToken,jdbcType=INTEGER},
-      total_use_money = #{record.totalUseMoney,jdbcType=INTEGER},
-      max_use_money = #{record.maxUseMoney,jdbcType=INTEGER},
-      `status` = #{record.status,jdbcType=TINYINT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      expired_time = #{record.expiredTime,jdbcType=TIMESTAMP}
+    account_id = #{record.accountId,jdbcType=VARCHAR},
+    openai_key = #{record.openaiKey,jdbcType=VARCHAR},
+    support_model = #{record.supportModel,jdbcType=VARCHAR},
+    total_use_token = #{record.totalUseToken,jdbcType=INTEGER},
+    total_use_money = #{record.totalUseMoney,jdbcType=INTEGER},
+    max_use_money = #{record.maxUseMoney,jdbcType=INTEGER},
+    `status` = #{record.status,jdbcType=TINYINT},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    expired_time = #{record.expiredTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfig">
@@ -277,15 +280,15 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cike.chatgpt.repository.entity.OpenaiKeyConfig">
     update openai_key_config
-    set account_id = #{accountId,jdbcType=VARCHAR},
-      openai_key = #{openaiKey,jdbcType=VARCHAR},
-      support_model = #{supportModel,jdbcType=VARCHAR},
-      total_use_token = #{totalUseToken,jdbcType=INTEGER},
-      total_use_money = #{totalUseMoney,jdbcType=INTEGER},
-      max_use_money = #{maxUseMoney,jdbcType=INTEGER},
-      `status` = #{status,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      expired_time = #{expiredTime,jdbcType=TIMESTAMP}
+    set account_id      = #{accountId,jdbcType=VARCHAR},
+        openai_key      = #{openaiKey,jdbcType=VARCHAR},
+        support_model   = #{supportModel,jdbcType=VARCHAR},
+        total_use_token = #{totalUseToken,jdbcType=INTEGER},
+        total_use_money = #{totalUseMoney,jdbcType=INTEGER},
+        max_use_money   = #{maxUseMoney,jdbcType=INTEGER},
+        `status`        = #{status,jdbcType=TINYINT},
+        create_time     = #{createTime,jdbcType=TIMESTAMP},
+        expired_time    = #{expiredTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

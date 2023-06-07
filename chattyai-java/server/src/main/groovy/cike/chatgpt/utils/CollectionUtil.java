@@ -9,7 +9,8 @@ import java.util.Set;
 
 public final class CollectionUtil {
 
-  private CollectionUtil() {}
+  private CollectionUtil() {
+  }
 
   public static boolean isNotEmpty(Collection coll) {
     return !isEmpty(coll);

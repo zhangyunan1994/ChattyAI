@@ -4,14 +4,11 @@ import cike.chatgpt.controller.PageList
 import cike.chatgpt.repository.SensitiveWordsRepository
 import cike.chatgpt.repository.entity.SensitiveWords
 import cike.chatgpt.repository.entity.SensitiveWordsHitRecord
-import cike.chatgpt.repository.entity.User
-import cike.chatgpt.utils.NanoIdUtils
 import com.github.pagehelper.Page
 import com.github.pagehelper.PageHelper
 import com.google.common.base.Preconditions
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.RequestParam
 
 @Service
 class SensitiveWordsService {

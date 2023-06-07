@@ -61,7 +61,8 @@ class ChattyAIServiceTest {
     ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), systemPrompt);
     messages.add(systemMessage);
 
-    ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), "我几个有一本书讲述一个二维空间的世界，好像居民都是几个图形。主人公是个正方形。有一天，一个来自名叫空间的三维球体跑来拜访这个正方形。平面国的居民眼看这个球体可以随意变化大小（进出平面），吓得目瞪口呆。这是哪本书？给我具体的介绍，并推荐几本类似的。");
+    ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(),
+        "我几个有一本书讲述一个二维空间的世界，好像居民都是几个图形。主人公是个正方形。有一天，一个来自名叫空间的三维球体跑来拜访这个正方形。平面国的居民眼看这个球体可以随意变化大小（进出平面），吓得目瞪口呆。这是哪本书？给我具体的介绍，并推荐几本类似的。");
     messages.add(userMessage);
 
     ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
@@ -84,8 +85,8 @@ class ChattyAIServiceTest {
     System.out.println(TokenizerUtil.tokenCount(chatCompletion.getChoices().get(0).getMessage().getContent()));
     // ----------------------------------------------------------------
 
-
-    messages.add(new ChatMessage(ChatMessageRole.ASSISTANT.value(), chatCompletion.getChoices().get(0).getMessage().getContent()));
+    messages.add(new ChatMessage(ChatMessageRole.ASSISTANT.value(),
+        chatCompletion.getChoices().get(0).getMessage().getContent()));
     messages.add(new ChatMessage(ChatMessageRole.USER.value(), "三体简介"));
 
     chatCompletionRequest = ChatCompletionRequest
@@ -109,7 +110,8 @@ class ChattyAIServiceTest {
     System.out.println("-----------------TokenizerUtil---------------");
     // ----------------------------------------------------------------
 
-    messages.add(new ChatMessage(ChatMessageRole.ASSISTANT.value(), chatCompletion.getChoices().get(0).getMessage().getContent()));
+    messages.add(new ChatMessage(ChatMessageRole.ASSISTANT.value(),
+        chatCompletion.getChoices().get(0).getMessage().getContent()));
     messages.add(new ChatMessage(ChatMessageRole.USER.value(), "三体中智子是神恶魔"));
 
     chatCompletionRequest = ChatCompletionRequest

@@ -3,73 +3,74 @@ package cike.chatgpt.repository.entity;
 import java.util.Date;
 
 public class MemberWalletRecord {
-    private Integer id;
 
-    private String uid;
+  private Integer id;
 
-    private Long sid;
+  private String uid;
 
-    private Byte type;
+  private Long sid;
 
-    private Integer tokenCount;
+  private Byte type;
 
-    private Date createTime;
+  private Integer tokenCount;
 
-    private Date updateTime;
+  private Date createTime;
 
-    public Integer getId() {
-        return id;
-    }
+  private Date updateTime;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+  public Integer getId() {
+    return id;
+  }
 
-    public String getUid() {
-        return uid;
-    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+  public String getUid() {
+    return uid;
+  }
 
-    public Long getSid() {
-        return sid;
-    }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
 
-    public void setSid(Long sid) {
-        this.sid = sid;
-    }
+  public Long getSid() {
+    return sid;
+  }
 
-    public Byte getType() {
-        return type;
-    }
+  public void setSid(Long sid) {
+    this.sid = sid;
+  }
 
-    public void setType(Byte type) {
-        this.type = type;
-    }
+  public Byte getType() {
+    return type;
+  }
 
-    public Integer getTokenCount() {
-        return tokenCount;
-    }
+  public void setType(Byte type) {
+    this.type = type;
+  }
 
-    public void setTokenCount(Integer tokenCount) {
-        this.tokenCount = tokenCount;
-    }
+  public Integer getTokenCount() {
+    return tokenCount;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setTokenCount(Integer tokenCount) {
+    this.tokenCount = tokenCount;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+  public Date getCreateTime() {
+    return createTime;
+  }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+  public Date getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Date updateTime) {
+    this.updateTime = updateTime;
+  }
 }

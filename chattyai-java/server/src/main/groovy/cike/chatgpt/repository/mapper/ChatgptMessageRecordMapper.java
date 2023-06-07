@@ -6,25 +6,28 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ChatgptMessageRecordMapper {
-    long countByExample(ChatgptMessageRecordExample example);
 
-    int deleteByExample(ChatgptMessageRecordExample example);
+  long countByExample(ChatgptMessageRecordExample example);
 
-    int deleteByPrimaryKey(Long id);
+  int deleteByExample(ChatgptMessageRecordExample example);
 
-    int insert(ChatgptMessageRecord record);
+  int deleteByPrimaryKey(Long id);
 
-    int insertSelective(ChatgptMessageRecord record);
+  int insert(ChatgptMessageRecord record);
 
-    List<ChatgptMessageRecord> selectByExample(ChatgptMessageRecordExample example);
+  int insertSelective(ChatgptMessageRecord record);
 
-    ChatgptMessageRecord selectByPrimaryKey(Long id);
+  List<ChatgptMessageRecord> selectByExample(ChatgptMessageRecordExample example);
 
-    int updateByExampleSelective(@Param("record") ChatgptMessageRecord record, @Param("example") ChatgptMessageRecordExample example);
+  ChatgptMessageRecord selectByPrimaryKey(Long id);
 
-    int updateByExample(@Param("record") ChatgptMessageRecord record, @Param("example") ChatgptMessageRecordExample example);
+  int updateByExampleSelective(@Param("record") ChatgptMessageRecord record,
+      @Param("example") ChatgptMessageRecordExample example);
 
-    int updateByPrimaryKeySelective(ChatgptMessageRecord record);
+  int updateByExample(@Param("record") ChatgptMessageRecord record,
+      @Param("example") ChatgptMessageRecordExample example);
 
-    int updateByPrimaryKey(ChatgptMessageRecord record);
+  int updateByPrimaryKeySelective(ChatgptMessageRecord record);
+
+  int updateByPrimaryKey(ChatgptMessageRecord record);
 }

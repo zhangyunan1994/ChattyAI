@@ -58,8 +58,8 @@ class RABCRepository {
       currentUserRole = new UserRole(userId: uid, roleId: roleId)
       userRoleMapper.insertSelective(currentUserRole)
     } else if (currentUserRole.roleId != roleId) {
-        currentUserRole.setRoleId(roleId)
-        userRoleMapper.updateByPrimaryKeySelective(currentUserRole)
+      currentUserRole.setRoleId(roleId)
+      userRoleMapper.updateByPrimaryKeySelective(currentUserRole)
     }
   }
 }

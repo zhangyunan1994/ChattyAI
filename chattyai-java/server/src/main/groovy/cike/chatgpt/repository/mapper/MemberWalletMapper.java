@@ -6,25 +6,26 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface MemberWalletMapper {
-    long countByExample(MemberWalletExample example);
 
-    int deleteByExample(MemberWalletExample example);
+  long countByExample(MemberWalletExample example);
 
-    int deleteByPrimaryKey(Integer id);
+  int deleteByExample(MemberWalletExample example);
 
-    int insert(MemberWallet record);
+  int deleteByPrimaryKey(Integer id);
 
-    int insertSelective(MemberWallet record);
+  int insert(MemberWallet record);
 
-    List<MemberWallet> selectByExample(MemberWalletExample example);
+  int insertSelective(MemberWallet record);
 
-    MemberWallet selectByPrimaryKey(Integer id);
+  List<MemberWallet> selectByExample(MemberWalletExample example);
 
-    int updateByExampleSelective(@Param("record") MemberWallet record, @Param("example") MemberWalletExample example);
+  MemberWallet selectByPrimaryKey(Integer id);
 
-    int updateByExample(@Param("record") MemberWallet record, @Param("example") MemberWalletExample example);
+  int updateByExampleSelective(@Param("record") MemberWallet record, @Param("example") MemberWalletExample example);
 
-    int updateByPrimaryKeySelective(MemberWallet record);
+  int updateByExample(@Param("record") MemberWallet record, @Param("example") MemberWalletExample example);
 
-    int updateByPrimaryKey(MemberWallet record);
+  int updateByPrimaryKeySelective(MemberWallet record);
+
+  int updateByPrimaryKey(MemberWallet record);
 }

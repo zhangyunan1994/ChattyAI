@@ -3,133 +3,134 @@ package cike.chatgpt.repository.entity;
 import java.util.Date;
 
 public class ChatgptMessageRecord {
-    private Long id;
 
-    private String uid;
+  private Long id;
 
-    private String conversationId;
+  private String uid;
 
-    private String systemMessage;
+  private String conversationId;
 
-    private String role;
+  private String systemMessage;
 
-    private String roleMessage;
+  private String role;
 
-    private String messageId;
+  private String roleMessage;
 
-    private Long created;
+  private String messageId;
 
-    private String model;
+  private Long created;
 
-    private Integer contextCount;
+  private String model;
 
-    private Integer promptTokens;
+  private Integer contextCount;
 
-    private Byte status;
+  private Integer promptTokens;
 
-    private Date createTime;
+  private Byte status;
 
-    public Long getId() {
-        return id;
-    }
+  private Date createTime;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getUid() {
-        return uid;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+  public String getUid() {
+    return uid;
+  }
 
-    public String getConversationId() {
-        return conversationId;
-    }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
 
-    public void setConversationId(String conversationId) {
-        this.conversationId = conversationId;
-    }
+  public String getConversationId() {
+    return conversationId;
+  }
 
-    public String getSystemMessage() {
-        return systemMessage;
-    }
+  public void setConversationId(String conversationId) {
+    this.conversationId = conversationId;
+  }
 
-    public void setSystemMessage(String systemMessage) {
-        this.systemMessage = systemMessage;
-    }
+  public String getSystemMessage() {
+    return systemMessage;
+  }
 
-    public String getRole() {
-        return role;
-    }
+  public void setSystemMessage(String systemMessage) {
+    this.systemMessage = systemMessage;
+  }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+  public String getRole() {
+    return role;
+  }
 
-    public String getRoleMessage() {
-        return roleMessage;
-    }
+  public void setRole(String role) {
+    this.role = role;
+  }
 
-    public void setRoleMessage(String roleMessage) {
-        this.roleMessage = roleMessage;
-    }
+  public String getRoleMessage() {
+    return roleMessage;
+  }
 
-    public String getMessageId() {
-        return messageId;
-    }
+  public void setRoleMessage(String roleMessage) {
+    this.roleMessage = roleMessage;
+  }
 
-    public void setMessageId(String messageId) {
-        this.messageId = messageId;
-    }
+  public String getMessageId() {
+    return messageId;
+  }
 
-    public Long getCreated() {
-        return created;
-    }
+  public void setMessageId(String messageId) {
+    this.messageId = messageId;
+  }
 
-    public void setCreated(Long created) {
-        this.created = created;
-    }
+  public Long getCreated() {
+    return created;
+  }
 
-    public String getModel() {
-        return model;
-    }
+  public void setCreated(Long created) {
+    this.created = created;
+  }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+  public String getModel() {
+    return model;
+  }
 
-    public Integer getContextCount() {
-        return contextCount;
-    }
+  public void setModel(String model) {
+    this.model = model;
+  }
 
-    public void setContextCount(Integer contextCount) {
-        this.contextCount = contextCount;
-    }
+  public Integer getContextCount() {
+    return contextCount;
+  }
 
-    public Integer getPromptTokens() {
-        return promptTokens;
-    }
+  public void setContextCount(Integer contextCount) {
+    this.contextCount = contextCount;
+  }
 
-    public void setPromptTokens(Integer promptTokens) {
-        this.promptTokens = promptTokens;
-    }
+  public Integer getPromptTokens() {
+    return promptTokens;
+  }
 
-    public Byte getStatus() {
-        return status;
-    }
+  public void setPromptTokens(Integer promptTokens) {
+    this.promptTokens = promptTokens;
+  }
 
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
+  public Byte getStatus() {
+    return status;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setStatus(Byte status) {
+    this.status = status;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+  public Date getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
 }

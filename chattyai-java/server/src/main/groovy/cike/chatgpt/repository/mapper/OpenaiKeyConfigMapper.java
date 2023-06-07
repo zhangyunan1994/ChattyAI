@@ -6,25 +6,27 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OpenaiKeyConfigMapper {
-    long countByExample(OpenaiKeyConfigExample example);
 
-    int deleteByExample(OpenaiKeyConfigExample example);
+  long countByExample(OpenaiKeyConfigExample example);
 
-    int deleteByPrimaryKey(Long id);
+  int deleteByExample(OpenaiKeyConfigExample example);
 
-    int insert(OpenaiKeyConfig record);
+  int deleteByPrimaryKey(Long id);
 
-    int insertSelective(OpenaiKeyConfig record);
+  int insert(OpenaiKeyConfig record);
 
-    List<OpenaiKeyConfig> selectByExample(OpenaiKeyConfigExample example);
+  int insertSelective(OpenaiKeyConfig record);
 
-    OpenaiKeyConfig selectByPrimaryKey(Long id);
+  List<OpenaiKeyConfig> selectByExample(OpenaiKeyConfigExample example);
 
-    int updateByExampleSelective(@Param("record") OpenaiKeyConfig record, @Param("example") OpenaiKeyConfigExample example);
+  OpenaiKeyConfig selectByPrimaryKey(Long id);
 
-    int updateByExample(@Param("record") OpenaiKeyConfig record, @Param("example") OpenaiKeyConfigExample example);
+  int updateByExampleSelective(@Param("record") OpenaiKeyConfig record,
+      @Param("example") OpenaiKeyConfigExample example);
 
-    int updateByPrimaryKeySelective(OpenaiKeyConfig record);
+  int updateByExample(@Param("record") OpenaiKeyConfig record, @Param("example") OpenaiKeyConfigExample example);
 
-    int updateByPrimaryKey(OpenaiKeyConfig record);
+  int updateByPrimaryKeySelective(OpenaiKeyConfig record);
+
+  int updateByPrimaryKey(OpenaiKeyConfig record);
 }

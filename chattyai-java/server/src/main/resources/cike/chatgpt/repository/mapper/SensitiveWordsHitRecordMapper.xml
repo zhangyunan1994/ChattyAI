@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cike.chatgpt.repository.mapper.SensitiveWordsHitRecordMapper">
   <resultMap id="BaseResultMap" type="cike.chatgpt.repository.entity.SensitiveWordsHitRecord">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
-    <result column="conversation_id" jdbcType="VARCHAR" property="conversationId" />
-    <result column="system_message" jdbcType="VARCHAR" property="systemMessage" />
-    <result column="user_message" jdbcType="VARCHAR" property="userMessage" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="uid" jdbcType="VARCHAR" property="uid"/>
+    <result column="conversation_id" jdbcType="VARCHAR" property="conversationId"/>
+    <result column="system_message" jdbcType="VARCHAR" property="systemMessage"/>
+    <result column="user_message" jdbcType="VARCHAR" property="userMessage"/>
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,43 +70,43 @@
   <sql id="Base_Column_List">
     id, `uid`, conversation_id, system_message, user_message, create_time
   </sql>
-  <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.SensitiveWordsHitRecordExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cike.chatgpt.repository.entity.SensitiveWordsHitRecordExample"
+    resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from sensitive_words_hit_record
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from sensitive_words_hit_record
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sensitive_words_hit_record
+    delete
+    from sensitive_words_hit_record
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="cike.chatgpt.repository.entity.SensitiveWordsHitRecordExample">
     delete from sensitive_words_hit_record
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </delete>
   <insert id="insert" parameterType="cike.chatgpt.repository.entity.SensitiveWordsHitRecord">
-    insert into sensitive_words_hit_record (id, `uid`, conversation_id, 
-      system_message, user_message, create_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{conversationId,jdbcType=VARCHAR}, 
-      #{systemMessage,jdbcType=VARCHAR}, #{userMessage,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+    insert into sensitive_words_hit_record (id, `uid`, conversation_id,
+                                            system_message, user_message, create_time)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=VARCHAR}, #{conversationId,jdbcType=VARCHAR},
+            #{systemMessage,jdbcType=VARCHAR}, #{userMessage,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cike.chatgpt.repository.entity.SensitiveWordsHitRecord">
     insert into sensitive_words_hit_record
@@ -151,10 +151,11 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="cike.chatgpt.repository.entity.SensitiveWordsHitRecordExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="cike.chatgpt.repository.entity.SensitiveWordsHitRecordExample"
+    resultType="java.lang.Long">
     select count(*) from sensitive_words_hit_record
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
+      <include refid="Example_Where_Clause"/>
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
@@ -180,19 +181,19 @@
       </if>
     </set>
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
     update sensitive_words_hit_record
     set id = #{record.id,jdbcType=BIGINT},
-      `uid` = #{record.uid,jdbcType=VARCHAR},
-      conversation_id = #{record.conversationId,jdbcType=VARCHAR},
-      system_message = #{record.systemMessage,jdbcType=VARCHAR},
-      user_message = #{record.userMessage,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    `uid` = #{record.uid,jdbcType=VARCHAR},
+    conversation_id = #{record.conversationId,jdbcType=VARCHAR},
+    system_message = #{record.systemMessage,jdbcType=VARCHAR},
+    user_message = #{record.userMessage,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
+      <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="cike.chatgpt.repository.entity.SensitiveWordsHitRecord">
@@ -218,11 +219,11 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="cike.chatgpt.repository.entity.SensitiveWordsHitRecord">
     update sensitive_words_hit_record
-    set `uid` = #{uid,jdbcType=VARCHAR},
-      conversation_id = #{conversationId,jdbcType=VARCHAR},
-      system_message = #{systemMessage,jdbcType=VARCHAR},
-      user_message = #{userMessage,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+    set `uid`           = #{uid,jdbcType=VARCHAR},
+        conversation_id = #{conversationId,jdbcType=VARCHAR},
+        system_message  = #{systemMessage,jdbcType=VARCHAR},
+        user_message    = #{userMessage,jdbcType=VARCHAR},
+        create_time     = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

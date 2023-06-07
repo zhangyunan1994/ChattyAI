@@ -2,7 +2,6 @@ package cike.chatgpt.controller
 
 import cike.chatgpt.interceptor.RequiredLogin
 import cike.chatgpt.service.AuthService
-import cike.chatgpt.service.MemberWalletService
 import cike.chatgpt.service.UserDTO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -17,7 +16,11 @@ class AuthController {
 
   @PostMapping("signup")
   CommonResponse<String> signup(@RequestBody AuthParam loginParam) {
-    authService.signup(loginParam);
+    try {
+      authService.signup(loginParam);
+    } catch (IllegalArgumentException e) {
+      CommonResponse<String>.failure(e.message)
+    }
   }
 
   @PostMapping("/login/withPassword")
@@ -34,7 +37,6 @@ class AuthController {
     return new CommonResponse<UserDTO>(status: CommonResponse.Fail, message: "No Authorization")
   }
 }
-
 
 
 class AuthParam {

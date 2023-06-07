@@ -3,103 +3,104 @@ package cike.chatgpt.repository.entity;
 import java.util.Date;
 
 public class OpenaiKeyConfig {
-    private Long id;
 
-    private String accountId;
+  private Long id;
 
-    private String openaiKey;
+  private String accountId;
 
-    private String supportModel;
+  private String openaiKey;
 
-    private Integer totalUseToken;
+  private String supportModel;
 
-    private Integer totalUseMoney;
+  private Integer totalUseToken;
 
-    private Integer maxUseMoney;
+  private Integer totalUseMoney;
 
-    private Byte status;
+  private Integer maxUseMoney;
 
-    private Date createTime;
+  private Byte status;
 
-    private Date expiredTime;
+  private Date createTime;
 
-    public Long getId() {
-        return id;
-    }
+  private Date expiredTime;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getAccountId() {
-        return accountId;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
+  public String getAccountId() {
+    return accountId;
+  }
 
-    public String getOpenaiKey() {
-        return openaiKey;
-    }
+  public void setAccountId(String accountId) {
+    this.accountId = accountId;
+  }
 
-    public void setOpenaiKey(String openaiKey) {
-        this.openaiKey = openaiKey;
-    }
+  public String getOpenaiKey() {
+    return openaiKey;
+  }
 
-    public String getSupportModel() {
-        return supportModel;
-    }
+  public void setOpenaiKey(String openaiKey) {
+    this.openaiKey = openaiKey;
+  }
 
-    public void setSupportModel(String supportModel) {
-        this.supportModel = supportModel;
-    }
+  public String getSupportModel() {
+    return supportModel;
+  }
 
-    public Integer getTotalUseToken() {
-        return totalUseToken;
-    }
+  public void setSupportModel(String supportModel) {
+    this.supportModel = supportModel;
+  }
 
-    public void setTotalUseToken(Integer totalUseToken) {
-        this.totalUseToken = totalUseToken;
-    }
+  public Integer getTotalUseToken() {
+    return totalUseToken;
+  }
 
-    public Integer getTotalUseMoney() {
-        return totalUseMoney;
-    }
+  public void setTotalUseToken(Integer totalUseToken) {
+    this.totalUseToken = totalUseToken;
+  }
 
-    public void setTotalUseMoney(Integer totalUseMoney) {
-        this.totalUseMoney = totalUseMoney;
-    }
+  public Integer getTotalUseMoney() {
+    return totalUseMoney;
+  }
 
-    public Integer getMaxUseMoney() {
-        return maxUseMoney;
-    }
+  public void setTotalUseMoney(Integer totalUseMoney) {
+    this.totalUseMoney = totalUseMoney;
+  }
 
-    public void setMaxUseMoney(Integer maxUseMoney) {
-        this.maxUseMoney = maxUseMoney;
-    }
+  public Integer getMaxUseMoney() {
+    return maxUseMoney;
+  }
 
-    public Byte getStatus() {
-        return status;
-    }
+  public void setMaxUseMoney(Integer maxUseMoney) {
+    this.maxUseMoney = maxUseMoney;
+  }
 
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
+  public Byte getStatus() {
+    return status;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setStatus(Byte status) {
+    this.status = status;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+  public Date getCreateTime() {
+    return createTime;
+  }
 
-    public Date getExpiredTime() {
-        return expiredTime;
-    }
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
 
-    public void setExpiredTime(Date expiredTime) {
-        this.expiredTime = expiredTime;
-    }
+  public Date getExpiredTime() {
+    return expiredTime;
+  }
+
+  public void setExpiredTime(Date expiredTime) {
+    this.expiredTime = expiredTime;
+  }
 }

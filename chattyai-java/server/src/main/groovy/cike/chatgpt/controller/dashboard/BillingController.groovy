@@ -22,50 +22,50 @@ import java.time.LocalDate
 @RequiredLogin(permission = Permission.DASH)
 class BillingController {
 
-    static Logger log = LoggerFactory.getLogger(BillingController.class)
+  static Logger log = LoggerFactory.getLogger(BillingController.class)
 
 
-    @Autowired
-    private OpenAIConfig openAIConfig
+  @Autowired
+  private OpenAIConfig openAIConfig
 
-    @Autowired
-    private OpenAIKeyRepository repository
+  @Autowired
+  private OpenAIKeyRepository repository
 
-    @GetMapping("usage")
-    CommonResponse<Map<String, BillingUsage>> usage() {
-        LocalDate endDate = LocalDate.now().plusDays(1)
-        LocalDate startDate = endDate.plusDays(-99)
+  @GetMapping("usage")
+  CommonResponse<Map<String, BillingUsage>> usage() {
+    LocalDate endDate = LocalDate.now().plusDays(1)
+    LocalDate startDate = endDate.plusDays(-99)
+    try {
+      def keyConfigs = repository.findAll()
+      Map<String, BillingUsage> result = new HashMap<String, BillingUsage>()
+      // TODO 这里可以根据 key 的数量来确定是否并发
+      for (final def config in keyConfigs) {
         try {
-            def keyConfigs = repository.findAll()
-            Map<String, BillingUsage> result = new HashMap<String, BillingUsage>()
-            // TODO 这里可以根据 key 的数量来确定是否并发
-            for (final def config in keyConfigs) {
-                try {
-                    Usage usage = new ChattyAIService(config.openaiKey, Duration.ofSeconds(10), openAIConfig.baseUrl).dashboardBillingUsage(startDate, endDate)
-                    result.put(config.accountId, new BillingUsage(usage.totalUsage / 100))
+          Usage usage = new ChattyAIService(config.openaiKey, Duration.ofSeconds(10), openAIConfig.baseUrl).dashboardBillingUsage(startDate, endDate)
+          result.put(config.accountId, new BillingUsage(usage.totalUsage / 100))
 
-                    repository.updateUsageInfo(config.id, usage.totalUsage)
+          repository.updateUsageInfo(config.id, usage.totalUsage)
 
-                } catch (Exception e) {
-                    log.info("accountId {} fetch usage error", config.accountId, e)
-                }
-            }
-
-            return new CommonResponse<Map<String, BillingUsage>>(status: CommonResponse.Success, data: result)
         } catch (Exception e) {
-            return new CommonResponse<Map<String, BillingUsage>>(status: CommonResponse.Fail, message: e.message)
+          log.info("accountId {} fetch usage error", config.accountId, e)
         }
+      }
+
+      return new CommonResponse<Map<String, BillingUsage>>(status: CommonResponse.Success, data: result)
+    } catch (Exception e) {
+      return new CommonResponse<Map<String, BillingUsage>>(status: CommonResponse.Fail, message: e.message)
     }
+  }
 }
 
 
 class BillingUsage {
-    Double totalUsage
+  Double totalUsage
 
-    BillingUsage() {
-    }
+  BillingUsage() {
+  }
 
-    BillingUsage(Double totalUsage) {
-        this.totalUsage = totalUsage
-    }
+  BillingUsage(Double totalUsage) {
+    this.totalUsage = totalUsage
+  }
 }

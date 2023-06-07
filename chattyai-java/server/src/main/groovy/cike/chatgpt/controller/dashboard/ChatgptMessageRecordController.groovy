@@ -4,7 +4,6 @@ import cike.chatgpt.controller.CommonResponse
 import cike.chatgpt.controller.PageList
 import cike.chatgpt.interceptor.Permission
 import cike.chatgpt.interceptor.RequiredLogin
-import cike.chatgpt.repository.entity.ChatgptMessageRecord
 import cike.chatgpt.repository.mapper.specific.ChatgptMessageSpecificRecord
 import cike.chatgpt.service.ChatgptMessageRecordService
 import org.springframework.beans.factory.annotation.Autowired
