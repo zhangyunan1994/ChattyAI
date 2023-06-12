@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /chatapi
+    context-path: /chattyai
   tomcat:
     connection-timeout: 10m
 spring:

@@ -7,34 +7,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type CommonResponse struct {
-	Status  string      `json:"status"`
-	Message string      `json:"message"`
-	Data    interface{} `json:"data"`
-}
-
-func NewSuccessCommonResponse() *CommonResponse {
-	return &CommonResponse{
-		Status:  "Success",
-		Message: "Success",
-	}
-}
-
-func NewFailCommonResponse(message string) *CommonResponse {
-	return &CommonResponse{
-		Status:  "Fail",
-		Message: message,
-	}
-}
-
-func NewSuccessCommonResponseWithData(data interface{}) *CommonResponse {
-	return &CommonResponse{
-		Status:  "Success",
-		Message: "Success",
-		Data:    data,
-	}
-}
-
 func InitRouter() *gin.Engine {
 
 	chathandler := myhandler.NewChatHandler()
@@ -55,12 +27,18 @@ func InitRouter() *gin.Engine {
 	{
 		{
 			authGroup := chattyaiGroup.Group("auth")
-			authGroup.POST("login/withPassword", LoginByPassword)
-			authGroup.GET("checkToken", AuthCheckToken)
+			authGroup.POST("login/withPassword", myhandler.LoginByPassword)
+			authGroup.GET("checkToken", myhandler.AuthCheckToken)
 		}
 		{
 			chatGroup := chattyaiGroup.Group("chat")
 			chatGroup.POST("stream", chathandler.ChatStream)
+		}
+		{
+			memberGroup := chattyaiGroup.Group("member")
+			memberGroup.Use(middlewares.Auth("member"))
+			memberGroup.GET("wallet", myhandler.GetTokenWallet)
+			memberGroup.GET("info", myhandler.GetMemberInfo)
 		}
 	}
 
