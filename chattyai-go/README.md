@@ -42,8 +42,8 @@ go env -w GO111MODULE=on
 **linux**
 
 ```shell
-rm chattyai-proxy
-GOOS=linux GOARCH=amd64 go build -o chattyai-proxy main.go
+rm dist/chattyai-go-linux
+GOOS=linux GOARCH=amd64 go build -o dist/chattyai-go-linux main.go
 ```
 
 **windows**
@@ -53,5 +53,6 @@ GOOS=linux GOARCH=amd64 go build -o chattyai-proxy main.go
 
 **mac**
 ```shell
-
+rm dist/chattyai-go-mac
+go build -o dist/chattyai-go-mac main.go
 ```
