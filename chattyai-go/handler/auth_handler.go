@@ -36,7 +36,9 @@ func LoginByPassword(c *gin.Context) {
 func AuthCheckToken(c *gin.Context) {
 	authorizationHeader := c.Request.Header.Get("Authorization")
 	if len(authorizationHeader) == 0 {
-		c.JSON(200, common.NewFailCommonResponse("No Authorization"))
+		c.AbortWithStatus(401)
+		return
+		//c.JSON(401, common.NewFailCommonResponse("No Authorization"))
 	}
 
 	if strings.HasPrefix(authorizationHeader, "Bearer ") {
@@ -44,18 +46,25 @@ func AuthCheckToken(c *gin.Context) {
 		if err != nil {
 			c.JSON(200, common.NewFailCommonResponse(err.Error()))
 		} else if token == nil || token.ExpiredTime.Before(time.Now()) {
-			c.JSON(200, common.NewFailCommonResponse("No Authorization"))
+			c.AbortWithStatus(401)
+			return
+			//c.JSON(200, common.NewFailCommonResponse("No Authorization"))
 		} else {
 			u, _ := models.GetUserByUid(token.UserID)
-
-			c.JSON(200, common.NewSuccessCommonResponseWithData(&UserDTO{
-				Nickname:    u.Nickname,
-				Avatar:      u.Avatar,
-				Description: u.Description,
-			}))
+			if u.ExpiredTime.Before(time.Now()) {
+				c.JSON(200, common.NewFailCommonResponse("用户已过期"))
+				return
+			} else {
+				c.JSON(200, common.NewSuccessCommonResponseWithData(&UserDTO{
+					Nickname:    u.Nickname,
+					Avatar:      u.Avatar,
+					Description: u.Description,
+				}))
+			}
 		}
 	} else {
-		c.JSON(200, common.NewFailCommonResponse("Mistake Authorization"))
+		c.AbortWithStatus(401)
+		return
 	}
 }
 
