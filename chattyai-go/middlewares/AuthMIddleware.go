@@ -3,7 +3,6 @@ package middlewares
 import (
 	"chattyai-go/models"
 	"chattyai-go/models/common"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
@@ -24,10 +23,10 @@ func Auth(permission string) gin.HandlerFunc {
 
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(http.StatusNoContent)
+			return
 		}
 
 		tokenId := token[7:]
-		fmt.Println(tokenId)
 
 		authToken, err := models.GetAuthTokenByToken(tokenId)
 		if err != nil {
