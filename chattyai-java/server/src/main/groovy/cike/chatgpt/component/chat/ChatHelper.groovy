@@ -211,7 +211,7 @@ class ChatStrategy extends GPTStrategy {
         .builder()
         .model(openAIConfig.model ?: "gpt-3.5-turbo")
         .messages(messages)
-        .maxTokens(1500)
+        .maxTokens(2000)
         .temperature(requestParam.temperature ?: 0.5D)
         .topP(requestParam.topP ?: 0.8D)
         .logitBias(new HashMap<>())

@@ -21,5 +21,5 @@ mybatis:
 openai:
   defaultSystemPrompt: You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown. 不回答任何政治相关问题
   baseUrl: http://52.15.253.100:38820
-  model: gpt-3.5-turbo
+  model: gpt-3.5-turbo-0613
   timeoutSeconds: 600
