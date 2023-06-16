@@ -2,7 +2,6 @@ package models
 
 import (
 	"database/sql"
-	"errors"
 	"gorm.io/gorm"
 	"time"
 )
@@ -28,13 +27,11 @@ func (m *Bot) TableName() string {
 	return "bot"
 }
 
-func GetPublishBot(uid string) ([]Bot, error) {
-	var u MemberWallet
-	if err := db.Where(&Bot{AccessLevel: 2}).First(&u).Error; err == nil {
-		return u, nil
-	} else if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, nil
-	} else {
+func GetPublishBot() ([]*Bot, error) {
+	var bots []*Bot
+	err := db.Where("access_level = ?", 2).Find(&bots).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
+	return bots, nil
 }

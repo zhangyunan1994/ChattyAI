@@ -69,7 +69,7 @@ func AuthCheckToken(c *gin.Context) {
 }
 
 type UserDTO struct {
-	Nickname    string
-	Avatar      string
-	Description string
+	Nickname    string `json:"nickname"`
+	Avatar      string `json:"avatar"`
+	Description string `json:"description"`
 }

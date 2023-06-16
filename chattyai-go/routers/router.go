@@ -40,6 +40,11 @@ func InitRouter() *gin.Engine {
 			memberGroup.GET("wallet", myhandler.GetTokenWallet)
 			memberGroup.GET("info", myhandler.GetMemberInfo)
 		}
+		{
+			memberGroup := chattyaiGroup.Group("bot")
+			memberGroup.Use(middlewares.Auth("member"))
+			memberGroup.GET("publicBot", myhandler.GetPublicBots)
+		}
 	}
 
 	return r
