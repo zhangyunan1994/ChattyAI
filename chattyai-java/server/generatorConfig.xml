@@ -21,37 +21,30 @@
       <property name="suppressAllComments" value="true"/>
     </commentGenerator>
 
-    <!--    <jdbcConnection-->
-    <!--      connectionURL="jdbc:mysql://127.0.0.1:13306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"-->
-    <!--      driverClass="com.mysql.cj.jdbc.Driver"-->
-    <!--      password="123456"-->
-    <!--      userId="root">-->
-    <!--      <property name="nullCatalogMeansCurrent" value="true"/>-->
-    <!--    </jdbcConnection>-->
-
-    <jdbcConnection
-      connectionURL="jdbc:mysql://www.zhangshenzhao.cn:3306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"
-      driverClass="com.mysql.cj.jdbc.Driver"
-      password="3k>kj!tv6ikF"
-      userId="zhangyunan">
-      <property name="nullCatalogMeansCurrent" value="true"/>
-    </jdbcConnection>
+        <jdbcConnection
+          connectionURL="jdbc:mysql://127.0.0.1:13306/chatgpt?characterEncoding=UTF-8&amp;useUnicode=true&amp;serverTimezone=GMT%2B8"
+          driverClass="com.mysql.cj.jdbc.Driver"
+          password="123456"
+          userId="root">
+          <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
 
     <javaModelGenerator targetPackage="cike.chatgpt.repository.entity" targetProject="./src/main/groovy"/>
     <sqlMapGenerator targetPackage="cike.chatgpt.repository.mapper" targetProject="./src/main/resources"/>
     <javaClientGenerator targetPackage="cike.chatgpt.repository.mapper" targetProject="./src/main/groovy"
       type="XMLMAPPER"/>
 
-    <table tableName="chatgpt_message_record">
-      <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
-    </table>
-    <table tableName="openai_key_config"/>
-    <table tableName="sensitive_words"/>
-    <table tableName="sensitive_words_hit_record"/>
-    <table tableName="user"/>
-    <table tableName="role"/>
-    <table tableName="user_role"/>
-    <table tableName="member_wallet"/>
-    <table tableName="member_wallet_record"/>
+<!--    <table tableName="chatgpt_message_record">-->
+<!--      <generatedKey column="id" sqlStatement="JDBC" identity="true"/>-->
+<!--    </table>-->
+<!--    <table tableName="openai_key_config"/>-->
+<!--    <table tableName="sensitive_words"/>-->
+<!--    <table tableName="sensitive_words_hit_record"/>-->
+<!--    <table tableName="user"/>-->
+<!--    <table tableName="role"/>-->
+<!--    <table tableName="user_role"/>-->
+<!--    <table tableName="member_wallet"/>-->
+<!--    <table tableName="member_wallet_record"/>-->
+    <table tableName="bot" />
   </context>
 </generatorConfiguration>

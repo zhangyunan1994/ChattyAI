@@ -47,10 +47,10 @@ class RequestProps {
   @JsonProperty("top_p")
   Double topP
   String conversationId
+  String botId
 }
 
 class ChatContext {
-  String conversationId
   String parentMessageId
 }
 

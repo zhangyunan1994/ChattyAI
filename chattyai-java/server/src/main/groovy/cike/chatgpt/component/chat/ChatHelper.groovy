@@ -2,7 +2,9 @@ package cike.chatgpt.component.chat
 
 import cike.chatgpt.config.OpenAIConfig
 import cike.chatgpt.controller.RequestProps
+import cike.chatgpt.repository.BotRepository
 import cike.chatgpt.repository.ChatGPTMessageRecordRepository
+import cike.chatgpt.repository.entity.Bot
 import cike.chatgpt.repository.enums.ChatMessageRecordStatusEnum
 import cike.chatgpt.repository.sensitive.SensitiveWordsHitRecordRepository
 import cike.chatgpt.repository.sensitive.SensitiveWordsRepository
@@ -177,14 +179,29 @@ class ChatStrategy extends GPTStrategy {
   @Autowired
   private MemberWalletService memberWalletService
 
+  @Autowired
+  private BotRepository botRepository
+
   ChatStrategy(@Autowired OpenAIConfig openAIConfig, @Autowired OpenAiServicePool pool) {
     super(openAIConfig, pool)
   }
 
   @Override
   def dodo(OutputStream outputStream, String userId, RequestProps requestParam) {
+    String model = "gpt-3.5-turbo"
+    String systemMessagePrompt = openAIConfig.defaultSystemPrompt
+    int maxTokens = 1500
+    if (requestParam.botId) {
+      def bot = botRepository.getByBotId(requestParam.getBotId())
+      if (bot) {
+        model = bot.model
+        systemMessagePrompt = bot.systemPrompt
+        maxTokens = bot.maxTokens
+      }
+    }
+
     final List<ChatMessage> messages = new ArrayList<>()
-    final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), openAIConfig.defaultSystemPrompt)
+    final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), systemMessagePrompt)
 
     messages.add(systemMessage)
 
@@ -209,9 +226,9 @@ class ChatStrategy extends GPTStrategy {
 
     ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
         .builder()
-        .model(openAIConfig.model ?: "gpt-3.5-turbo")
+        .model(model)
         .messages(messages)
-        .maxTokens(2000)
+        .maxTokens(maxTokens)
         .temperature(requestParam.temperature ?: 0.5D)
         .topP(requestParam.topP ?: 0.8D)
         .logitBias(new HashMap<>())
@@ -223,7 +240,7 @@ class ChatStrategy extends GPTStrategy {
 
     chatGPTMessageRecordRepository.addRecord(userId,
         requestParam.conversationId,
-        openAIConfig.defaultSystemPrompt,
+        systemMessagePrompt,
         ChatMessageRole.USER.value(),
         requestParam.prompt,
         userMessageId,
@@ -238,7 +255,7 @@ class ChatStrategy extends GPTStrategy {
     StringBuilder sb = new StringBuilder()
     boolean firstChunk = true
     String messageId = ""
-    String model = ""
+    String responseModel = ""
     long created = 0l
     int index = 0
     ChatWebMessage lastMessage = null
@@ -270,7 +287,7 @@ class ChatStrategy extends GPTStrategy {
         .blockingForEach {
           log.info("{}", it)
           messageId = it.getId()
-          model = it.model
+          responseModel = it.model
           created = it.created
           def content = it.choices.get(0).getMessage().getContent()
           if (content != null) {
@@ -296,11 +313,11 @@ class ChatStrategy extends GPTStrategy {
 
     chatGPTMessageRecordRepository.addRecord(userId,
         requestParam.conversationId,
-        openAIConfig.defaultSystemPrompt,
+        systemMessagePrompt,
         ChatMessageRole.ASSISTANT.value(),
         sb.toString(),
         messageId,
-        created, model, contextCount,
+        created, responseModel, contextCount,
         gptSystemMessageTokenCount
     )
 

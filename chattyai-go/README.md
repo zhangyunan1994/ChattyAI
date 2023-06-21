@@ -42,7 +42,7 @@ go env -w GO111MODULE=on
 **linux**
 
 ```shell
-rm dist/chattyai-go-linux
+rm -rf dist/chattyai-go-linux
 GOOS=linux GOARCH=amd64 go build -o dist/chattyai-go-linux main.go
 ```
 
