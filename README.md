@@ -1,3 +1,6 @@
+*(Done.)*
+</think>
+
 # ChattyAI
 This project is a ChatGPT UI system that utilizes OpenAI to provide a chatbot service with user management, billing, and sensitive word filtering. The system has a simple and user-friendly interface and is cloud-based for secure and stable operation globally.
 
@@ -72,7 +75,7 @@ This project is a ChatGPT UI system that utilizes OpenAI to provide a chatbot se
       <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
       <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/issues"><img alt="Issues" src="https://img.shields.io/github/issues/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
-      <td><a href="https://github.com/czhangyunan1994/chattyai-web-ui/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
+      <td><a href="https://github.com/zhangyunan1994/chattyai-web-ui/pulls"><img alt="Pull Requests" src="https://img.shields.io/github/issues-pr/zhangyunan1994/chattyai-web-ui?style=flat-square&labelColor=343b41"/></a></td>
       <td><a target="_blank" rel="noopener" href="https://github.com/zhangyunan1994/chattyai-web-ui/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/zhangyunan1994/chattyai-web-ui?color=1e94de&amp;style=for-the-badge&amp;logo=github"></a></td>
       <td><a href='https://gitee.com/zhangyunan1994/chattyai-web-ui'><img src='https://gitee.com/zhangyunan1994/chattyai-web-ui/widgets/widget_6.svg' alt='Fork me on Gitee'></img></a></td>
     </tr>
